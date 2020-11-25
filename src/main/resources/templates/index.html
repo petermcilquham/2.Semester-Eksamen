@@ -2,25 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- css link virker ikke -->
+    <link rel="stylesheet" href="../static/index.css" type="text/css">
+    <title>Forside</title>
 </head>
 <body>
 
+<!-- test/ufærdigt
+
+<div class="hej">1234</div>
+<div  class="grid-container-index">
+    <div class="grid-item" id="item-1">1</div>
+    <div class="grid-item" id="item-2">2</div>
+    <div class="grid-item" id="item-3">3</div>
+</div>
+-->
+
+<!-- banner/logo -->
+
+<!-- opret bruger -->
 <div>
     <form id="createUser" action="/createUser" method="post" enctype="multipart/form-data">
         <label>
-            <input type="text" name="createUsername" placeholder="Write username...">
-        </label>
+            <input type="text" name="createUsername" placeholder="Username..." required>
+        </label> <br>
         <label>
-            <input type="text" name="createPassword" placeholder="Write password...">
-        </label>
+            <input type="text" name="createPassword" placeholder="Password..." required>
+        </label> <br>
         <button type="submit" class="button">Create User</button>
     </form>
 </div>
 
-<div id="login">
-    <form>
-
+<!-- login -->
+<div>
+    <form id="login" action="/login" method="post" enctype="multipart/form-data">
+        <label>
+            <input type="text" name="inputUsername" placeholder="Username..." required>
+        </label> <br>
+        <label>
+            <input type="text" name="inputPassword" placeholder="Password..." required>
+        </label> <br>
+        <button type="submit" class="button">Log In</button>
     </form>
 </div>
 

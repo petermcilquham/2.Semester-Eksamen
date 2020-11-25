@@ -28,4 +28,9 @@ public class UserController {
         ur.getUsersProjects(1);
         return "redirect:/";
     }
+    @PostMapping("/login")
+    public String login(){
+        //ur.login metode (test for username/password er optaget)
+        return "main";
+    }
 }
