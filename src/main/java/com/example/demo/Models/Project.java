@@ -37,4 +37,13 @@ public class Project {
     public void setProjectCreatedDate(Date projectCreatedDate) {
         this.projectCreatedDate = projectCreatedDate;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "projectID=" + projectID +
+                ", projectName='" + projectName + '\'' +
+                ", projectCreatedDate='" + projectCreatedDate + '\'' +
+                '}';
+    }
 }
