@@ -8,12 +8,18 @@
     <title>Main</title>
 </head>
 
+
 <body>
 
     <div  class="grid-container-index">
         <!-- banner/logo -->
         <div class="grid-item" id="item-1">
             <h1>logo</h1>
+            <form id="createProject" action="/createproject" method="post" enctype="multipart/form-data">
+                <label>Create a project</label><br>
+                <input type="text" name="projectName" placeholder="Project name"><br>
+                <button type="submit">Create project!</button>
+            </form>
         </div>
 
         <!-- mine projekter liste -->
@@ -43,8 +49,8 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
+          </div>
+  </div>
 
 </body>
 </html>
