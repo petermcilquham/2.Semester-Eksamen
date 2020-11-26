@@ -2,20 +2,48 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <!-- css link virker ikke -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_main.css">
     <title>Main</title>
 </head>
 <body>
 
-<div class="projectList">
-    <h4>Your projects</h4>
-    <th:block th:each="Project : ${projectList}">
-        <p th:text="${Project.getProjectName()}"></p>
-        <p th:text="${Project.getProjectCreatedDate()}"></p>
-        <form action="/project" method="post">
-            <button type="submit" th:value="${Project.getProjectID()}">View project</button>
-            <br>
-        </form>
-    </th:block>
+
+<div  class="grid-container-index">
+    <!-- banner/logo -->
+    <div class="grid-item" id="item-1">
+        <h1>logo</h1>
+    </div>
+
+    <!-- opret bruger -->
+    <div class="grid-item" id="item-2">
+        <div class="projectList">
+            <h4>Your projects</h4>
+            <th:block th:each="Project : ${projectList}">
+                <p th:text="${Project.getProjectName()}"></p>
+                <p th:text="${Project.getProjectCreatedDate()}"></p>
+                <form action="/project" method="post">
+                    <button type="submit" th:value="${Project.getProjectID()}">View project</button> <br>
+                </form>
+            </th:block>
+        </div>
+     </div>
+
+    <!-- login -->
+    <div class="grid-item" id="item-3">
+        <div class="projectList">
+            <h4>Shared projects</h4>
+            <th:block th:each="Project : ${projectList}">
+              <p th:text="${Project.getProjectName()}"></p>
+              <p th:text="${Project.getProjectCreatedDate()}"></p>
+              <form action="/project" method="post">
+                  <button type="submit" th:value="${Project.getProjectID()}">View project</button> <br>
+              </form>
+            </th:block>
+        </div>
+    </div>
+
 </div>
 
 </body>
