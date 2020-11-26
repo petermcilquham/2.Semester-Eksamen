@@ -15,25 +15,36 @@ import java.util.List;
 
 @Controller
 public class MainController {
-    UserRepository ur = new UserRepository();
-    ProjectRepository pr = new ProjectRepository();
-    List<Project> projectList = new ArrayList<>();
+
+    ProjectRepository pRep = new ProjectRepository();
+    UserRepository uRep = new UserRepository();
+    Project p = new Project(0,"",null,0);
+    List<Project> myProjectList = new ArrayList<>();
+    List<Project> sharedProjectList = new ArrayList<>();
+
+    public void clearLists(){
+        //clear array lists
+        myProjectList.clear();
+        sharedProjectList.clear();
+    }
 
     @GetMapping("/main")
-    public String main(Model m) throws SQLException {
-        projectList.clear();
-        projectList = ur.getUsersProjects(1);
-        System.out.println("number of projects: " + projectList.size());
-        m.addAttribute("projectList",projectList);
+    public String main(Model myProjects, Model sharedProjects, Model username) throws SQLException {
+        clearLists();
+        myProjectList = pRep.getMyProjects(2);
+        sharedProjectList = pRep.getSharedProjects(2);
+        myProjects.addAttribute("myProjectList",myProjectList);
+        sharedProjects.addAttribute("sharedProjectList",sharedProjectList);
+        username.addAttribute("usernameFromCreatedBy",uRep.getUserByID(p.getCreatedBy()));
         return "main";
     }
 
     @PostMapping("/backtomain")
     public String backToMain() {
-        projectList.clear();
+        clearLists();
         return "redirect:/main";
     }
-
+  
     @PostMapping("/createproject")
     public String createProject(WebRequest wr) throws SQLException {
         String projectName = wr.getParameter("projectName");
@@ -45,9 +56,7 @@ public class MainController {
         //ændre til currentlogins id, når den er klar :)
         int createdBy = 1;
 
-        pr.createProject(projectName, currentDay, createdBy);
+        pRep.createProject(projectName, currentDay, createdBy);
         return "redirect:/main";
-
-
     }
 }

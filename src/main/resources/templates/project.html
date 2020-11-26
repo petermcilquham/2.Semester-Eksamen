@@ -1,54 +1,59 @@
 <!DOCTYPE html>
-<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <!-- css link virker ikke -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style_project.css">
     <title>Project</title>
 </head>
 <body>
-	
 
-	
-<div  class="grid-container-index">
-    <!-- banner/logo -->
-    <div class="grid-item" id="item-1">
+    <div  class="grid-container">
+        <!-- tilbage knap -->
+        <div class="grid-item" id="item-1">
+            <form action="/backtomain" method="post">
+                <button type="submit">Back to main menu</button>
+            </form>
+        </div>
 
-        <form action="/backtomain" method="post">
-            <button type="submit">Back to main menu</button>
-        </form>
+        <!-- knapper -->
+        <div class="grid-item" id="item-2">
+            <ul>
+                <li><p>del projekt knap</p></li>
+                <li><p>se projekt team knap</p></li>
+                <li><p>generer gantt diagram knap</p></li>
+            </ul>
+        </div>
 
-        <div th:each="Project : ${singleProject}">
-        <form action="/project/delete" method="post">
-            <h2 th:text="${Project.getProjectName()}"></h2>
+        <!-- main -->
+        <div class="grid-item" id="item-3">
+            <!-- single projekt virker ikke -->
+            <div th:each="Project : ${singleProject}">
+                <form action="/project/delete" method="post">
+                    <label th:text="${Project.getProjectName()}"></label>
+                    <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
+                </form>
+            </div>
+            <!-- placeholder -->
+            <h1>main content</h1>
+        </div>
 
-            <label>
-                created on: <h4 th:text="${Project.getProjectCreatedDate()}"></h4>
-            </label>
-
-            <label>
-                made by: <h4 th:text="${Project.getProjectID()}"></h4>
-            </label>
-
-            <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
-        </form>
-
+        <!-- slet knap -->
+        <div class="grid-item" id="item-4">
+            <div th:each="Project : ${singleProject}">
+              <form action="/project/delete" method="post">
+              <h2 th:text="${Project.getProjectName()}"></h2>
+              <label>
+                  created on: <h4 th:text="${Project.getProjectCreatedDate()}"></h4>
+              </label>
+              <label>
+                  made by: <h4 th:text="${Project.getProjectID()}"></h4>
+              </label>
+              <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
+              </form>    
         </div>
 
     </div>
-
-    <!-- opret bruger -->
-    <div class="grid-item" id="item-2">
-        <p>ahjwjgdahkwd</p>
-    </div>
-
-    <!-- login -->
-    <div class="grid-item" id="item-3">
-        <p>ahjwjgdahkwd</p>
-    </div>
-
-</div>
 
 </body>
 </html>

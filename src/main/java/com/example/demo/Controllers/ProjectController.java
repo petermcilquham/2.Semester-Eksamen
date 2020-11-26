@@ -15,12 +15,14 @@ import java.util.List;
 
 @Controller
 public class ProjectController {
-    UserRepository ur = new UserRepository();
-    ProjectRepository pr = new ProjectRepository();
+    UserRepository uRep = new UserRepository();
+    ProjectRepository pRep = new ProjectRepository();
     List<Project> projectList = new ArrayList<>();
 
     @GetMapping("/project")
     public String projectPage(Model m) throws SQLException {
+        //projectList = pRep.getUsersProjects(1);
+        System.out.println("liste: " + projectList.size());
         m.addAttribute("singleProject",projectList);
         return "project";
     }
@@ -29,7 +31,7 @@ public class ProjectController {
     public String deleteProject(WebRequest wr) throws SQLException {
         String tempID = wr.getParameter("deleteProject");
         int projectID = Integer.parseInt(tempID);
-        pr.deleteProject(projectID);
+        pRep.deleteProject(projectID);
         return "redirect:/main";
     }
 
