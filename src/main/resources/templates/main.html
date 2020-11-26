@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+
+<div class="projectList">
+    <h4>Your projects</h4>
+    <th:block th:each="Project : ${projectList}">
+        <p th:text="${Project.getProjectName()}"></p>
+        <p th:text="${Project.getProjectCreatedDate()}"></p>
+        <form action="/project" method="post">
+            <button type="submit" th:value="${Project.getProjectID()}">View project</button>
+            <br>
+        </form>
+    </th:block>
+</div>
+
+</body>
+</html>

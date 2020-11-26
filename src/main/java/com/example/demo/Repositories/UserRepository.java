@@ -16,7 +16,6 @@ public class UserRepository {
     DBConnect connection = new DBConnect();
 
     public void createUser(String username, String password) throws SQLException {
-
         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO users (username,password) VALUES (?,?)");
         ps.setString(1,username);
         ps.setString(2,password);
@@ -24,7 +23,7 @@ public class UserRepository {
         ps.executeUpdate();
     }
 
-    public void getUsersProjects(int id) throws SQLException {
+    public List<Project> getUsersProjects(int id) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("select projects.projectID, project_name, project_created_date " +
                 "from projects inner join users_projects on projects.projectID = users_projects.projectID " +
                 "inner join users on users.userID = users_projects.userID where users.userID = ?");
@@ -38,7 +37,7 @@ public class UserRepository {
                     rs.getDate(3));
             projectList.add(temp);
         }
-        System.out.println(projectList.toString());
+        return projectList;
     }
 
 }

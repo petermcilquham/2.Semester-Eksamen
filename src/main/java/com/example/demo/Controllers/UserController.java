@@ -1,5 +1,6 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.Models.User;
 import com.example.demo.Repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +26,12 @@ public class UserController {
 
         ur.createUser(username,password);
 
-        ur.getUsersProjects(1);
         return "redirect:/";
+    }
+    @PostMapping("/login")
+    public String login(){
+        System.out.println("User loggd in");
+        //ur.login metode (test for username/password er optaget)
+        return "redirect:/main";
     }
 }
