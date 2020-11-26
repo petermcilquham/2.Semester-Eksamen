@@ -1,20 +1,18 @@
 package com.example.demo.Repositories;
 
-import com.example.demo.Models.Project;
+import com.example.demo.Models.User;
 import com.example.demo.Services.DBConnect;
-import org.springframework.stereotype.Repository;
 
+import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Repository
 public class UserRepository {
-    List<Project> projectList = new ArrayList<>();
     DBConnect connection = new DBConnect();
 
+    //create user
     public void createUser(String username, String password) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO users (username,password) VALUES (?,?)");
         ps.setString(1,username);
@@ -23,21 +21,16 @@ public class UserRepository {
         ps.executeUpdate();
     }
 
-    public List<Project> getUsersProjects(int id) throws SQLException {
-        PreparedStatement ps = connection.establishConnection().prepareStatement("select projects.projectID, project_name, project_created_date " +
-                "from projects inner join users_projects on projects.projectID = users_projects.projectID " +
-                "inner join users on users.userID = users_projects.userID where users.userID = ?");
-        ps.setInt(1,id);
-
+    //get user by created_by id
+    public String getUserByID(int i) throws SQLException {
+        PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct username from users inner join projects on userID = created_by where created_by = 1 ");
         ResultSet rs = ps.executeQuery();
-        while(rs.next()){
-            Project  temp = new Project(
-                    rs.getInt(1),
-                    rs.getString(2),
-                    rs.getDate(3));
-            projectList.add(temp);
+
+        String username = "";
+        if(rs.next()){
+            username = rs.getString(1);
         }
-        return projectList;
+        return "Project created by: " + username;
     }
 
 }

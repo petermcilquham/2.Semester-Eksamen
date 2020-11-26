@@ -1,5 +1,8 @@
 package com.example.demo.Controllers;
 
+
+public class ProjectController {
+
 import com.example.demo.Models.Project;
 import com.example.demo.Repositories.ProjectRepository;
 import com.example.demo.Repositories.UserRepository;
@@ -34,4 +37,5 @@ public class ProjectController {
         pr.deleteProject(projectID);
         return "redirect:/main";
     }
+
 }

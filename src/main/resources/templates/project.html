@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <!-- css link virker ikke -->
@@ -7,8 +7,16 @@
     <link rel="stylesheet" href="style_project.css">
     <title>Project</title>
 </head>
+
 <body>
 	
+
+    <form action="/backtomain" method="post">
+        <button type="submit">Back to main menu</button>
+    </form>
+	
+   
+
 
 	
 <div  class="grid-container-index">
@@ -19,33 +27,28 @@
             <button type="submit">Back to main menu</button>
         </form>
 
-
-
         <h1>logo</h1>
-
-
 
         <div th:each="Project : ${singleProject}">
         <form action="/project/delete" method="post">
             <label th:text="${Project.getProjectName()}"></label>
             <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
         </form>
-
         </div>
 
     </div>
 
-    <!-- opret bruger -->
-    <div class="grid-item" id="item-2">
-        <p>ahjwjgdahkwd</p>
-    </div>
+        
+        <div class="grid-item" id="item-2">
+            <p>ahjwjgdahkwd</p>
+        </div>
 
-    <!-- login -->
-    <div class="grid-item" id="item-3">
-        <p>ahjwjgdahkwd</p>
-    </div>
+      
+        <div class="grid-item" id="item-3">
+            <p>ahjwjgdahkwd</p>
+        </div>
 
-</div>
+    </div>
 
 </body>
 </html>
