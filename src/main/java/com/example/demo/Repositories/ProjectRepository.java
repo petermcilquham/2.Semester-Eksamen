@@ -22,7 +22,7 @@ public class ProjectRepository {
     }
 
     public void deleteProject(int id) throws SQLException {
-        PreparedStatement ps = connection.establishConnection().prepareStatement("DELETE FROM projects WHERE id=?");
+        PreparedStatement ps = connection.establishConnection().prepareStatement("DELETE FROM projects WHERE projectID = ?");
         ps.setInt(1,id);
         ps.executeUpdate();
     }
