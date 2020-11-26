@@ -5,17 +5,19 @@ import com.example.demo.Services.DBConnect;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class ProjectRepository {
     DBConnect connection = new DBConnect();
+    List<Project> projectList = new ArrayList<>();
     List<Project> myProjectList = new ArrayList<>();
     List<Project> sharedProjectList = new ArrayList<>();
+
 
   public void updateUsersProjects(int userID, int projectID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO users_projects (userID, projectID) VALUES (?,?)");
@@ -31,7 +33,6 @@ public class ProjectRepository {
         ps.setInt(3,createdBy);
 
         ps.executeUpdate();
-
 
         //int cookieCurrentLoginId=0;
         //updateUsersProjects(cookieCurrentLoginId, );
@@ -69,5 +70,20 @@ public class ProjectRepository {
         PreparedStatement ps = connection.establishConnection().prepareStatement("DELETE FROM projects WHERE projectID = ?");
         ps.setInt(1,id);
         ps.executeUpdate();
+    }
+
+    public List<Project> getSingleProject(int projectID) throws SQLException {
+        PreparedStatement ps = connection.establishConnection().prepareStatement("SELECT * FROM projects WHERE projectID = ?");
+        ps.setInt(1,projectID);
+
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()) {
+            Project  temp = new Project(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getDate(3));
+            projectList.add(temp);
+        }
+        return projectList;
     }
 }

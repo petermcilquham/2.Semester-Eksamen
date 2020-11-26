@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="style_project.css">
     <title>Project</title>
 </head>
-
 <body>
 
     <div  class="grid-container">
@@ -41,7 +40,17 @@
 
         <!-- slet knap -->
         <div class="grid-item" id="item-4">
-            <p>slet knap</p>
+            <div th:each="Project : ${singleProject}">
+              <form action="/project/delete" method="post">
+              <h2 th:text="${Project.getProjectName()}"></h2>
+              <label>
+                  created on: <h4 th:text="${Project.getProjectCreatedDate()}"></h4>
+              </label>
+              <label>
+                  made by: <h4 th:text="${Project.getProjectID()}"></h4>
+              </label>
+              <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
+              </form>    
         </div>
 
     </div>

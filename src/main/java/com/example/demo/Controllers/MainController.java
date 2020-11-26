@@ -44,16 +44,7 @@ public class MainController {
         clearLists();
         return "redirect:/main";
     }
-
-    @PostMapping("/getproject")
-    public String project(WebRequest wr) {
-        clearLists();
-        String tempID = wr.getParameter("projectID");
-        int projectID = Integer.parseInt(tempID);
-        System.out.println(projectID);
-        return "redirect:/project";
-    }
-
+  
     @PostMapping("/createproject")
     public String createProject(WebRequest wr) throws SQLException {
         String projectName = wr.getParameter("projectName");
@@ -67,7 +58,5 @@ public class MainController {
 
         pRep.createProject(projectName, currentDay, createdBy);
         return "redirect:/main";
-
-
     }
 }
