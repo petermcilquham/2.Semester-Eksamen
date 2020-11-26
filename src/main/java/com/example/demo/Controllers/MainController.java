@@ -35,9 +35,13 @@ public class MainController {
         return "redirect:/main";
     }
 
-    @PostMapping("/project")
-    public String project() {
-        return "project";
+    @PostMapping("/getproject")
+    public String project(WebRequest wr) {
+        projectList.clear();
+        String tempID = wr.getParameter("projectID");
+        int projectID = Integer.parseInt(tempID);
+        System.out.println(projectID);
+        return "redirect:/project";
     }
 
     @PostMapping("/createproject")
@@ -45,7 +49,7 @@ public class MainController {
         String projectName = wr.getParameter("projectName");
 
         //dette giver dagens dato i yyyy/mm/dd
-        long millis=System.currentTimeMillis();
+        long millis = System.currentTimeMillis();
         java.sql.Date currentDay = new java.sql.Date(millis);
 
         //ændre til currentlogins id, når den er klar :)
@@ -56,7 +60,4 @@ public class MainController {
 
 
     }
-
-    //@PostMapping("/projects")
-    //controller klik på/vis projekt
 }

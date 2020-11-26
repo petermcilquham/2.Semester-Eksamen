@@ -1,6 +1,6 @@
 <!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
 <head>
-    <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <meta charset="UTF-8">
     <!-- css link virker ikke -->
     <link rel="stylesheet" href="style.css">
@@ -19,7 +19,20 @@
             <button type="submit">Back to main menu</button>
         </form>
 
+
+
         <h1>logo</h1>
+
+
+
+        <div th:each="Project : ${singleProject}">
+        <form action="/project/delete" method="post">
+            <label th:text="${Project.getProjectName()}"></label>
+            <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
+        </form>
+
+        </div>
+
     </div>
 
     <!-- opret bruger -->

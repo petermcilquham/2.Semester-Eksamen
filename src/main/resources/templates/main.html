@@ -32,8 +32,8 @@
             <th:block th:each="Project : ${projectList}">
                 <p th:text="${Project.getProjectName()}"></p>
                 <p th:text="${Project.getProjectCreatedDate()}"></p>
-                <form action="/project" method="post">
-                    <button type="submit" th:value="${Project.getProjectID()}">View project</button> <br>
+                <form action="/getproject" method="post">
+                    <button type="submit" name="projectID" th:value="${Project.getProjectID()}">View project</button> <br>
                 </form>
             </th:block>
         </div>
