@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <meta charset="UTF-8">
     <!-- css link virker ikke -->
     <link rel="stylesheet" href="style.css">
@@ -8,7 +8,11 @@
     <title>Project</title>
 </head>
 <body>
-
+	
+<form action="/backtomain" method="post">
+    <button type="submit">Back to main menu</button>
+</form>
+	
 <div  class="grid-container-index">
     <!-- banner/logo -->
     <div class="grid-item" id="item-1">
