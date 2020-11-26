@@ -9,31 +9,39 @@
 
 <body>
 
-    <div  class="grid-container-index">
-        <!-- banner/logo -->
+    <div  class="grid-container">
+        <!-- tilbage knap -->
         <div class="grid-item" id="item-1">
-
             <form action="/backtomain" method="post">
                 <button type="submit">Back to main menu</button>
             </form>
-
-            <h1>logo</h1>
-
-            <div th:each="Project : ${singleProject}">
-            <form action="/project/delete" method="post">
-                <label th:text="${Project.getProjectName()}"></label>
-                <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
-            </form>
-            </div>
-
         </div>
 
+        <!-- knapper -->
         <div class="grid-item" id="item-2">
-            <p>ahjwjgdahkwd</p>
+            <ul>
+                <li><p>del projekt knap</p></li>
+                <li><p>se projekt team knap</p></li>
+                <li><p>generer gantt diagram knap</p></li>
+            </ul>
         </div>
 
+        <!-- main -->
         <div class="grid-item" id="item-3">
-            <p>ahjwjgdahkwd</p>
+            <!-- single projekt virker ikke -->
+            <div th:each="Project : ${singleProject}">
+                <form action="/project/delete" method="post">
+                    <label th:text="${Project.getProjectName()}"></label>
+                    <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
+                </form>
+            </div>
+            <!-- placeholder -->
+            <h1>main content</h1>
+        </div>
+
+        <!-- slet knap -->
+        <div class="grid-item" id="item-4">
+            <p>slet knap</p>
         </div>
 
     </div>
