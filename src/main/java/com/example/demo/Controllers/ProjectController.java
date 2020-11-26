@@ -21,8 +21,6 @@ public class ProjectController {
 
     @GetMapping("/project")
     public String projectPage(Model m) throws SQLException {
-        projectList = ur.getUsersProjects(1);
-        System.out.println("liste: " + projectList.size());
         m.addAttribute("singleProject",projectList);
         return "project";
     }
@@ -33,5 +31,14 @@ public class ProjectController {
         int projectID = Integer.parseInt(tempID);
         pr.deleteProject(projectID);
         return "redirect:/main";
+    }
+
+    @PostMapping("/getproject")
+    public String project(WebRequest wr) throws SQLException {
+        projectList.clear();
+        String tempID = wr.getParameter("projectID");
+        int projectID = Integer.parseInt(tempID);
+        projectList = pr.getSingleProject(projectID);
+        return "redirect:/project";
     }
 }

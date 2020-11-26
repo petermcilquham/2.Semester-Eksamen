@@ -19,7 +19,6 @@ public class MainController {
     ProjectRepository pr = new ProjectRepository();
     List<Project> projectList = new ArrayList<>();
 
-
     @GetMapping("/main")
     public String main(Model m) throws SQLException {
         projectList.clear();
@@ -33,15 +32,6 @@ public class MainController {
     public String backToMain() {
         projectList.clear();
         return "redirect:/main";
-    }
-
-    @PostMapping("/getproject")
-    public String project(WebRequest wr) {
-        projectList.clear();
-        String tempID = wr.getParameter("projectID");
-        int projectID = Integer.parseInt(tempID);
-        System.out.println(projectID);
-        return "redirect:/project";
     }
 
     @PostMapping("/createproject")

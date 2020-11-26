@@ -2,6 +2,7 @@ package com.example.demo.Repositories;
 
 import com.example.demo.Models.Project;
 import com.example.demo.Services.DBConnect;
+import com.mysql.cj.protocol.Resultset;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -23,11 +24,11 @@ public class UserRepository {
         ps.executeUpdate();
     }
 
-    public List<Project> getUsersProjects(int id) throws SQLException {
+    public List<Project> getUsersProjects(int userID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("select projects.projectID, project_name, project_created_date " +
                 "from projects inner join users_projects on projects.projectID = users_projects.projectID " +
                 "inner join users on users.userID = users_projects.userID where users.userID = ?");
-        ps.setInt(1,id);
+        ps.setInt(1,userID);
 
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
