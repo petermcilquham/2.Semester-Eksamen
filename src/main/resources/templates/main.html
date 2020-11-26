@@ -14,6 +14,15 @@
     <!-- banner/logo -->
     <div class="grid-item" id="item-1">
         <h1>logo</h1>
+
+        <div>
+            <form id="createProject" action="/createproject" method="post" enctype="multipart/form-data">
+                <label>Create a project</label><br>
+                <input type="text" name="projectName" placeholder="Project name"><br>
+                <button type="submit">Create project!</button>
+            </form>
+        </div>
+
     </div>
 
     <!-- opret bruger -->
@@ -28,18 +37,18 @@
                 </form>
             </th:block>
         </div>
-     </div>
+    </div>
 
     <!-- login -->
     <div class="grid-item" id="item-3">
         <div class="projectList">
             <h4>Shared projects</h4>
             <th:block th:each="Project : ${projectList}">
-              <p th:text="${Project.getProjectName()}"></p>
-              <p th:text="${Project.getProjectCreatedDate()}"></p>
-              <form action="/project" method="post">
-                  <button type="submit" th:value="${Project.getProjectID()}">View project</button> <br>
-              </form>
+                <p th:text="${Project.getProjectName()}"></p>
+                <p th:text="${Project.getProjectCreatedDate()}"></p>
+                <form action="/project" method="post">
+                    <button type="submit" th:value="${Project.getProjectID()}">View project</button> <br>
+                </form>
             </th:block>
         </div>
     </div>
