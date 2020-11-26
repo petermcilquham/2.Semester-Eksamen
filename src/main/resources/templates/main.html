@@ -7,44 +7,44 @@
     <link rel="stylesheet" href="style_main.css">
     <title>Main</title>
 </head>
+
 <body>
 
-
-<div  class="grid-container-index">
-    <!-- banner/logo -->
-    <div class="grid-item" id="item-1">
-        <h1>logo</h1>
-    </div>
-
-    <!-- opret bruger -->
-    <div class="grid-item" id="item-2">
-        <div class="projectList">
-            <h4>Your projects</h4>
-            <th:block th:each="Project : ${projectList}">
-                <p th:text="${Project.getProjectName()}"></p>
-                <p th:text="${Project.getProjectCreatedDate()}"></p>
-                <form action="/project" method="post">
-                    <button type="submit" th:value="${Project.getProjectID()}">View project</button> <br>
-                </form>
-            </th:block>
+    <div  class="grid-container-index">
+        <!-- banner/logo -->
+        <div class="grid-item" id="item-1">
+            <h1>logo</h1>
         </div>
-     </div>
 
-    <!-- login -->
-    <div class="grid-item" id="item-3">
-        <div class="projectList">
-            <h4>Shared projects</h4>
-            <th:block th:each="Project : ${projectList}">
-              <p th:text="${Project.getProjectName()}"></p>
-              <p th:text="${Project.getProjectCreatedDate()}"></p>
-              <form action="/project" method="post">
-                  <button type="submit" th:value="${Project.getProjectID()}">View project</button> <br>
-              </form>
-            </th:block>
+        <!-- mine projekter liste -->
+        <div class="grid-item" id="item-2">
+            <div class="projectList">
+                <h4>Your projects</h4>
+                <div th:each="Project : ${myProjectList}">
+                    <p th:text="${Project.getProjectName()}"></p>
+                    <p th:text="${Project.getProjectCreatedDate()}"></p>
+                    <form action="/project" method="post">
+                        <button type="submit" th:value="${Project.getProjectID()}">View project</button> <br>
+                    </form>
+                </div>
+            </div>
+         </div>
+
+        <!-- projekter delt med mig liste -->
+        <div class="grid-item" id="item-3">
+            <div class="projectList">
+                <h4>Shared projects</h4>
+                <div th:each="Project : ${sharedProjectList}">
+                    <p th:text="${Project.getProjectName()}"></p>
+                    <p th:text="${Project.getProjectCreatedDate()}"></p>
+                    <p th:text="${usernameFromCreatedBy}"></p>
+                    <form action="/project" method="post">
+                        <button type="submit" th:value="${Project.getProjectID()}">View project</button> <br>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-
-</div>
 
 </body>
 </html>
