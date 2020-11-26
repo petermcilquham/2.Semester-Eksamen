@@ -47,7 +47,7 @@ public class MainController {
 
     @PostMapping("/getproject")
     public String project(WebRequest wr) {
-        projectList.clear();
+        clearLists();
         String tempID = wr.getParameter("projectID");
         int projectID = Integer.parseInt(tempID);
         System.out.println(projectID);
@@ -65,7 +65,7 @@ public class MainController {
         //ændre til currentlogins id, når den er klar :)
         int createdBy = 1;
 
-        pr.createProject(projectName, currentDay, createdBy);
+        pRep.createProject(projectName, currentDay, createdBy);
         return "redirect:/main";
 
 

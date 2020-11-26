@@ -1,6 +1,5 @@
 package com.example.demo.Repositories;
 
-import com.example.demo.Models.User;
 import com.example.demo.Services.DBConnect;
 
 import org.springframework.stereotype.Repository;
