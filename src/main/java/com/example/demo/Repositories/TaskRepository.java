@@ -45,6 +45,15 @@ public class TaskRepository {
             listOfTasks.add(tmp);
         }
         return listOfTasks;
+    }
 
+    public void editTask(String taskName, String startDate, String endDate, int taskID) throws SQLException {
+        PreparedStatement ps = connection.establishConnection().prepareStatement("UPDATE tasks set task_name = ?, start_date = ?, end_date = ? where taskID = ?");
+        ps.setString(1,taskName);
+        ps.setString(2,startDate);
+        ps.setString(3,endDate);
+        ps.setInt(4,taskID);
+
+        ps.executeUpdate();
     }
 }
