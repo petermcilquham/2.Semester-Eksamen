@@ -16,7 +16,7 @@
             </form>
         </div>
 
-        <!-- knapper -->
+        <!-- del projekt, se projekt og generer gantt diagram knapper -->
         <div class="grid-item" id="item-2">
             <ul>
                 <li><p>del projekt knap</p></li>
@@ -27,7 +27,6 @@
 
         <!-- main -->
         <div class="grid-item" id="item-3" th:each="Project : ${singleProject}">
-            <div class="center">
                 <div class="singleProject">
                     <h1 th:text="${Project.getProjectName()}"></h1>
                     <h4 th:text="${Project.getProjectCreatedDate()}"></h4>
@@ -35,7 +34,6 @@
                         made by: <h4 th:text="${Project.getProjectID()}"></h4>
                     </label>
                 </div>
-            </div>
 
             <form id="createTask" action="/createTask" method="post" enctype="multipart/form-data">
                 <label>Create a task</label><br>
