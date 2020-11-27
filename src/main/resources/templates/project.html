@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/project.css">
+    <link th:href="@{/css/style.css}" href="../static/css/style.css" rel="stylesheet">
+    <link th:href="@{/css/project.css}" href="../static/css/project.css" rel="stylesheet">
     <title>Project</title>
 </head>
 <body>
@@ -30,9 +30,8 @@
         <div class="grid-item" id="item-3">
             <!-- single projekt virker ikke -->
             <div th:each="Project : ${singleProject}">
-                <form action="/project/delete" method="post">
+                <form action="/getproject" method="post">
                     <label th:text="${Project.getProjectName()}"></label>
-                    <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
                 </form>
             </div>
             <!-- placeholder -->
@@ -42,18 +41,9 @@
         <!-- slet knap -->
         <div class="grid-item" id="item-4">
             <!-- slet knap virker ikke -->
-            <div th:each="Project : ${singleProject}">
               <form action="/project/delete" method="post">
-              <h2 th:text="${Project.getProjectName()}"></h2>
-              <label>
-                  created on: <h4 th:text="${Project.getProjectCreatedDate()}"></h4>
-              </label>
-              <label>
-                  made by: <h4 th:text="${Project.getProjectID()}"></h4>
-              </label>
-              <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
-              </form>    
-            </div>
+                <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
+              </form>
             <!-- placeholder -->
             <p>slet knap</p>
         </div>

@@ -35,6 +35,7 @@ public class ProjectController {
     @PostMapping("/getproject")
     public String project(WebRequest wr, Model m) throws SQLException {
         projectList.clear();
+
         String tempID = wr.getParameter("projectID");
         int projectID = Integer.parseInt(tempID);
         projectList = pRep.getSingleProject(projectID);

@@ -32,7 +32,7 @@ public class UserController {
     @PostMapping("/login")
     public String login(){
         System.out.println("User loggd in");
-        //ur.login metode (test for username/password er optaget)
+        //uRep.login metode (test for username/password er optaget)
         return "redirect:/main";
     }
 }
