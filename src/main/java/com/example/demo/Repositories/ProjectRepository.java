@@ -19,14 +19,15 @@ public class ProjectRepository {
     List<Project> sharedProjectList = new ArrayList<>();
 
 
-  public void updateUsersProjects(int userID, int projectID) throws SQLException {
-        PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO users_projects (userID, projectID) VALUES (?,?)");
-        ps.setInt(1,userID);
-        ps.setInt(2,projectID);
+//   public void updateUsersProjects(int userID, int projectID) throws SQLException {
+//         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO users_projects (userID, projectID) VALUES (?,?)");
+//         ps.setInt(1,userID);
+//         ps.setInt(2,projectID);
 
-        ps.executeQuery();
-    }
-  public void createProject(String projectName, Date currentDay, int createdBy) throws SQLException {
+//         ps.executeQuery();
+//     }
+
+  public void createProject(String projectName, Date createdDate, int createdBy) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO projects (project_name, project_created_date, created_by) VALUES (?,?,?)");
         ps.setString(1,projectName);
         ps.setDate(2,currentDay);
@@ -65,26 +66,16 @@ public class ProjectRepository {
         return returnProjectList(ps, id, sharedProjectList);
     }
   
-  //delete project
+    //delete project
    public void deleteProject(int id) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("DELETE FROM projects WHERE projectID = ?");
         ps.setInt(1,id);
         ps.executeUpdate();
     }
 
-    public List<Project> getSingleProject(int projectID) throws SQLException {
+    //get single project
+    public List<Project> getSingleProject(int id) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("SELECT * FROM projects WHERE projectID = ?");
-        ps.setInt(1,projectID);
-
-        ResultSet rs = ps.executeQuery();
-        while(rs.next()) {
-            Project  temp = new Project(
-                    rs.getInt(1),
-                    rs.getString(2),
-                    rs.getDate(3),
-                    rs.getInt(4));
-            singleProjectList.add(temp);
-        }
-        return singleProjectList;
+        return returnProjectList(ps, id, projectList);
     }
 }

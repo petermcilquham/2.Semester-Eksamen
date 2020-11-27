@@ -33,13 +33,14 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(HttpServletRequest wr, HttpServletResponse re){
+      //uRep.login metode (test for username/password er optaget)
         /*
         Request username = wr.getParameter("inputUsername");
         Response response = re.addCookie();
         cookie.doPost(username, response);
         System.out.println("User loggd in");
-        //ur.login metode (test for username/password er optaget)
          */
+      
         return "redirect:/main";
     }
 }

@@ -17,7 +17,6 @@ import java.util.List;
 
 @Controller
 public class MainController {
-
     ProjectRepository pRep = new ProjectRepository();
     UserRepository uRep = new UserRepository();
     Project p = new Project(0,"",null,0);
