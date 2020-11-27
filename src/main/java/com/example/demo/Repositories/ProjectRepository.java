@@ -26,10 +26,10 @@ public class ProjectRepository {
 
         ps.executeQuery();
     }
-  public void createProject(String projectName, Date createdDate, int createdBy) throws SQLException {
+  public void createProject(String projectName, Date currentDay, int createdBy) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO projects (project_name, project_created_date, created_by) VALUES (?,?,?)");
         ps.setString(1,projectName);
-        ps.setDate(2,createdDate);
+        ps.setDate(2,currentDay);
         ps.setInt(3,createdBy);
 
         ps.executeUpdate();
@@ -81,7 +81,8 @@ public class ProjectRepository {
             Project  temp = new Project(
                     rs.getInt(1),
                     rs.getString(2),
-                    rs.getDate(3));
+                    rs.getDate(3),
+                    rs.getInt(4));
             projectList.add(temp);
         }
         return projectList;

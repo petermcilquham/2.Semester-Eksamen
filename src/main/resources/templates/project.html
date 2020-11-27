@@ -34,6 +34,13 @@
                     <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
                 </form>
             </div>
+            <div>
+                <form id="createTask" action="/createTask" method="post" enctype="multipart/form-data">
+                    <label>Create a project</label><br>
+                    <input type="text" name="taskName" placeholder="Task Name"><br>
+                    <button type="submit">Create task!</button>
+                </form>
+            </div>
             <!-- placeholder -->
             <h1>main content</h1>
         </div>

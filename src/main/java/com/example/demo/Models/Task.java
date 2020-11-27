@@ -6,13 +6,13 @@ public class Task {
 
     private int taskID;
     private String taskName;
-    private Date startDate;
+    private Date currentDay;
     private Date endDate;
 
-    public Task(int taskID, String taskName, Date startDate, Date endDate) {
+    public Task(int taskID, String taskName, Date currentDay, Date endDate) {
         this.taskID = taskID;
         this.taskName = taskName;
-        this.startDate = startDate;
+        this.currentDay = currentDay;
         this.endDate = endDate;
     }
 
@@ -33,11 +33,11 @@ public class Task {
     }
 
     public Date getStartDate() {
-        return startDate;
+        return currentDay;
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        this.currentDay = startDate;
     }
 
     public Date getEndDate() {
