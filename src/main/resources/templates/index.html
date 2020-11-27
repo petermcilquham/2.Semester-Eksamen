@@ -2,17 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style_index.css">
+    <link th:href="@{/css/style.css}" href="../static/css/style.css" rel="stylesheet">
+    <link th:href="@{/css/index.css}" href="../static/css/index.css" rel="stylesheet">
     <title>Index</title>
 </head>
-
 <body>
 
     <div  class="grid-container">
+        
         <!-- banner/logo -->
         <div class="grid-item" id="item-1">
-
+            <a href="/"><h1>logo bitch</h1></a>
         </div>
 
         <!-- opret bruger -->
