@@ -40,7 +40,7 @@ public class ProjectController {
         projectList.clear();
         String tempID = wr.getParameter("projectID");
         int projectID = Integer.parseInt(tempID);
-        projectList = pr.getSingleProject(projectID);
+        projectList = pRep.getSingleProject(projectID);
         return "redirect:/project";
     }
 }

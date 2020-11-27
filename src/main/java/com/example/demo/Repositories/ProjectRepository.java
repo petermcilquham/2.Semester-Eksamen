@@ -81,7 +81,8 @@ public class ProjectRepository {
             Project  temp = new Project(
                     rs.getInt(1),
                     rs.getString(2),
-                    rs.getDate(3));
+                    rs.getDate(3),
+                    rs.getInt(4));
             projectList.add(temp);
         }
         return projectList;

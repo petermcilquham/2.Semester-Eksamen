@@ -8,12 +8,22 @@ public class Task {
     private String taskName;
     private Date startDate;
     private Date endDate;
+    private int projectID;
 
-    public Task(int taskID, String taskName, Date startDate, Date endDate) {
+    public Task(int taskID, String taskName, Date startDate, Date endDate, int projectID) {
         this.taskID = taskID;
         this.taskName = taskName;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.projectID = projectID;
+    }
+
+    public int getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(int projectID) {
+        this.projectID = projectID;
     }
 
     public int getTaskID() {
