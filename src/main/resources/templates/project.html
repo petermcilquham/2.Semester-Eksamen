@@ -39,8 +39,23 @@
             <form id="createTask" action="/createTask" method="post" enctype="multipart/form-data">
                 <label>Create a task</label><br>
                 <input type="text" name="taskName" placeholder="Task Name"><br>
-                <button type="submit" name="createTask"th:text="${Project.getProjectID()}">Create task!</button>
+                <button type="submit" name="createTask"th:value="${Project.getProjectID()}">Create task!</button>
             </form>
+
+            <table>
+                <tr>
+                    <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th>
+                </tr>
+                <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">
+                    <tr>
+                        <td><input th:type="text" name="taskID" placeholder="TaskID"></td>
+                        <td> <input th:type="text" name="taskName" placeholder="Task name"></td>
+                        <td> <input th:type="date" name="startDate"></td>
+                        <td> <input th:type="date" name="endDate"></td>
+                        <td><button type="submit" name="editTask" th:value="${Project.getProjectID()}">Apply Changes</button></td>
+                    </tr>
+                </form>
+            </table>
 
             <h1>Tasks</h1>
             <div class="taskList">
