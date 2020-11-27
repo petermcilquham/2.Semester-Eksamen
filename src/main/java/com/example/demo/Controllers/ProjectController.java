@@ -2,7 +2,6 @@ package com.example.demo.Controllers;
 
 import com.example.demo.Models.Project;
 import com.example.demo.Repositories.ProjectRepository;
-import com.example.demo.Repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,14 +14,12 @@ import java.util.List;
 
 @Controller
 public class ProjectController {
-    UserRepository uRep = new UserRepository();
+    //UserRepository uRep = new UserRepository();
     ProjectRepository pRep = new ProjectRepository();
     List<Project> projectList = new ArrayList<>();
 
     @GetMapping("/project")
-    public String projectPage(Model m) throws SQLException {
-        //projectList = pRep.getUsersProjects(1);
-        System.out.println("liste: " + projectList.size());
+    public String projectPage(Model m) {
         m.addAttribute("singleProject",projectList);
         return "project";
     }
@@ -36,11 +33,12 @@ public class ProjectController {
     }
 
     @PostMapping("/getproject")
-    public String project(WebRequest wr) throws SQLException {
+    public String project(WebRequest wr, Model m) throws SQLException {
         projectList.clear();
         String tempID = wr.getParameter("projectID");
         int projectID = Integer.parseInt(tempID);
-        projectList = pr.getSingleProject(projectID);
+        projectList = pRep.getSingleProject(projectID);
+        m.addAttribute("project",projectList);
         return "redirect:/project";
     }
 }

@@ -2,13 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style_project.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/project.css">
     <title>Project</title>
 </head>
 <body>
 
     <div  class="grid-container">
+
         <!-- tilbage knap -->
         <div class="grid-item" id="item-1">
             <form action="/backtomain" method="post">
@@ -16,7 +17,7 @@
             </form>
         </div>
 
-        <!-- knapper -->
+        <!-- del projekt, se projekt og generer gantt diagram knapper -->
         <div class="grid-item" id="item-2">
             <ul>
                 <li><p>del projekt knap</p></li>
@@ -40,6 +41,7 @@
 
         <!-- slet knap -->
         <div class="grid-item" id="item-4">
+            <!-- slet knap virker ikke -->
             <div th:each="Project : ${singleProject}">
               <form action="/project/delete" method="post">
               <h2 th:text="${Project.getProjectName()}"></h2>
@@ -51,6 +53,9 @@
               </label>
               <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
               </form>    
+            </div>
+            <!-- placeholder -->
+            <p>slet knap</p>
         </div>
 
     </div>
