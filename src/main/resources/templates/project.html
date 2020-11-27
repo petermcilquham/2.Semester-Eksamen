@@ -26,27 +26,20 @@
             </ul>
         </div>
 
-        <!-- main -->
-        <div class="grid-item" id="item-3">
-            <!-- single projekt virker ikke -->
-            <div th:each="Project : ${singleProject}">
-                <form action="/getproject" method="post">
-                    <label th:text="${Project.getProjectName()}"></label>
-                </form>
-            </div>
-            <!-- placeholder -->
-            <h1>main content</h1>
-        </div>
-
-        <!-- slet knap -->
-        <div class="grid-item" id="item-4">
-            <!-- slet knap virker ikke -->
-              <form action="/project/delete" method="post">
-                <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
-              </form>
-            <!-- placeholder -->
-            <p>slet knap</p>
-        </div>
+        <table style="width:100%">
+            <tr>
+                <th>taskID</th>
+                <th>taskName</th>
+                <th>startDate</th>
+                <th>endDate</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
 
     </div>
 
