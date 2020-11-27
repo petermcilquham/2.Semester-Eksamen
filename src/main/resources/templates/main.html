@@ -9,11 +9,12 @@
 <body>
 
     <div  class="grid-container">
+
         <!-- banner/logo -->
         <div class="grid-item" id="item-1">
             <a href="/"><h1>logooo</h1></a>
         </div>
-        
+
         <!-- opret projekt knap -->
         <div class="grid-item" id="item-2">
             <form id="createProject" action="/createproject" method="post" enctype="multipart/form-data">
@@ -46,7 +47,7 @@
                     <p th:text="${Project.getProjectCreatedDate()}"></p>
                     <p th:text="${usernameFromCreatedBy}"></p>
                     <form action="/project" method="post">
-                        <button type="submit" th:value="${Project.getProjectID()}">View project</button> <br>
+                        <button type="submit" name="projectID" th:value="${Project.getProjectID()}">View project</button> <br>
                     </form>
                 </div>
             </div>

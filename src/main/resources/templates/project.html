@@ -9,6 +9,7 @@
 <body>
 
     <div  class="grid-container">
+
         <!-- tilbage knap -->
         <div class="grid-item" id="item-1">
             <form action="/backtomain" method="post">
@@ -56,20 +57,17 @@
                         </tr>
                     </div>
                 </table>
-            </div>
-
+              </di>
         </div>
 
         <!-- slet knap -->
         <div class="grid-item" id="item-4">
-            <div th:each="Project : ${singleProject}">
-              <form action="/project/delete" method="post">
-                <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
-              </form>
-            </div>
-        </div>
-
+            <!-- slet knap virker ikke -->
+            <form action="/project/delete" method="post">
+              <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
+            </form>
+         </div>
+     
     </div>
-
 </body>
 </html>

@@ -31,4 +31,9 @@ public class UserRepository {
         return "Project created by: " + username;
     }
 
+    //validate user login method
+    public void loginValidation(){
+
+    }
+
 }

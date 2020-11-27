@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 public class ProjectController {
-    UserRepository uRep = new UserRepository();
+    //UserRepository uRep = new UserRepository();
     ProjectRepository pRep = new ProjectRepository();
     TaskRepository tRep = new TaskRepository();
     List<Project> singleProjectList = new ArrayList<>();
@@ -39,18 +39,15 @@ public class ProjectController {
     }
 
     @PostMapping("/getproject")
-    public String project(WebRequest wr) throws SQLException{
+    public String project(WebRequest wr) throws SQLException {
         String tempID = wr.getParameter("projectID");
         System.out.println(tempID);
         int projectID = Integer.parseInt(tempID);
-
         singleProjectList.clear();
         listOfTasks.clear();
         singleProjectList = pRep.getSingleProject(projectID);
         listOfTasks = tRep.getTaskList(projectID);
-
         return "redirect:/project";
     }
-
 
 }
