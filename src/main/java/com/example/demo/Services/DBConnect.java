@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DBConnect {
 
     public Connection establishConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/project_manager_app?serverTimezone=UTC", "root", "12957375a");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/project_manager_app?serverTimezone=UTC", "root", "1");
         //standard user: root, password: 1
     }
 }

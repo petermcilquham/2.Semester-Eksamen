@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public class ProjectRepository {
     DBConnect connection = new DBConnect();
-    List<Project> projectList = new ArrayList<>();
+    List<Project> singleProjectList = new ArrayList<>();
     List<Project> myProjectList = new ArrayList<>();
     List<Project> sharedProjectList = new ArrayList<>();
 

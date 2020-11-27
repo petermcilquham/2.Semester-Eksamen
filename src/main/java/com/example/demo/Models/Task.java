@@ -6,14 +6,24 @@ public class Task {
 
     private int taskID;
     private String taskName;
-    private Date currentDay;
+    private Date startDate;
     private Date endDate;
+    private int projectID;
 
-    public Task(int taskID, String taskName, Date currentDay, Date endDate) {
+    public Task(int taskID, String taskName, Date startDate, Date endDate, int projectID) {
         this.taskID = taskID;
         this.taskName = taskName;
-        this.currentDay = currentDay;
+        this.startDate = startDate;
         this.endDate = endDate;
+        this.projectID = projectID;
+    }
+
+    public int getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(int projectID) {
+        this.projectID = projectID;
     }
 
     public int getTaskID() {
@@ -33,11 +43,11 @@ public class Task {
     }
 
     public Date getStartDate() {
-        return currentDay;
+        return startDate;
     }
 
     public void setStartDate(Date startDate) {
-        this.currentDay = startDate;
+        this.startDate = startDate;
     }
 
     public Date getEndDate() {
