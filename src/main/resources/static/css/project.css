@@ -7,31 +7,48 @@
     justify-content: center;
 }
 
+/*tilbage knap*/
+#item-1{
+    /*grid-row-start: 1;*/
+    /*grid-column-start: 1;*/
+    /*grid-row-end: 4;*/
+    /*grid-column-end: 2;*/
+    grid-area: 1 / 1 / 2 / 2;
+}
+/*knapper*/
+#item-2{
+    /*grid-row-start: 2;*/
+    /*grid-column-start: 1;*/
+    /*grid-row-end: 3;*/
+    /*grid-column-end: 2;*/
+    grid-area: 2 / 1 / 3 / 2;
+    justify-self: center;
+}
+/*projekt + opgaver*/
+#item-3{
+    /*grid-row-start: 3;*/
+    /*grid-column-start: 1;*/
+    /*grid-row-end: 4;*/
+    /*grid-column-end: 2;*/
+    grid-area: 3 / 1 / 4 / 2;
+    justify-self: center;
+}
+/*slet knap*/
+#item-4{
+    /*grid-row-start: 4;*/
+    /*grid-column-start: 1;*/
+    /*grid-row-end: 5;*/
+    /*grid-column-end: 3;*/
+    grid-area: 4 / 1 / 5 / 2;
+    justify-self: right;
+    align-self: end;
+}
+
+/* -------------------------------- liste ----------------------- */
 ul li{
     display: inline;
 }
 li{
     float:left;
     padding-right: 30px;
-}
-
-#item-1{
-    /*tilbage knap*/
-    grid-area: 1 / 1 / 2 / 2;
-}
-#item-2{
-    /*knapper*/
-    grid-area: 2 / 1 / 3 / 2;
-    justify-self: center;
-}
-#item-3{
-    /*projekt + opgaver*/
-    grid-area: 3 / 1 / 4 / 2;
-    justify-self: center;
-}
-#item-4{
-    /*slet knap*/
-    grid-area: 4 / 1 / 5 / 2;
-    justify-self: right;
-    align-self: end;
 }
