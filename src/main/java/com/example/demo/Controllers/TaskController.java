@@ -27,8 +27,15 @@ public class TaskController {
         //Vi modtager endDate i String format fra html og omdanner den til en sql.date, så den kan indsættes i databasen.
         String endDate = wr.getParameter("endDate");
         java.sql.Date.valueOf(endDate);
-
-        tRep.createTask(taskName, currentDay, endDate, projectID);
+      
+        //tRep.createTask(taskName, currentDay, endDate);
         return "redirect:/project";
     }
+
+    @PostMapping("/project/edit")
+    public String editTask(WebRequest wr) {
+   
+        return "redirect:/project";
+    }
+
 }

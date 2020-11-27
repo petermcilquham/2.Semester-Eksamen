@@ -25,7 +25,7 @@ li{
     justify-self: center;
 }
 #item-3{
-    /*main*/
+    /*projekt + opgaver*/
     grid-area: 3 / 1 / 4 / 2;
     justify-self: center;
 }
@@ -33,4 +33,20 @@ li{
     /*slet knap*/
     grid-area: 4 / 1 / 5 / 2;
     justify-self: right;
+    align-self: end;
+}
+
+/* -------------------------------- table ----------------------- */
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
