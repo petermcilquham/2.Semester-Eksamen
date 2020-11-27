@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public class ProjectRepository {
     DBConnect connection = new DBConnect();
-    List<Project> projectList = new ArrayList<>();
+    List<Project> singleProjectList = new ArrayList<>();
     List<Project> myProjectList = new ArrayList<>();
     List<Project> sharedProjectList = new ArrayList<>();
 
@@ -83,8 +83,8 @@ public class ProjectRepository {
                     rs.getString(2),
                     rs.getDate(3),
                     rs.getInt(4));
-            projectList.add(temp);
+            singleProjectList.add(temp);
         }
-        return projectList;
+        return singleProjectList;
     }
 }

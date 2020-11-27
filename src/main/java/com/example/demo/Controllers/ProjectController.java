@@ -1,7 +1,9 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Models.Project;
+import com.example.demo.Models.Task;
 import com.example.demo.Repositories.ProjectRepository;
+import com.example.demo.Repositories.TaskRepository;
 import com.example.demo.Repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +19,14 @@ import java.util.List;
 public class ProjectController {
     UserRepository uRep = new UserRepository();
     ProjectRepository pRep = new ProjectRepository();
-    List<Project> projectList = new ArrayList<>();
+    TaskRepository tRep = new TaskRepository();
+    List<Project> singleProjectList = new ArrayList<>();
+    List<Task> listOfTasks = new ArrayList<>();
 
     @GetMapping("/project")
-    public String projectPage(Model m) throws SQLException {
-        //projectList = pRep.getUsersProjects(1);
-        System.out.println("liste: " + projectList.size());
-        m.addAttribute("singleProject",projectList);
+    public String projectPage(Model m, Model m2) throws SQLException {
+        m2.addAttribute("taskList",listOfTasks);
+        m.addAttribute("singleProject",singleProjectList);
         return "project";
     }
 
@@ -36,11 +39,18 @@ public class ProjectController {
     }
 
     @PostMapping("/getproject")
-    public String project(WebRequest wr) throws SQLException {
-        projectList.clear();
+    public String project(WebRequest wr) throws SQLException{
         String tempID = wr.getParameter("projectID");
+        System.out.println(tempID);
         int projectID = Integer.parseInt(tempID);
-        projectList = pRep.getSingleProject(projectID);
+
+        singleProjectList.clear();
+        listOfTasks.clear();
+        singleProjectList = pRep.getSingleProject(projectID);
+        listOfTasks = tRep.getTaskList(projectID);
+
         return "redirect:/project";
     }
+
+
 }

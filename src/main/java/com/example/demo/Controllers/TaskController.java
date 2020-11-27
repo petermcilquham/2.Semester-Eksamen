@@ -20,8 +20,15 @@ public class TaskController {
         long millis = System.currentTimeMillis();
         java.sql.Date currentDay = new java.sql.Date(millis);
 
-
-        tRep.createTask(taskName, currentDay, endDate);
+        //tRep.createTask(taskName, currentDay, endDate);
         return "redirect:/project";
     }
+
+    @PostMapping("/projetc/edit")
+    public String editTask(WebRequest wr) {
+        String newTaskName = wr.getParameter("editTask");
+        System.out.println(newTaskName);
+        return "redirect:/project";
+    }
+
 }

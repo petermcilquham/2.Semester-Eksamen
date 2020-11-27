@@ -1,7 +1,9 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Models.Project;
+import com.example.demo.Models.Task;
 import com.example.demo.Repositories.ProjectRepository;
+import com.example.demo.Repositories.TaskRepository;
 import com.example.demo.Repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,9 @@ public class MainController {
     Project p = new Project(0,"",null,0);
     List<Project> myProjectList = new ArrayList<>();
     List<Project> sharedProjectList = new ArrayList<>();
+    TaskRepository tRep = new TaskRepository();
+    List<Project> singleProjectList = new ArrayList<>();
+    List<Task> listOfTasks = new ArrayList<>();
 
     public void clearLists(){
         //clear array lists
@@ -59,4 +64,7 @@ public class MainController {
         pRep.createProject(projectName, currentDay, createdBy);
         return "redirect:/main";
     }
+
+
+
 }
