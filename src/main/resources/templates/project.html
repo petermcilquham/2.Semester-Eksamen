@@ -2,13 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style_project.css">
+    <link th:href="@{/css/style.css}" href="../static/css/style.css" rel="stylesheet">
+    <link th:href="@{/css/project.css}" href="../static/css/project.css" rel="stylesheet">
     <title>Project</title>
 </head>
 <body>
 
     <div  class="grid-container">
+
         <!-- tilbage knap -->
         <div class="grid-item" id="item-1">
             <form action="/backtomain" method="post">
@@ -16,7 +17,7 @@
             </form>
         </div>
 
-        <!-- knapper -->
+        <!-- del projekt, se projekt og generer gantt diagram knapper -->
         <div class="grid-item" id="item-2">
             <ul>
                 <li><p>del projekt knap</p></li>
@@ -29,9 +30,8 @@
         <div class="grid-item" id="item-3">
             <!-- single projekt virker ikke -->
             <div th:each="Project : ${singleProject}">
-                <form action="/project/delete" method="post">
+                <form action="/getproject" method="post">
                     <label th:text="${Project.getProjectName()}"></label>
-                    <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
                 </form>
             </div>
             <div>
@@ -49,17 +49,12 @@
 
         <!-- slet knap -->
         <div class="grid-item" id="item-4">
-            <div th:each="Project : ${singleProject}">
+            <!-- slet knap virker ikke -->
               <form action="/project/delete" method="post">
-              <h2 th:text="${Project.getProjectName()}"></h2>
-              <label>
-                  created on: <h4 th:text="${Project.getProjectCreatedDate()}"></h4>
-              </label>
-              <label>
-                  made by: <h4 th:text="${Project.getProjectID()}"></h4>
-              </label>
-              <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
-              </form>    
+                <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
+              </form>
+            <!-- placeholder -->
+            <p>slet knap</p>
         </div>
 
     </div>
