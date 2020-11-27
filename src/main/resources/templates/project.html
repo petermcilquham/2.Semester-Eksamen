@@ -26,22 +26,34 @@
             </ul>
         </div>
 
-        <table style="width:100%">
-            <tr>
-                <th>taskID</th>
-                <th>taskName</th>
-                <th>startDate</th>
-                <th>endDate</th>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
+        <!-- main -->
+        <div class="grid-item" id="item-3">
+            <!-- single projekt virker ikke -->
+            <div th:each="Project : ${singleProject}">
+                <form action="/getproject" method="post">
+                    <label th:text="${Project.getProjectName()}"></label>
+                </form>
+            </div>
+            <div>
+                <form id="createTask" action="/createTask" method="post" enctype="multipart/form-data">
+                    <label>Create a project</label><br>
+                    <input type="text" name="taskName" placeholder="Task Name"><br>
+                    <button type="submit">Create task!</button>
+                    <label for="endDate">End Date: </label>
+                    <input type="date" id="endDate" name="endDate" >
+                </form>
+            </div>
+        </div>
+
+        <!-- slet knap -->
+        <div class="grid-item" id="item-4">
+            <!-- slet knap virker ikke -->
+              <form action="/project/delete" method="post">
+                <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
+              </form>
+        </div>
 
     </div>
-
+    </div>
 </body>
 </html>

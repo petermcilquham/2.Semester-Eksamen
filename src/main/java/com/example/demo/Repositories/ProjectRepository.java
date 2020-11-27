@@ -19,17 +19,18 @@ public class ProjectRepository {
     List<Project> sharedProjectList = new ArrayList<>();
 
 
-//  public void updateUsersProjects(int userID, int projectID) throws SQLException {
-//        PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO users_projects (userID, projectID) VALUES (?,?)");
-//        ps.setInt(1,userID);
-//        ps.setInt(2,projectID);
-//
-//        ps.executeQuery();
-//    }
+//   public void updateUsersProjects(int userID, int projectID) throws SQLException {
+//         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO users_projects (userID, projectID) VALUES (?,?)");
+//         ps.setInt(1,userID);
+//         ps.setInt(2,projectID);
+
+//         ps.executeQuery();
+//     }
+
   public void createProject(String projectName, Date createdDate, int createdBy) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO projects (project_name, project_created_date, created_by) VALUES (?,?,?)");
         ps.setString(1,projectName);
-        ps.setDate(2,createdDate);
+        ps.setDate(2,currentDay);
         ps.setInt(3,createdBy);
 
         ps.executeUpdate();
