@@ -5,14 +5,12 @@
     grid-template-rows: 100px 100px auto;
     grid-row-gap: 20px;
     grid-column-gap: 20px;
-    /*grid-gap: 20px;*/
     justify-content: center;
 }
-
 .grid-item{
     justify-self: center;
 }
-
+/* logo */
 #item-1{
     /*grid-row-start: 1;*/
     /*grid-column-start: 1;*/
@@ -20,6 +18,7 @@
     /*grid-column-end: 3;*/
     grid-area: 1 / 1 / 2 / 3;
 }
+/* opret projekt knap */
 #item-2{
     /*grid-row-start: 2;*/
     /*grid-column-start: 1;*/
@@ -28,6 +27,7 @@
     grid-area: 2 / 1 / 3 / 3;
     align-self: end;
 }
+/* liste over mine projekter */
 #item-3{
     /*grid-row-start: 3;*/
     /*grid-column-start: 1;*/
@@ -35,6 +35,7 @@
     /*grid-column-end: 2;*/
     grid-area: 3 / 1 / 4 / 2;
 }
+/* liste over projekter der er delt med mig */
 #item-4{
     /*grid-row-start: 3;*/
     /*grid-column-start: 2;*/

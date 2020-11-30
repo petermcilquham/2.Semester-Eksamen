@@ -4,7 +4,6 @@ import com.example.demo.Models.Project;
 import com.example.demo.Models.Task;
 import com.example.demo.Repositories.ProjectRepository;
 import com.example.demo.Repositories.TaskRepository;
-import com.example.demo.Repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,16 +16,15 @@ import java.util.List;
 
 @Controller
 public class ProjectController {
-    //UserRepository uRep = new UserRepository();
     ProjectRepository pRep = new ProjectRepository();
     TaskRepository tRep = new TaskRepository();
     List<Project> singleProjectList = new ArrayList<>();
     List<Task> listOfTasks = new ArrayList<>();
 
     @GetMapping("/project")
-    public String projectPage(Model m, Model m2) throws SQLException {
-        m2.addAttribute("taskList",listOfTasks);
+    public String projectPage(Model m, Model m2) {
         m.addAttribute("singleProject",singleProjectList);
+        m2.addAttribute("taskList",listOfTasks);
         return "project";
     }
 

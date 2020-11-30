@@ -5,6 +5,9 @@ import com.example.demo.Models.Task;
 import com.example.demo.Repositories.ProjectRepository;
 import com.example.demo.Repositories.TaskRepository;
 import com.example.demo.Repositories.UserRepository;
+import com.example.demo.Services.ListManager;
+import com.example.demo.Services.ModelManager;
+import com.example.demo.Services.RepositoryManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,35 +20,38 @@ import java.util.List;
 
 @Controller
 public class MainController {
-    ProjectRepository pRep = new ProjectRepository();
-    UserRepository uRep = new UserRepository();
-    Project p = new Project(0,"",null,0);
-    List<Project> myProjectList = new ArrayList<>();
-    List<Project> sharedProjectList = new ArrayList<>();
-    TaskRepository tRep = new TaskRepository();
-    List<Project> singleProjectList = new ArrayList<>();
-    List<Task> listOfTasks = new ArrayList<>();
+    RepositoryManager repositoryManager = new RepositoryManager();
+    ModelManager modelManager = new ModelManager();
+    ListManager listManager = new ListManager();
+//    List<Project> myProjectList = new ArrayList<>();
+//    List<Project> sharedProjectList = new ArrayList<>();
+//    Project p = new Project(0,"",null,0);
+//    TaskRepository tRep = new TaskRepository();
+//    List<Project> singleProjectList = new ArrayList<>();
+//    List<Task> listOfTasks = new ArrayList<>();
+//    ProjectRepository pRep = new ProjectRepository();
+//    UserRepository uRep = new UserRepository();
 
-    public void clearLists(){
-        //clear array lists
-        myProjectList.clear();
-        sharedProjectList.clear();
-    }
+//    public void clearLists(){
+//        //clear array lists
+//        myProjectList.clear();
+//        sharedProjectList.clear();
+//    }
 
     @GetMapping("/main")
     public String main(Model myProjects, Model sharedProjects, Model username) throws SQLException {
-        clearLists();
-        myProjectList = pRep.getMyProjects(2);
-        sharedProjectList = pRep.getSharedProjects(2);
-        myProjects.addAttribute("myProjectList",myProjectList);
-        sharedProjects.addAttribute("sharedProjectList",sharedProjectList);
-        username.addAttribute("usernameFromCreatedBy",uRep.getUserByID(p.getCreatedBy()));
+        listManager.clearLists();
+        listManager.myProjectList = repositoryManager.pRep.getMyProjects(2);
+        listManager.sharedProjectList = repositoryManager.pRep.getSharedProjects(2);
+        myProjects.addAttribute("myProjectList",listManager.myProjectList);
+        sharedProjects.addAttribute("sharedProjectList",listManager.sharedProjectList);
+        username.addAttribute("usernameFromCreatedBy",repositoryManager.uRep.getUserByID(modelManager.project.getCreatedBy()));
         return "main";
     }
 
     @PostMapping("/backtomain")
     public String backToMain() {
-        clearLists();
+        listManager.clearLists();
         return "redirect:/main";
     }
   
@@ -60,10 +66,8 @@ public class MainController {
         //ændre til currentlogins id, når den er klar :)
         int createdBy = 1;
 
-        pRep.createProject(projectName, currentDay, createdBy);
+        repositoryManager.pRep.createProject(projectName, currentDay, createdBy);
         return "redirect:/main";
     }
-
-
 
 }
