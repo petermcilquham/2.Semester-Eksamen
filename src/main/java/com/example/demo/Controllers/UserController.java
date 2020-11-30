@@ -1,6 +1,8 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Repositories.UserRepository;
+import com.example.demo.Services.ClearLists;
+import com.example.demo.Services.ObjectManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,8 @@ import java.sql.SQLException;
 
 @Controller
 public class UserController {
-    UserRepository uRep = new UserRepository();
+    ObjectManager objectManager = new ObjectManager();
+    ClearLists clearLists = new ClearLists();
 
     @GetMapping("/")
     public String index(Model m){
@@ -26,7 +29,7 @@ public class UserController {
         String username = wr.getParameter("createUsername");
         String password = wr.getParameter("createPassword");
 
-        uRep.createUser(username,password);
+        objectManager.uRep.createUser(username,password);
 
         return "redirect:/";
     }

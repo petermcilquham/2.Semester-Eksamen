@@ -1,24 +1,18 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Models.Task;
-import com.example.demo.Repositories.TaskRepository;
+import com.example.demo.Services.ClearLists;
+import com.example.demo.Services.ObjectManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
-import java.sql.Date;
 import java.sql.SQLException;
-
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 @Controller
 public class TaskController {
-    TaskRepository tRep = new TaskRepository();
-    List<Task> listOfTasks = new ArrayList<>();
+    ObjectManager objectManager = new ObjectManager();
+    ClearLists clearLists = new ClearLists();
 
     @PostMapping("/createTask")
     public String createTask(WebRequest wr) throws SQLException, ParseException {
@@ -46,7 +40,7 @@ public class TaskController {
         String tempID = wr.getParameter("taskID");
         int taskID = Integer.parseInt(tempID);
 
-        tRep.editTask(newTaskName, startDate, endDate, taskID);
+        objectManager.tRep.editTask(newTaskName, startDate, endDate, taskID);
         return "redirect:/project";
     }
 

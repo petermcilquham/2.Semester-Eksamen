@@ -1,9 +1,7 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Models.Project;
-import com.example.demo.Models.Task;
-import com.example.demo.Repositories.ProjectRepository;
-import com.example.demo.Repositories.TaskRepository;
+import com.example.demo.Services.ClearLists;
+import com.example.demo.Services.ObjectManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,20 +9,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class ProjectController {
-    ProjectRepository pRep = new ProjectRepository();
-    TaskRepository tRep = new TaskRepository();
-    List<Project> singleProjectList = new ArrayList<>();
-    List<Task> listOfTasks = new ArrayList<>();
+    ObjectManager objectManager = new ObjectManager();
+    ClearLists clearLists = new ClearLists();
 
     @GetMapping("/project")
     public String projectPage(Model m, Model m2) {
-        m.addAttribute("singleProject",singleProjectList);
-        m2.addAttribute("taskList",listOfTasks);
+        m.addAttribute("singleProject",objectManager.singleProjectList);
+        m2.addAttribute("taskList",objectManager.listOfTasks);
         return "project";
     }
 
@@ -32,7 +26,7 @@ public class ProjectController {
     public String deleteProject(WebRequest wr) throws SQLException {
         String tempID = wr.getParameter("deleteProject");
         int projectID = Integer.parseInt(tempID);
-        pRep.deleteProject(projectID);
+        objectManager.pRep.deleteProject(projectID);
         return "redirect:/main";
     }
 
@@ -41,10 +35,10 @@ public class ProjectController {
         String tempID = wr.getParameter("projectID");
         System.out.println(tempID);
         int projectID = Integer.parseInt(tempID);
-        singleProjectList.clear();
-        listOfTasks.clear();
-        singleProjectList = pRep.getSingleProject(projectID);
-        listOfTasks = tRep.getTaskList(projectID);
+        objectManager.singleProjectList.clear();
+        objectManager.listOfTasks.clear();
+        objectManager.singleProjectList = objectManager.pRep.getSingleProject(projectID);
+        objectManager.listOfTasks = objectManager.tRep.getTaskList(projectID);
         return "redirect:/project";
     }
 

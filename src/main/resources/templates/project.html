@@ -36,17 +36,19 @@
                 made by: <h4 th:text="${Project.getProjectID()}"></h4>
             </div>
 
+            <h1>Tasks</h1>
             <!-- opret opgave -->
             <div th:each="Project : ${singleProject}">
                 <form id="createTask" action="/createTask" method="post" enctype="multipart/form-data">
-                    <label for="taskName">Create a task</label><br>
-                    <input type="text" name="taskName" id="taskName" placeholder="Task Name"><br>
+                    <h3>Create a task</h3>
+                    <label><input type="text" name="taskName" id="taskName" placeholder="Task Name"></label><br>
                     <button type="submit" name="createTask" th:value="${Project.getProjectID()}">Create task!</button>
                 </form>
             </div>
 
             <!-- edit opgaver-->
             <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">
+                <h3>Edit task</h3>
                 <table>
                     <tr>
                         <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th>
@@ -62,7 +64,7 @@
             </form>
 
             <!-- vis opgaver -->
-            <h1>Tasks</h1>
+            <h3>Current tasks</h3>
             <table>
                 <tr>
                     <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th>
@@ -79,7 +81,6 @@
 
         <!-- slet knap -->
         <div class="grid-item" id="item-4">
-            <!-- slet knap vises ikke! ?? -->
             <form action="/project/delete" method="post" th:each="Project : ${singleProject}">
                 <button type="submit" th:value="${Project.getProjectID()}">Delete project</button>
             </form>
