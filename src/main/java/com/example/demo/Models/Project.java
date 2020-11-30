@@ -6,12 +6,14 @@ public class Project {
 
     private int projectID;
     private String projectName;
-    private Date projectCreatedDate;
+    private Date currentDay;
+    private int createdBy;
 
-    public Project(int projectID, String projectName, Date projectCreatedDate) {
+    public Project(int projectID, String projectName, Date currentDay, int createdBy) {
         this.projectID = projectID;
         this.projectName = projectName;
-        this.projectCreatedDate = projectCreatedDate;
+        this.currentDay = currentDay;
+        this.createdBy = createdBy;
     }
 
     public int getProjectID() {
@@ -31,11 +33,19 @@ public class Project {
     }
 
     public Date getProjectCreatedDate() {
-        return projectCreatedDate;
+        return currentDay;
     }
 
     public void setProjectCreatedDate(Date projectCreatedDate) {
-        this.projectCreatedDate = projectCreatedDate;
+        this.currentDay = projectCreatedDate;
+    }
+
+    public int getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(int created_by) {
+        this.createdBy = created_by;
     }
 
     @Override
@@ -43,7 +53,8 @@ public class Project {
         return "Project{" +
                 "projectID=" + projectID +
                 ", projectName='" + projectName + '\'' +
-                ", projectCreatedDate='" + projectCreatedDate + '\'' +
+                ", projectCreatedDate=" + currentDay +
+                ", created_by=" + createdBy +
                 '}';
     }
 }
