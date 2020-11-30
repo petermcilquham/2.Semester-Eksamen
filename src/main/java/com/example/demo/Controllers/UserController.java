@@ -18,7 +18,7 @@ public class UserController {
     @GetMapping("/")
     public String index(Model m){
         m.addAttribute("createUser",m);
-        return "index.html";
+        return "index";
     }
 
     @PostMapping("/createUser")
