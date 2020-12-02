@@ -15,7 +15,7 @@ public class TaskController {
     ClearLists clearLists = new ClearLists();
 
     @PostMapping("/task/create")
-    public String createTask(WebRequest wr) throws SQLException{
+    public String createTask(WebRequest wr) throws SQLException, ParseException {
         String tempProjectID = wr.getParameter("createTask");
         int projectID = Integer.parseInt(tempProjectID);
 
@@ -40,13 +40,14 @@ public class TaskController {
         String tempUserID = wr.getParameter("newResponsible");
         int responsibleUserID = Integer.parseInt(tempUserID);
 
-        boolean tempStatus = wr.checkNotModified("newCompletionStatus");
+        boolean tempStatus = Boolean.parseBoolean(wr.getParameter("newCompletionStatus"));
+        System.out.println(tempStatus);
+
 
         String tempID = wr.getParameter("getTaskID");
         int taskID = Integer.parseInt(tempID);
 
-        objectManager.tRep.editTask(newTaskName, startDate, endDate, responsibleUserID , tempStatus, taskID);
+        objectManager.tRep.editTask(newTaskName, startDate, endDate, responsibleUserID, tempStatus, taskID);
         return "redirect:/project";
     }
-
 }

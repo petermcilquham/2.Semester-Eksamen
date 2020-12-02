@@ -50,8 +50,8 @@ public class ProjectController {
         String tempProjectID = wr.getParameter("shareProjectID");
         int userID = Integer.parseInt(tempUserID);
         int projectID = Integer.parseInt(tempProjectID);
+
         objectManager.pRep.shareProject(userID,projectID);
         return "redirect:/project";
     }
-
 }

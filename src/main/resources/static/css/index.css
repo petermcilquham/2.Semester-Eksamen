@@ -1,5 +1,5 @@
 /* -------------------------------- grid ----------------------- */
-.grid-container-main {
+.grid-container-main{
     display: grid;
     grid-template-columns: 50%;
     grid-template-rows: 100px 150px 150px;

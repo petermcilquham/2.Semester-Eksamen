@@ -34,7 +34,7 @@ public class UserRepository {
         if(rs.next()){
             username = rs.getString(1);
         }
-        return username;
+        return "Project created by: " + username;
     }
 
     //validate user login method
@@ -50,7 +50,6 @@ public class UserRepository {
         return id;
     }
 
-    //get my team list
     public List<User> getTeamList(int projectID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("SELECT DISTINCT users.userID, username, password from users inner join project_ownership on users.userID = project_ownership.userID " +
                 "inner join projects on project_ownership.projectID = projects.projectID where projects.projectID = ? and users.userID != created_by");
@@ -67,7 +66,6 @@ public class UserRepository {
         return teamList;
     }
 
-    //get my team list including owner of project
     public List<User> getTeamListIncludeCreatedBy(int projectID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("SELECT DISTINCT users.userID, username, password from users inner join project_ownership on users.userID = project_ownership.userID " +
                 "inner join projects on project_ownership.projectID = projects.projectID where projects.projectID = ?");
