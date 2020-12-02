@@ -15,10 +15,10 @@ public class MainController {
     ClearLists clearLists = new ClearLists();
 
     @GetMapping("/main")
-    public String main(Model myProjects, Model sharedProjects, Model username) throws SQLException {
+    public String main(Model myProjects, Model sharedProjects, Model username, HttpSession session) throws SQLException {
         clearLists.clearLists();
-        objectManager.myProjectList = objectManager.pRep.getMyProjects(1);
-        objectManager.sharedProjectList = objectManager.pRep.getSharedProjects(1);
+        objectManager.myProjectList = objectManager.pRep.getMyProjects((Integer)session.getAttribute("userID"));
+        objectManager.sharedProjectList = objectManager.pRep.getSharedProjects((Integer)session.getAttribute("userID"));
         myProjects.addAttribute("myProjectList",objectManager.myProjectList);
         sharedProjects.addAttribute("sharedProjectList",objectManager.sharedProjectList);
         username.addAttribute("usernameFromCreatedBy",objectManager.uRep.getUserByID(objectManager.project.getCreatedBy()));
