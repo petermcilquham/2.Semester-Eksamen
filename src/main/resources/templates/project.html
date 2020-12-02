@@ -51,13 +51,15 @@
                 <h3>Edit task</h3>
                 <table>
                     <tr>
-                        <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th>
+                        <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th>
                     </tr>
                     <tr th:each="Project : ${singleProject}">
                         <td><label><input th:type="text" name="taskID" placeholder="TaskID"></label></td>
                         <td><label><input th:type="text" name="taskName" placeholder="Task name"></label></td>
                         <td><label><input th:type="date" name="startDate"></label></td>
                         <td><label><input th:type="date" name="endDate"></label></td>
+                        <td><label><input th:type="number" name="taskResponsible"></label></td>
+                        <td><label><input th:type="radio" name="completionStatus"></label></td>
                         <td><button type="submit" name="editTask" th:value="${Project.getProjectID()}">Apply Changes</button></td>
                     </tr>
                 </table>
@@ -67,13 +69,15 @@
             <h3>Current tasks</h3>
             <table>
                 <tr>
-                    <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th>
+                    <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th>
                 </tr>
                 <tr th:each="Task : ${taskList}">
                     <td th:text="${Task.getTaskID()}"></td>
                     <td th:text="${Task.getTaskName()}"></td>
                     <td th:text="${Task.getStartDate()}"></td>
                     <td th:text="${Task.getEndDate()}"></td>
+                    <td th:text="${Task.getTaskResponsible()}"></td>
+                    <td th:text="${Task.isCompletionStatus()}"></td>
                 </tr>
             </table>
 

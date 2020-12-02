@@ -33,6 +33,7 @@ public class MainController {
   
     @PostMapping("/createproject")
     public String createProject(WebRequest wr) throws SQLException {
+        clearLists.clearLists();
         String projectName = wr.getParameter("projectName");
 
         //dette giver dagens dato i yyyy/mm/dd
@@ -45,5 +46,4 @@ public class MainController {
         objectManager.pRep.createProject(projectName, currentDay, createdBy);
         return "redirect:/main";
     }
-
 }

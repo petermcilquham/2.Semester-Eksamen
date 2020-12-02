@@ -37,10 +37,12 @@ public class TaskController {
         String newTaskName = wr.getParameter("taskName");
         String startDate = wr.getParameter("startDate");
         String endDate = wr.getParameter("endDate");
+        int taskResponsible = Integer.parseInt(wr.getParameter("taskResponsible"));
+        boolean completionStatus = Boolean.parseBoolean(wr.getParameter("completionStatus"));
         String tempID = wr.getParameter("taskID");
         int taskID = Integer.parseInt(tempID);
 
-        objectManager.tRep.editTask(newTaskName, startDate, endDate, taskID);
+        objectManager.tRep.editTask(newTaskName, startDate, endDate, taskResponsible, completionStatus, taskID);
         return "redirect:/project";
     }
 
