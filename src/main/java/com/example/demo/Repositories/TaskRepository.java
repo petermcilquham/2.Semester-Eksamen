@@ -31,6 +31,7 @@ public class TaskRepository {
         ps.setInt(1,id);
         ps.executeUpdate();
     }
+
     public List<Task> getTaskList(int projectID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("SELECT * from tasks where projectID = ? ORDER BY start_date ASC");
         ps.setInt(1,projectID);

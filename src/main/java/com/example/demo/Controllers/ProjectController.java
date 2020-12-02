@@ -22,16 +22,8 @@ public class ProjectController {
         return "project";
     }
 
-    @PostMapping("/project/delete")
-    public String deleteProject(WebRequest wr) throws SQLException {
-        String tempID = wr.getParameter("deleteProject");
-        int projectID = Integer.parseInt(tempID);
-        objectManager.pRep.deleteProject(projectID);
-        return "redirect:/main";
-    }
-
     @PostMapping("/getproject")
-    public String project(WebRequest wr) throws SQLException {
+    public String getProject(WebRequest wr) throws SQLException {
         String tempID = wr.getParameter("projectID");
         System.out.println(tempID);
         int projectID = Integer.parseInt(tempID);
@@ -40,6 +32,14 @@ public class ProjectController {
         objectManager.singleProjectList = objectManager.pRep.getSingleProject(projectID);
         objectManager.listOfTasks = objectManager.tRep.getTaskList(projectID);
         return "redirect:/project";
+    }
+
+    @PostMapping("/project/delete")
+    public String deleteProject(WebRequest wr) throws SQLException {
+        String tempID = wr.getParameter("deleteProject");
+        int projectID = Integer.parseInt(tempID);
+        objectManager.pRep.deleteProject(projectID);
+        return "redirect:/main";
     }
 
 }
