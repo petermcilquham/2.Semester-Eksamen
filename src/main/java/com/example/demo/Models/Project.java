@@ -48,7 +48,7 @@ public class Project {
         return createdBy;
     }
     public String getCreatedByString() throws SQLException {
-        return userRepository.getUserByID(getCreatedBy());
+        return "Created by: " + userRepository.getUserByID(getCreatedBy());
     }
 
     public void setCreatedBy(int created_by) {

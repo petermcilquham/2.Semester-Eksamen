@@ -16,18 +16,17 @@ public class ProjectController {
     ClearLists clearLists = new ClearLists();
 
     @GetMapping("/project")
-    public String projectPage(Model m, Model m2) {
+    public String projectPage(Model m) {
         m.addAttribute("singleProject",objectManager.singleProjectList);
-        m2.addAttribute("taskList",objectManager.listOfTasks);
+        m.addAttribute("taskList",objectManager.listOfTasks);
         return "project";
     }
 
-    @PostMapping("/getproject")
+    @PostMapping("/project/get")
     public String getProject(WebRequest wr) throws SQLException {
+        clearLists.clearLists();
         String tempID = wr.getParameter("projectID");
         int projectID = Integer.parseInt(tempID);
-        objectManager.singleProjectList.clear();
-        objectManager.listOfTasks.clear();
         objectManager.singleProjectList = objectManager.pRep.getSingleProject(projectID);
         objectManager.listOfTasks = objectManager.tRep.getTaskList(projectID);
         return "redirect:/project";

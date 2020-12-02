@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <div  class="grid-container">
+    <div  class="grid-container-main">
 
         <!-- tilbage knap -->
         <div class="grid-item" id="item-1">
@@ -26,81 +26,63 @@
             </ul>
         </div>
 
-        <!-- main -->
+        <!-- vis projekt -->
         <div class="grid-item" id="item-3">
-
-            <!-- vis enkelt projekt -->
-            <div th:each="Project : ${singleProject}">
-                <h1 th:text="${Project.getProjectName()}"></h1>
-                <h4 th:text="${Project.getProjectCreatedDate()}"></h4>
-                made by: <p th:text="${Project.getCreatedByString()}"></p>
+            <div class="grid-container-show-project" th:each="Project : ${singleProject}">
+                <div id="show-project-item-1">
+                    <h1 th:text="${Project.getProjectName()}"></h1>
+                </div>
+                <div id="show-project-item-2">
+                    <ul>
+                        <li><p th:text="${Project.getCreatedByString()}"></p></li>
+                        <li><p th:text="${Project.getProjectCreatedDate()}"></p></li>
+                    </ul>
+                </div>
             </div>
+        </div>
 
-            <h1>Tasks</h1>
-            <!-- opret opgave -->
-            <div th:each="Project : ${singleProject}">
-                <form id="createTask" action="/createTask" method="post" enctype="multipart/form-data">
-                    <h3>Create a task</h3>
-                    <label><input type="text" name="taskName" id="taskName" placeholder="Task Name"></label><br>
-                    <button type="submit" name="createTask" th:value="${Project.getProjectID()}">Create task!</button>
-                </form>
-            </div>
+        <!-- delopgaver -->
+        <div class="grid-item" id="item-4" >
+            <div class="grid-container-tasks">
 
-            <!-- edit opgaver-->
-<!--            <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">-->
-<!--                <h3>Edit task</h3>-->
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th>-->
-<!--                    </tr>-->
-<!--                    <tr th:each="Project : ${singleProject}">-->
-<!--                        <td><label><input th:type="text" name="taskID" placeholder="TaskID"></label></td>-->
-<!--                        <td><label><input th:type="text" name="taskName" placeholder="Task name"></label></td>-->
-<!--                        <td><label><input th:type="date" name="startDate"></label></td>-->
-<!--                        <td><label><input th:type="date" name="endDate"></label></td>-->
-<!--                        <td><label><input th:type="text" name="taskResponsible"></label></td>-->
-<!--                        <td><label><input th:type="radio" name="completionStatus"></label></td>-->
-<!--                        <td><button type="submit" name="editTask" th:value="${Project.getProjectID()}">Apply Changes</button></td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--            </form>-->
-
-            <!-- vis opgaver -->
-            <h3>Current tasks</h3>
-            <table>
-                <tr>
-                    <th id="taskIDHeader">ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th><th>edit</th>
-                </tr>
-                <tr th:each="Task : ${taskList}">
-                    <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">
-                        <td th:text="${Task.getTaskID()}" style="width:30px"></td>
-
-                        <td> <input type="text" name="newTaskName" th:contenteditable="true" th:placeholder="${Task.getTaskName()}" th:value="${Task.getTaskName()}"></td>
-
-                        <td> <input type="text" name="newStartDate" th:contenteditable="true" th:placeholder="${Task.getStartDate()}"
-                                    th:value="${Task.getStartDate()}" onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 70px" ></td>
-
-                        <td> <input type="text" name="newEndDate" th:contenteditable="true" th:placeholder="${Task.getEndDate()}"
-                                    th:value="${Task.getEndDate()}" onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 70px"></td>
-
-                        <td> <input type="text" name="newResponsible "th:contenteditable="true" th:placeholder="${Task.getTaskResponsible()}"
-                                    th:value="${Task.getTaskResponsible()}" style="width: 100px"></td>
-
-                        <td> <input type="checkbox" name="newCompletionStatus" th:text="${Task.isCompletionStatus()}" checked="unchecked" style="width: 10px"></td>
-
-                        <td><button type="submit" name="getTaskID" th:value="${Task.getTaskID()}">Edit!</button></td>
+                <!-- opret opgave -->
+                <h1>Tasks</h1>
+                <div th:each="Project : ${singleProject}">
+                    <form id="createTask" action="/createTask" method="post" enctype="multipart/form-data">
+                        <h3>Create a task</h3>
+                        <label><input type="text" name="taskName" id="taskName" placeholder="Task Name"></label><br>
+                        <button type="submit" name="createTask" th:value="${Project.getProjectID()}">Create task!</button>
                     </form>
-                </tr>
-            </table>
+                </div>
 
+                <!-- vis opgaver -->
+                <h3>Current tasks</h3>
+                <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">
+                    <table>
+                        <tr>
+                            <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th><th>edit</th>
+                        </tr>
+                        <tr th:each="Task : ${taskList}">
+                            <td style="width:30px" th:text="${Task.getTaskID()}"></td>
+                            <td> <input type="text" name="newTaskName" th:contenteditable="true" th:placeholder="${Task.getTaskName()}" th:value="${Task.getTaskName()}"></td>
+                            <td style="width: 60px"> <input type="text" name="newStartDate" th:contenteditable="true" th:placeholder="${Task.getStartDate()}" th:value="${Task.getStartDate()}" onfocus="(this.type='date')" onblur="(this.type='text')"></td>
+                            <td style="width: 60px"> <input type="text" name="newEndDate" th:contenteditable="true" th:placeholder="${Task.getEndDate()}" th:value="${Task.getEndDate()}" onfocus="(this.type='date')" onblur="(this.type='text')"></td>
+                            <td style="width: 80px"> <input type="text" name="newResponsible "th:contenteditable="true" th:placeholder="${Task.getTaskResponsibleString()}" th:value="${Task.getTaskResponsibleString()}"></td>
+                            <td style="width: 80px"> <input type="checkbox" name="newCompletionStatus" th:text="${Task.isCompletionStatus()}" checked="checked"></td>
+                            <td style="width: 40px"> <button type="submit" name="getTaskID" th:value="${Task.getTaskID()}">Edit!</button></td>
+                        </tr>
+                    </table>
+                </form>
+
+            </div>
         </div>
 
         <!-- slet knap -->
-        <div class="grid-item" id="item-4">
+        <div class="grid-item" id="item-5">
             <form action="/project/delete" method="post" th:each="Project : ${singleProject}">
                 <button type="submit" th:value="${Project.getProjectID()}">Delete project</button>
             </form>
-         </div>
+        </div>
 
     </div>
 

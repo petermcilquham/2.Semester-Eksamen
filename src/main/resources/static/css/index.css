@@ -1,5 +1,5 @@
 /* -------------------------------- grid ----------------------- */
-.grid-container {
+.grid-container-main {
     display: grid;
     grid-template-columns: 50%;
     grid-template-rows: 100px 150px 150px;
@@ -32,4 +32,5 @@
     /*grid-row-end: 4;*/
     /*grid-column-end: 2;*/
     grid-area: 3 / 1 / 4 / 2;
+    width: 183px;
 }
