@@ -20,6 +20,7 @@
         <!-- del projekt, se team og generer gantt diagram knapper -->
         <div class="grid-item" id="item-2">
             <ul>
+                <li>Your team:</li>
                 <!--share project with teamList-->
                 <li>
                     <div th:each="Project : ${singleProject}">
@@ -32,13 +33,13 @@
                     </div>
                 </li>
                 <!-- gantt diagram -->
-                <li><p>generer gantt diagram knap</p></li>
+                <li>Generate GANTT diagram</li>
             </ul>
         </div>
 
         <!-- vis projekt -->
-        <div class="grid-item" id="item-3">
-            <div class="grid-container-show-project" th:each="Project : ${singleProject}">
+        <div class="grid-item" id="item-3" th:each="Project : ${singleProject}">
+            <div class="grid-container-show-project">
                 <div id="show-project-item-1">
                     <h1 th:text="${Project.getProjectName()}"></h1>
                 </div>
@@ -75,23 +76,23 @@
                 <!-- vis opgaver -->
                 <h3>Current tasks</h3>
                 <form id="editTask" action="/task/edit" method="post" enctype="multipart/form-data">
-                    <table>
+                    <table th:each="Task : ${taskList}">
                         <tr>
                             <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th><th>edit</th>
                         </tr>
-                        <tr th:each="Task : ${taskList}">
-                            <td style="width:30px" th:text="${Task.getTaskID()}"></td>
+                        <tr>
+                            <td th:text="${Task.getTaskID()}" style="width:30px"></td>
                             <td> <input type="text" name="newTaskName" th:contenteditable="true" th:placeholder="${Task.getTaskName()}" th:value="${Task.getTaskName()}"></td>
-                            <td style="width: 70px"> <input type="text" name="newStartDate" th:contenteditable="true" th:placeholder="${Task.getStartDate()}" th:value="${Task.getStartDate()}" onfocus="(this.type='date')" onblur="(this.type='text')"></td>
-                            <td style="width: 70px"> <input type="text" name="newEndDate" th:contenteditable="true" th:placeholder="${Task.getEndDate()}" th:value="${Task.getEndDate()}" onfocus="(this.type='date')" onblur="(this.type='text')"></td>
-                            <td style="width: 80px">
+                            <td> <input type="text" name="newStartDate" th:contenteditable="true" th:placeholder="${Task.getStartDate()}" th:value="${Task.getStartDate()}" onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 70px" ></td>
+                            <td> <input type="text" name="newEndDate" th:contenteditable="true" th:placeholder="${Task.getEndDate()}" th:value="${Task.getEndDate()}" onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 70px"></td>
+                            <td>
                                 <select name="newResponsible" id="newResponsible">
-                                    <option th:text="${Task.getTaskResponsible()}" selected disabled hidden> </option>
+                                    <option th:text="${Task.getTaskResponsibleString()}" selected disabled hidden> </option>
                                     <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
                                 </select>
                             </td>
-                            <td style="width: 60px"> <input type="checkbox" id="newCompletionStatus" name="newCompletionStatus" value="true" checked="" th:text="${Task.isCompletionStatus()}" th:default="${Task.isCompletionStatus()}"></td>
-                            <td style="width: 40px"> <button type="submit" name="getTaskID" th:value="${Task.getTaskID()}">Edit!</button></td>
+                            <td> <input type="checkbox" id="newCompletionStatus" name="newCompletionStatus" value="true" checked="" th:text="${Task.isCompletionStatus()}" th:default="${Task.isCompletionStatus()}" style="width: 10px"></td>
+                            <td> <button type="submit" name="getTaskID" th:value="${Task.getTaskID()}">Edit!</button></td>
                         </tr>
                     </table>
                 </form>

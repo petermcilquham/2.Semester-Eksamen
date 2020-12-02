@@ -15,7 +15,7 @@ public class TaskController {
     ClearLists clearLists = new ClearLists();
 
     @PostMapping("/task/create")
-    public String createTask(WebRequest wr) throws SQLException, ParseException {
+    public String createTask(WebRequest wr) throws SQLException{
         String tempProjectID = wr.getParameter("createTask");
         int projectID = Integer.parseInt(tempProjectID);
 
@@ -42,7 +42,6 @@ public class TaskController {
 
         boolean tempStatus = Boolean.parseBoolean(wr.getParameter("newCompletionStatus"));
         System.out.println(tempStatus);
-
 
         String tempID = wr.getParameter("getTaskID");
         int taskID = Integer.parseInt(tempID);

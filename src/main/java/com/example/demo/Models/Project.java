@@ -54,14 +54,4 @@ public class Project {
     public void setCreatedBy(int created_by) {
         this.createdBy = created_by;
     }
-
-    @Override
-    public String toString() {
-        return "Project{" +
-                "projectID=" + projectID +
-                ", projectName='" + projectName + '\'' +
-                ", projectCreatedDate=" + currentDay +
-                ", created_by=" + createdBy +
-                '}';
-    }
 }

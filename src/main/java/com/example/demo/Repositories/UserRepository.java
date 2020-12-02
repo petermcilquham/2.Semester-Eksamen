@@ -34,7 +34,7 @@ public class UserRepository {
         if(rs.next()){
             username = rs.getString(1);
         }
-        return "Project created by: " + username;
+        return username;
     }
 
     //validate user login method

@@ -62,7 +62,7 @@ public class Task {
         return taskResponsible;
     }
     public String getTaskResponsibleString() throws SQLException {
-        return taskRepository.getTaskResponsible(getTaskResponsible());
+        return taskRepository.getTaskResponsibleRepoMethod(getTaskResponsible());
     }
 
     public void setTaskResponsible(int task_responsible) {
