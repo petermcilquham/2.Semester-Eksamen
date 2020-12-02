@@ -21,10 +21,26 @@
         <div class="grid-item" id="item-2">
             <ul>
                 <li><p>del projekt knap</p></li>
-                <li><p>se projekt team knap</p></li>
+                <!--share project with teamList-->
+                <li>
+                    <div th:each="Project : ${singleProject}">
+                    <form id="shareProject" action="/project/share" method="post">
+                        <select name="teamList" id="teamList">
+                            <option th:each="User : ${teamList}" name="shareUserID" id="shareUserID"  th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
+                        </select>
+                        <button type="submit" name="shareProjectID" th:value="${Project.getProjectID()}">Share Project!</button>
+                    </form>
+                    </div>
+                </li>
+
                 <li><p>generer gantt diagram knap</p></li>
             </ul>
+
+
+
         </div>
+
+
 
         <!-- main -->
         <div class="grid-item" id="item-3">
@@ -46,13 +62,13 @@
                 </form>
             </div>
 
-            <div th:each="Project : ${singleProject}">
-                <form id="shareProject" action="/project/share" method="post">
-                    <h3>Share project with your coworkers</h3>
-                    <input type="text" name="shareUserID" id="shareUserID" placeholder="User ID">
-                    <button type="submit" name="shareProjectID" th:value="${Project.getProjectID()}" >Share Project!</button>
-                </form>
-            </div>
+<!--            <div th:each="Project : ${singleProject}">-->
+<!--                <form id="shareProject" action="/project/share" method="post">-->
+<!--                    <h3>Share project with your coworkers</h3>-->
+<!--                    <input type="text" name="shareUserID" id="shareUserID" placeholder="User ID">-->
+<!--                    <button type="submit" name="shareProjectID" th:value="${Project.getProjectID()}" >Share Project!</button>-->
+<!--                </form>-->
+<!--            </div>-->
 
             <!-- edit opgaver-->
 <!--            <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">-->

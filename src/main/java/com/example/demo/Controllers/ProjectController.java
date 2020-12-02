@@ -16,9 +16,11 @@ public class ProjectController {
     ClearLists clearLists = new ClearLists();
 
     @GetMapping("/project")
-    public String projectPage(Model m, Model m2) {
+    public String projectPage(Model m) {
         m.addAttribute("singleProject",objectManager.singleProjectList);
-        m2.addAttribute("taskList",objectManager.listOfTasks);
+        m.addAttribute("taskList",objectManager.listOfTasks);
+        m.addAttribute("teamList",objectManager.teamList);
+        System.out.println(objectManager.teamList.size());
         return "project";
     }
 
@@ -28,6 +30,8 @@ public class ProjectController {
         int projectID = Integer.parseInt(tempID);
         objectManager.singleProjectList.clear();
         objectManager.listOfTasks.clear();
+        objectManager.teamList.clear();
+        objectManager.teamList = objectManager.pRep.getTeamList(projectID);
         objectManager.singleProjectList = objectManager.pRep.getSingleProject(projectID);
         objectManager.listOfTasks = objectManager.tRep.getTaskList(projectID);
         return "redirect:/project";
@@ -43,8 +47,12 @@ public class ProjectController {
 
     @PostMapping("/project/share")
     public String shareProject(WebRequest wr) throws SQLException {
-        String tempUserID = wr.getParameter("shareUserID");
+        System.out.println("hej");
+        String tempUserID = wr.getParameter("teamList");
         String tempProjectID = wr.getParameter("shareProjectID");
+
+        System.out.println("userid " + tempUserID + " projectID: " + tempProjectID);
+
         int userID = Integer.parseInt(tempUserID);
         int projectID = Integer.parseInt(tempProjectID);
 

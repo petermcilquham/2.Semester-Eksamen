@@ -26,4 +26,6 @@ public class ObjectManager {
     public List<Project> sharedProjectList = new ArrayList<>();
     public List<Project> singleProjectList = new ArrayList<>();
     public List<Task> listOfTasks = new ArrayList<>();
+    public List<User> teamList = new ArrayList<>();
+
 }
