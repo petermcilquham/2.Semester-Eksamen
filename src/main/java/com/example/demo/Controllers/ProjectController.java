@@ -22,7 +22,7 @@ public class ProjectController {
         return "project";
     }
 
-    @PostMapping("/getproject")
+    @PostMapping("/project/get")
     public String getProject(WebRequest wr) throws SQLException {
         String tempID = wr.getParameter("projectID");
         int projectID = Integer.parseInt(tempID);
@@ -39,6 +39,18 @@ public class ProjectController {
         int projectID = Integer.parseInt(tempID);
         objectManager.pRep.deleteProject(projectID);
         return "redirect:/main";
+    }
+
+    @PostMapping("/project/share")
+    public String shareProject(WebRequest wr) throws SQLException {
+        String tempUserID = wr.getParameter("shareUserID");
+        String tempProjectID = wr.getParameter("shareProjectID");
+        int userID = Integer.parseInt(tempUserID);
+        int projectID = Integer.parseInt(tempProjectID);
+
+        objectManager.pRep.shareProject(userID,projectID);
+        return "redirect:/project";
+
     }
 
 }

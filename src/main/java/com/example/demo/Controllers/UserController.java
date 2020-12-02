@@ -38,7 +38,7 @@ public class UserController {
         String password = wr.getParameter("inputPassword");
 
         int id = objectManager.uRep.loginValidation(username, password);
-        System.out.println("id:" + id);
+        System.out.println("logged in as id:" + id + ", " + username);
 
         if(id>0){
             session.setAttribute("userID", id);

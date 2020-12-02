@@ -46,6 +46,14 @@
                 </form>
             </div>
 
+            <div th:each="Project : ${singleProject}">
+                <form id="shareProject" action="/project/share" method="post">
+                    <h3>Share project with your coworkers</h3>
+                    <input type="text" name="shareUserID" id="shareUserID" placeholder="User ID">
+                    <button type="submit" name="shareProjectID" th:value="${Project.getProjectID()}" >Share Project!</button>
+                </form>
+            </div>
+
             <!-- edit opgaver-->
 <!--            <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">-->
 <!--                <h3>Edit task</h3>-->
@@ -99,7 +107,7 @@
         <!-- slet knap -->
         <div class="grid-item" id="item-4">
             <form action="/project/delete" method="post" th:each="Project : ${singleProject}">
-                <button type="submit" th:value="${Project.getProjectID()}">Delete project</button>
+                <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
             </form>
          </div>
 
