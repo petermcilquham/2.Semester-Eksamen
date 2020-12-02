@@ -50,7 +50,7 @@ public class ProjectRepository {
 
     //get projects shared with me and NOT my own projects
     public List<Project> getSharedProjects(int id) throws SQLException{
-        PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct projects.projectID, project_name, project_created_date, created_by from projects inner join project_ownership on projects.projectID = projec_ownership.projectID inner join users on users.userID = project_ownership.userID where users.userID = ? and created_by != users.userID");
+        PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct projects.projectID, project_name, project_created_date, created_by from projects inner join project_ownership on projects.projectID = project_ownership.projectID inner join users on users.userID = project_ownership.userID where users.userID = ? and created_by != users.userID");
         return returnProjectList(ps, id, sharedProjectList);
     }
   
