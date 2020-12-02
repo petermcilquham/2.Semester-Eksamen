@@ -21,7 +21,17 @@
         <div class="grid-item" id="item-2">
             <ul>
                 <li><p>del projekt knap</p></li>
-                <li><p>se projekt team knap</p></li>
+                <!--share project with teamList-->
+                <li>
+                    <div th:each="Project : ${singleProject}">
+                    <form id="shareProject" action="/project/share" method="post">
+                        <select name="teamList" id="teamList">
+                            <option th:each="User : ${teamList}" name="shareUserID" id="shareUserID"  th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
+                        </select>
+                        <button type="submit" name="shareProjectID" th:value="${Project.getProjectID()}">Share Project!</button>
+                    </form>
+                    </div>
+                </li>
                 <li><p>generer gantt diagram knap</p></li>
             </ul>
         </div>
@@ -39,31 +49,19 @@
             <h1>Tasks</h1>
             <!-- opret opgave -->
             <div th:each="Project : ${singleProject}">
-                <form id="createTask" action="/createTask" method="post" enctype="multipart/form-data">
+                <form id="createTask" action="/task/create" method="post" enctype="multipart/form-data">
                     <h3>Create a task</h3>
                     <label><input type="text" name="taskName" id="taskName" placeholder="Task Name"></label><br>
+                    <label for="startDate">start Date: </label>
+                    <input type="date" id="startDate" name="startDate" >
+                    <label for="endDate">end Date: </label>
+                    <input type="date" id="endDate" name="endDate" >
+                    <select name="responsible" id="responsible">
+                        <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
+                    </select>
                     <button type="submit" name="createTask" th:value="${Project.getProjectID()}">Create task!</button>
                 </form>
             </div>
-
-            <!-- edit opgaver-->
-<!--            <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">-->
-<!--                <h3>Edit task</h3>-->
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th>-->
-<!--                    </tr>-->
-<!--                    <tr th:each="Project : ${singleProject}">-->
-<!--                        <td><label><input th:type="text" name="taskID" placeholder="TaskID"></label></td>-->
-<!--                        <td><label><input th:type="text" name="taskName" placeholder="Task name"></label></td>-->
-<!--                        <td><label><input th:type="date" name="startDate"></label></td>-->
-<!--                        <td><label><input th:type="date" name="endDate"></label></td>-->
-<!--                        <td><label><input th:type="text" name="taskResponsible"></label></td>-->
-<!--                        <td><label><input th:type="radio" name="completionStatus"></label></td>-->
-<!--                        <td><button type="submit" name="editTask" th:value="${Project.getProjectID()}">Apply Changes</button></td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--            </form>-->
 
             <!-- vis opgaver -->
             <h3>Current tasks</h3>
@@ -72,7 +70,7 @@
                     <th id="taskIDHeader">ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th><th>edit</th>
                 </tr>
                 <tr th:each="Task : ${taskList}">
-                    <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">
+                    <form id="editTask" action="/task/edit" method="post" enctype="multipart/form-data">
                         <td th:text="${Task.getTaskID()}" style="width:30px"></td>
 
                         <td> <input type="text" name="newTaskName" th:contenteditable="true" th:placeholder="${Task.getTaskName()}" th:value="${Task.getTaskName()}"></td>
@@ -83,12 +81,17 @@
                         <td> <input type="text" name="newEndDate" th:contenteditable="true" th:placeholder="${Task.getEndDate()}"
                                     th:value="${Task.getEndDate()}" onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 70px"></td>
 
-                        <td> <input type="text" name="newResponsible "th:contenteditable="true" th:placeholder="${Task.getTaskResponsible()}"
-                                    th:value="${Task.getTaskResponsible()}" style="width: 100px"></td>
+                        <td>
+                            <select name="newResponsible" id="newResponsible">
+                                <option th:text="${Task.getTaskResponsible()}" selected disabled hidden> </option>
+                                <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
+                            </select>
+                        </td>
 
-                        <td> <input type="checkbox" name="newCompletionStatus" th:text="${Task.isCompletionStatus()}" checked="unchecked" style="width: 10px"></td>
+                        <td> <input type="checkbox" id="newCompletionStatus" name="newCompletionStatus" value="true" checked="" th:text="${Task.isCompletionStatus()}"
+                                    th:default="${Task.isCompletionStatus()}" style="width: 10px"></td>
 
-                        <td><button type="submit" name="getTaskID" th:value="${Task.getTaskID()}">Edit!</button></td>
+                        <td> <button type="submit" name="getTaskID" th:value="${Task.getTaskID()}">Edit!</button></td>
                     </form>
                 </tr>
             </table>
@@ -98,7 +101,7 @@
         <!-- slet knap -->
         <div class="grid-item" id="item-4">
             <form action="/project/delete" method="post" th:each="Project : ${singleProject}">
-                <button type="submit" th:value="${Project.getProjectID()}">Delete project</button>
+                <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
             </form>
          </div>
 

@@ -31,7 +31,7 @@ public class MainController {
         return "redirect:/main";
     }
   
-    @PostMapping("/createproject")
+    @PostMapping("/project/create")
     public String createProject(WebRequest wr) throws SQLException {
         clearLists.clearLists();
         String projectName = wr.getParameter("projectName");

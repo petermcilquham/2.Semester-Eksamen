@@ -18,7 +18,7 @@
         <!-- opret projekt knap -->
         <div class="grid-item" id="item-2">
             <h3>Create project</h3>
-            <form id="createProject" action="/createproject" method="post" enctype="multipart/form-data">
+            <form id="createProject" action="/project/create" method="post" enctype="multipart/form-data">
                 <label><input type="text" name="projectName" placeholder="Project name"></label><br>
 <!--                <label><input type="date" name="projectEndDate" placeholder="Expected end date"></label><br>-->
                 <button type="submit">Create project!</button>
@@ -31,7 +31,7 @@
             <div th:each="Project : ${myProjectList}">
                 <p th:text="${Project.getProjectName()}"></p>
                 <p th:text="${Project.getProjectCreatedDate()}"></p>
-                <form action="/getproject" method="post">
+                <form action="/project/get" method="post">
                     <button type="submit" name="projectID" th:value="${Project.getProjectID()}">View project</button> <br>
                 </form>
             </div>
@@ -44,7 +44,7 @@
                 <p th:text="${Project.getProjectName()}"></p>
                 <p th:text="${Project.getProjectCreatedDate()}"></p>
                 <p th:text="${Project.getCreatedByString()}"></p>
-                <form action="/getproject" method="post">
+                <form action="/project/get" method="post">
                     <button type="submit" name="projectID" th:value="${Project.getProjectID()}">View project</button> <br>
                 </form>
             </div>

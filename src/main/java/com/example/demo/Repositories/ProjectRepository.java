@@ -1,6 +1,7 @@
 package com.example.demo.Repositories;
 
 import com.example.demo.Models.Project;
+import com.example.demo.Models.User;
 import com.example.demo.Services.DBConnect;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,7 @@ public class ProjectRepository {
     List<Project> singleProjectList = new ArrayList<>();
     List<Project> myProjectList = new ArrayList<>();
     List<Project> sharedProjectList = new ArrayList<>();
+
 
     public void createProject(String projectName, Date currentDay, int createdBy) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO projects (project_name, project_created_date, created_by) VALUES (?,?,?)");
@@ -44,16 +46,19 @@ public class ProjectRepository {
 
     //get my projects only
     public List<Project> getMyProjects(int id) throws SQLException {
-        PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct projects.projectID, project_name, project_created_date, created_by from projects inner join project_ownership on projects.projectID = project_ownership.projectID inner join users on users.userID = project_ownership.userID where created_by = ?");
+        PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct projects.projectID, project_name, project_created_date, created_by from projects" +
+                " inner join project_ownership on projects.projectID = project_ownership.projectID inner join users on users.userID = project_ownership.userID where created_by = ?");
         return returnProjectList(ps, id, myProjectList);
     }
 
     //get projects shared with me and NOT my own projects
     public List<Project> getSharedProjects(int id) throws SQLException{
-        PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct projects.projectID, project_name, project_created_date, created_by from projects inner join project_ownership on projects.projectID = project_ownership.projectID inner join users on users.userID = project_ownership.userID where users.userID = ? and created_by != users.userID");
+            PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct projects.projectID, project_name, project_created_date, created_by " +
+                    "from projects inner join project_ownership on projects.projectID = project_ownership.projectID inner join users " +
+                    "on users.userID = project_ownership.userID where users.userID = ? and created_by != users.userID");
         return returnProjectList(ps, id, sharedProjectList);
     }
-  
+
     //delete project
    public void deleteProject(int id) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("DELETE FROM projects WHERE projectID = ?");
@@ -65,5 +70,13 @@ public class ProjectRepository {
     public List<Project> getSingleProject(int id) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("SELECT * FROM projects WHERE projectID = ?");
         return returnProjectList(ps, id, singleProjectList);
+    }
+
+    public void shareProject(int userID, int projectID) throws SQLException {
+        PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO project_ownership (userID, projectID) values (?,?)");
+        ps.setInt(1,userID);
+        ps.setInt(2,projectID);
+
+        ps.executeUpdate();
     }
 }
