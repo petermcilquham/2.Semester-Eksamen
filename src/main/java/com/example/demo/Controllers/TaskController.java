@@ -39,7 +39,7 @@ public class TaskController {
         String endDate = wr.getParameter("newEndDate");
         int taskResponsible = Integer.parseInt(wr.getParameter("newResponsible"));
 
-        boolean tempStatus = wr.checkNotModified("newCompletionStatus");
+        boolean tempStatus = Boolean.parseBoolean(wr.getParameter("newCompletionStatus"));
         System.out.println(tempStatus);
 
 

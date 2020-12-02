@@ -87,7 +87,8 @@
                         <td> <input type="text" name="newResponsible "th:contenteditable="true" th:placeholder="${Task.getTaskResponsible()}"
                                     th:value="${Task.getTaskResponsible()}" style="width: 100px"></td>
 
-                        <td> <input type="checkbox" name="newCompletionStatus" th:text="${Task.isCompletionStatus()}" checked="unchecked" style="width: 10px"></td>
+                        <td> <input type="checkbox" id="newCompletionStatus" name="newCompletionStatus" value="true" checked="" th:text="${Task.isCompletionStatus()}"
+                                    th:default="${Task.isCompletionStatus()}" style="width: 10px"></td>
 
                         <td><button type="submit" name="getTaskID" th:value="${Task.getTaskID()}">Edit!</button></td>
                     </form>
