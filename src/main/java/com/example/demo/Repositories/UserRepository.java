@@ -32,8 +32,16 @@ public class UserRepository {
     }
 
     //validate user login method
-    public void loginValidation(){
-
+    public int loginValidation(String username, String password) throws SQLException {
+        PreparedStatement ps = connection.establishConnection().prepareStatement("select userID from users where username = ? and password = ?");
+        ps.setString(1,username);
+        ps.setString(2,password);
+        ResultSet rs = ps.executeQuery();
+        int id = 0;
+        if(rs.next()){
+            id = rs.getInt(1);
+        }
+        return id;
     }
 
 }

@@ -35,15 +35,19 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(HttpServletRequest wr, HttpServletResponse re){
-      //uRep.login metode (test for username/password er optaget)
-        /*
-        Request username = wr.getParameter("inputUsername");
-        Response response = re.addCookie();
-        cookie.doPost(username, response);
-        System.out.println("User loggd in");
-         */
-      
-        return "redirect:/main";
+    public String login(HttpSession session, WebRequest wr) throws SQLException {
+        String username = wr.getParameter("inputUsername");
+        String password = wr.getParameter("inputPassword");
+
+        int id = objectManager.uRep.loginValidation(username, password);
+        System.out.println("id:" + id);
+
+        if(id>0){
+            session.setAttribute("userID", id);
+            return "redirect:/main";
+        } else {
+            //error msg i html: "username or password not correct. try again"
+            return "redirect:/";
+        }
     }
 }
