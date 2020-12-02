@@ -33,7 +33,7 @@
             <div th:each="Project : ${singleProject}">
                 <h1 th:text="${Project.getProjectName()}"></h1>
                 <h4 th:text="${Project.getProjectCreatedDate()}"></h4>
-<!--                bør vise created_by og ikke projectID ???!?-->
+                <!--                bør vise created_by og ikke projectID ???!?-->
                 made by: <h4 th:text="${Project.getProjectID()}"></h4>
             </div>
 
