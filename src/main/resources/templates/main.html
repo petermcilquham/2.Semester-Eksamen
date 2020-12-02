@@ -17,41 +17,38 @@
 
         <!-- opret projekt knap -->
         <div class="grid-item" id="item-2">
+            <h3>Create project</h3>
             <form id="createProject" action="/createproject" method="post" enctype="multipart/form-data">
-                <label>Create a project</label><br>
-                <input type="text" name="projectName" placeholder="Project name"><br>
+                <label><input type="text" name="projectName" placeholder="Project name"></label><br>
+<!--                <label><input type="date" name="projectEndDate" placeholder="Expected end date"></label><br>-->
                 <button type="submit">Create project!</button>
             </form>
         </div>
 
         <!-- mine projekter liste -->
         <div class="grid-item" id="item-3">
-            <div class="projectList">
-                <h4>Your projects</h4>
-                <div th:each="Project : ${myProjectList}">
-                    <p th:text="${Project.getProjectName()}"></p>
-                    <p th:text="${Project.getProjectCreatedDate()}"></p>
-                    <form action="/getproject" method="post">
-                        <button type="submit" name="projectID" th:value="${Project.getProjectID()}">View project</button> <br>
-                    </form>
-                </div>
+            <h3>Your projects</h3>
+            <div th:each="Project : ${myProjectList}">
+                <p th:text="${Project.getProjectName()}"></p>
+                <p th:text="${Project.getProjectCreatedDate()}"></p>
+                <form action="/getproject" method="post">
+                    <button type="submit" name="projectID" th:value="${Project.getProjectID()}">View project</button> <br>
+                </form>
             </div>
          </div>
 
         <!-- projekter delt med mig liste -->
         <div class="grid-item" id="item-4">
-            <div class="projectList">
-                <h4>Shared projects</h4>
-                <div th:each="Project : ${sharedProjectList}">
-                    <p th:text="${Project.getProjectName()}"></p>
-                    <p th:text="${Project.getProjectCreatedDate()}"></p>
-                    <p th:text="${usernameFromCreatedBy}"></p>
-                    <form action="/project" method="post">
-                        <button type="submit" name="projectID" th:value="${Project.getProjectID()}">View project</button> <br>
-                    </form>
-                </div>
+            <h3>Shared projects</h3>
+            <div th:each="Project : ${sharedProjectList}">
+                <p th:text="${Project.getProjectName()}"></p>
+                <p th:text="${Project.getProjectCreatedDate()}"></p>
+                <p th:text="${usernameFromCreatedBy}"></p>
+                <form action="/getproject" method="post">
+                    <button type="submit" name="projectID" th:value="${Project.getProjectID()}">View project</button> <br>
+                </form>
             </div>
-          </div>
+        </div>
   </div>
 
 </body>

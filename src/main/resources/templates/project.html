@@ -36,42 +36,48 @@
                 made by: <h4 th:text="${Project.getProjectID()}"></h4>
             </div>
 
+            <h1>Tasks</h1>
             <!-- opret opgave -->
             <div th:each="Project : ${singleProject}">
                 <form id="createTask" action="/createTask" method="post" enctype="multipart/form-data">
-                    <label for="taskName">Create a task</label><br>
-                    <input type="text" name="taskName" id="taskName" placeholder="Task Name"><br>
+                    <h3>Create a task</h3>
+                    <label><input type="text" name="taskName" id="taskName" placeholder="Task Name"></label><br>
                     <button type="submit" name="createTask" th:value="${Project.getProjectID()}">Create task!</button>
                 </form>
             </div>
 
             <!-- edit opgaver-->
             <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">
+                <h3>Edit task</h3>
                 <table>
                     <tr>
-                        <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th>
+                        <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th>
                     </tr>
                     <tr th:each="Project : ${singleProject}">
                         <td><label><input th:type="text" name="taskID" placeholder="TaskID"></label></td>
                         <td><label><input th:type="text" name="taskName" placeholder="Task name"></label></td>
                         <td><label><input th:type="date" name="startDate"></label></td>
                         <td><label><input th:type="date" name="endDate"></label></td>
+                        <td><label><input th:type="number" name="taskResponsible"></label></td>
+                        <td><label><input th:type="radio" name="completionStatus"></label></td>
                         <td><button type="submit" name="editTask" th:value="${Project.getProjectID()}">Apply Changes</button></td>
                     </tr>
                 </table>
             </form>
 
             <!-- vis opgaver -->
-            <h1>Tasks</h1>
+            <h3>Current tasks</h3>
             <table>
                 <tr>
-                    <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th>
+                    <th id="taskIDHeader">ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th>
                 </tr>
                 <tr th:each="Task : ${taskList}">
-                    <td th:text="${Task.getTaskID()}"></td>
-                    <td th:text="${Task.getTaskName()}"></td>
-                    <td th:text="${Task.getStartDate()}"></td>
-                    <td th:text="${Task.getEndDate()}"></td>
+                    <td th:text="${Task.getTaskID()}" style="width:30px"></td>
+                    <td th:contenteditable="true" th:text="${Task.getTaskName()}"></td>
+                    <td th:contenteditable="true" th:text="${Task.getStartDate()}" style="width: 50px"></td>
+                    <td th:contenteditable="true" th:text="${Task.getEndDate()}" style="width: 50px"></td>
+                    <td th:contenteditable="true" th:text="${Task.getTaskResponsible()}" style="width: 100px"></td>
+                    <td th:contenteditable="true" th:text="${Task.isCompletionStatus()}" style="width: 60px"></td>
                 </tr>
             </table>
 
@@ -79,7 +85,6 @@
 
         <!-- slet knap -->
         <div class="grid-item" id="item-4">
-            <!-- slet knap vises ikke! ?? -->
             <form action="/project/delete" method="post" th:each="Project : ${singleProject}">
                 <button type="submit" th:value="${Project.getProjectID()}">Delete project</button>
             </form>
