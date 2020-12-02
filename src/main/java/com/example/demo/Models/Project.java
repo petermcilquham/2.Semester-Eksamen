@@ -1,8 +1,12 @@
 package com.example.demo.Models;
 
+import com.example.demo.Repositories.UserRepository;
+
+import java.sql.SQLException;
 import java.util.Date;
 
 public class Project {
+    UserRepository userRepository = new UserRepository();
 
     private int projectID;
     private String projectName;
@@ -42,6 +46,9 @@ public class Project {
 
     public int getCreatedBy() {
         return createdBy;
+    }
+    public String getCreatedByString() throws SQLException {
+        return userRepository.getUserByID(getCreatedBy());
     }
 
     public void setCreatedBy(int created_by) {

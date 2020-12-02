@@ -33,8 +33,7 @@
             <div th:each="Project : ${singleProject}">
                 <h1 th:text="${Project.getProjectName()}"></h1>
                 <h4 th:text="${Project.getProjectCreatedDate()}"></h4>
-                <!--                bør vise created_by og ikke projectID ???!?-->
-                made by: <h4 th:text="${Project.getProjectID()}"></h4>
+                made by: <p th:text="${Project.getCreatedByString()}"></p>
             </div>
 
             <h1>Tasks</h1>
@@ -59,7 +58,7 @@
                         <td><label><input th:type="text" name="taskName" placeholder="Task name"></label></td>
                         <td><label><input th:type="date" name="startDate"></label></td>
                         <td><label><input th:type="date" name="endDate"></label></td>
-                        <td><label><input th:type="number" name="taskResponsible"></label></td>
+                        <td><label><input th:type="text" name="taskResponsible"></label></td>
                         <td><label><input th:type="radio" name="completionStatus"></label></td>
                         <td><button type="submit" name="editTask" th:value="${Project.getProjectID()}">Apply Changes</button></td>
                     </tr>
@@ -77,7 +76,7 @@
                     <td th:contenteditable="true" th:text="${Task.getTaskName()}"></td>
                     <td th:contenteditable="true" th:text="${Task.getStartDate()}" style="width: 50px"></td>
                     <td th:contenteditable="true" th:text="${Task.getEndDate()}" style="width: 50px"></td>
-                    <td th:contenteditable="true" th:text="${Task.getTaskResponsible()}" style="width: 100px"></td>
+                    <td th:contenteditable="true" th:text="${Task.getTaskResponsibleString()}" style="width: 100px"></td>
                     <td th:contenteditable="true" th:text="${Task.isCompletionStatus()}" style="width: 60px"></td>
                 </tr>
             </table>

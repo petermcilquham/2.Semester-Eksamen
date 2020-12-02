@@ -20,8 +20,9 @@ public class UserRepository {
     }
 
     //get user by created_by id
-    public String getUserByID(int i) throws SQLException {
-        PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct username from users inner join projects on userID = created_by where created_by = 1 ");
+    public String getUserByID(int id) throws SQLException {
+        PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct username from users inner join projects on userID = created_by where created_by = ? ");
+        ps.setInt(1,id);
         ResultSet rs = ps.executeQuery();
 
         String username = "";

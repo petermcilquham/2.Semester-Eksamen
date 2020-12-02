@@ -1,8 +1,12 @@
 package com.example.demo.Models;
 
+import com.example.demo.Repositories.TaskRepository;
+
+import java.sql.SQLException;
 import java.util.Date;
 
 public class Task {
+    TaskRepository taskRepository = new TaskRepository();
 
     private int taskID;
     private String taskName;
@@ -56,6 +60,9 @@ public class Task {
 
     public int getTaskResponsible() {
         return taskResponsible;
+    }
+    public String getTaskResponsibleString() throws SQLException {
+        return taskRepository.getTaskResponsible(getTaskResponsible());
     }
 
     public void setTaskResponsible(int task_responsible) {
