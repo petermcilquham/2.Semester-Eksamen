@@ -34,15 +34,19 @@ public class TaskController {
 
     @PostMapping("/project/edit")
     public String editTask(WebRequest wr) throws SQLException {
-        String newTaskName = wr.getParameter("taskName");
-        String startDate = wr.getParameter("startDate");
-        String endDate = wr.getParameter("endDate");
-        int taskResponsible = Integer.parseInt(wr.getParameter("taskResponsible"));
-        boolean completionStatus = Boolean.parseBoolean(wr.getParameter("completionStatus"));
-        String tempID = wr.getParameter("taskID");
+        String newTaskName = wr.getParameter("newTaskName");
+        String startDate = wr.getParameter("newStartDate");
+        String endDate = wr.getParameter("newEndDate");
+        int taskResponsible = Integer.parseInt(wr.getParameter("newResponsible"));
+
+        boolean tempStatus = wr.checkNotModified("newCompletionStatus");
+        System.out.println(tempStatus);
+
+
+        String tempID = wr.getParameter("getTaskID");
         int taskID = Integer.parseInt(tempID);
 
-        objectManager.tRep.editTask(newTaskName, startDate, endDate, taskResponsible, completionStatus, taskID);
+        objectManager.tRep.editTask(newTaskName, startDate, endDate, taskResponsible, tempStatus, taskID);
         return "redirect:/project";
     }
 

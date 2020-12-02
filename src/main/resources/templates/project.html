@@ -47,37 +47,49 @@
             </div>
 
             <!-- edit opgaver-->
-            <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">
-                <h3>Edit task</h3>
-                <table>
-                    <tr>
-                        <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th>
-                    </tr>
-                    <tr th:each="Project : ${singleProject}">
-                        <td><label><input th:type="text" name="taskID" placeholder="TaskID"></label></td>
-                        <td><label><input th:type="text" name="taskName" placeholder="Task name"></label></td>
-                        <td><label><input th:type="date" name="startDate"></label></td>
-                        <td><label><input th:type="date" name="endDate"></label></td>
-                        <td><label><input th:type="text" name="taskResponsible"></label></td>
-                        <td><label><input th:type="radio" name="completionStatus"></label></td>
-                        <td><button type="submit" name="editTask" th:value="${Project.getProjectID()}">Apply Changes</button></td>
-                    </tr>
-                </table>
-            </form>
+<!--            <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">-->
+<!--                <h3>Edit task</h3>-->
+<!--                <table>-->
+<!--                    <tr>-->
+<!--                        <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th>-->
+<!--                    </tr>-->
+<!--                    <tr th:each="Project : ${singleProject}">-->
+<!--                        <td><label><input th:type="text" name="taskID" placeholder="TaskID"></label></td>-->
+<!--                        <td><label><input th:type="text" name="taskName" placeholder="Task name"></label></td>-->
+<!--                        <td><label><input th:type="date" name="startDate"></label></td>-->
+<!--                        <td><label><input th:type="date" name="endDate"></label></td>-->
+<!--                        <td><label><input th:type="text" name="taskResponsible"></label></td>-->
+<!--                        <td><label><input th:type="radio" name="completionStatus"></label></td>-->
+<!--                        <td><button type="submit" name="editTask" th:value="${Project.getProjectID()}">Apply Changes</button></td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+<!--            </form>-->
 
             <!-- vis opgaver -->
             <h3>Current tasks</h3>
             <table>
                 <tr>
-                    <th id="taskIDHeader">ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th>
+                    <th id="taskIDHeader">ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th><th>edit</th>
                 </tr>
                 <tr th:each="Task : ${taskList}">
-                    <td th:text="${Task.getTaskID()}" style="width:30px"></td>
-                    <td th:contenteditable="true" th:text="${Task.getTaskName()}"></td>
-                    <td th:contenteditable="true" th:text="${Task.getStartDate()}" style="width: 50px"></td>
-                    <td th:contenteditable="true" th:text="${Task.getEndDate()}" style="width: 50px"></td>
-                    <td th:contenteditable="true" th:text="${Task.getTaskResponsibleString()}" style="width: 100px"></td>
-                    <td th:contenteditable="true" th:text="${Task.isCompletionStatus()}" style="width: 60px"></td>
+                    <form id="editTask" action="/project/edit" method="post" enctype="multipart/form-data">
+                        <td th:text="${Task.getTaskID()}" style="width:30px"></td>
+
+                        <td> <input type="text" name="newTaskName" th:contenteditable="true" th:placeholder="${Task.getTaskName()}" th:value="${Task.getTaskName()}"></td>
+
+                        <td> <input type="text" name="newStartDate" th:contenteditable="true" th:placeholder="${Task.getStartDate()}"
+                                    th:value="${Task.getStartDate()}" onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 70px" ></td>
+
+                        <td> <input type="text" name="newEndDate" th:contenteditable="true" th:placeholder="${Task.getEndDate()}"
+                                    th:value="${Task.getEndDate()}" onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 70px"></td>
+
+                        <td> <input type="text" name="newResponsible "th:contenteditable="true" th:placeholder="${Task.getTaskResponsible()}"
+                                    th:value="${Task.getTaskResponsible()}" style="width: 100px"></td>
+
+                        <td> <input type="checkbox" name="newCompletionStatus" th:text="${Task.isCompletionStatus()}" checked="unchecked" style="width: 10px"></td>
+
+                        <td><button type="submit" name="getTaskID" th:value="${Task.getTaskID()}">Edit!</button></td>
+                    </form>
                 </tr>
             </table>
 
