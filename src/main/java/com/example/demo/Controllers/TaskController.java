@@ -14,39 +14,38 @@ public class TaskController {
     ObjectManager objectManager = new ObjectManager();
     ClearLists clearLists = new ClearLists();
 
-    @PostMapping("/createTask")
-    public String createTask(WebRequest wr) throws SQLException, ParseException {
-        String taskName = wr.getParameter("taskName");
-        String tempID = wr.getParameter("createTask");
-        int projectID = Integer.parseInt(tempID);
+    @PostMapping("/task/create")
+    public String createTask(WebRequest wr) throws SQLException{
+        String tempProjectID = wr.getParameter("createTask");
+        int projectID = Integer.parseInt(tempProjectID);
 
-        //dette giver dagens dato i yyyy/mm/dd
-        long millis = System.currentTimeMillis();
-        java.sql.Date currentDay = new java.sql.Date(millis);
+        String taskName = wr.getParameter("taskName");
 
         //Vi modtager endDate i String format fra html og omdanner den til en sql.date, så den kan indsættes i databasen.
+        String startDate = wr.getParameter("startDate");
         String endDate = wr.getParameter("endDate");
-        java.sql.Date.valueOf(endDate);
-      
-        //tRep.createTask(taskName, currentDay, endDate);
+
+        String tempUserID = wr.getParameter("responsible");
+        int userID = Integer.parseInt(tempUserID);
+
+        objectManager.tRep.createTask(taskName, startDate, endDate, userID, projectID);
         return "redirect:/project";
     }
 
-    @PostMapping("/project/edit")
+    @PostMapping("/task/edit")
     public String editTask(WebRequest wr) throws SQLException {
         String newTaskName = wr.getParameter("newTaskName");
         String startDate = wr.getParameter("newStartDate");
         String endDate = wr.getParameter("newEndDate");
-        int taskResponsible = Integer.parseInt(wr.getParameter("newResponsible"));
+        String tempUserID = wr.getParameter("newResponsible");
+        int responsibleUserID = Integer.parseInt(tempUserID);
 
         boolean tempStatus = wr.checkNotModified("newCompletionStatus");
-        System.out.println(tempStatus);
-
 
         String tempID = wr.getParameter("getTaskID");
         int taskID = Integer.parseInt(tempID);
 
-        objectManager.tRep.editTask(newTaskName, startDate, endDate, taskResponsible, tempStatus, taskID);
+        objectManager.tRep.editTask(newTaskName, startDate, endDate, responsibleUserID , tempStatus, taskID);
         return "redirect:/project";
     }
 

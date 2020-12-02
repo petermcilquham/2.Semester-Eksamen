@@ -13,12 +13,12 @@ import java.util.List;
 @Repository
 public class TaskRepository {
     DBConnect connection = new DBConnect();
-    List<Task> listOfTasks = new ArrayList<>();
+    List<Task> taskList = new ArrayList<>();
 
-    public void createTask(String taskName, Date currentDay, String endDate, int taskResponsible, int projectID) throws SQLException {
+    public void createTask(String taskName, String currentDay, String endDate, int taskResponsible, int projectID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO tasks (task_name,start_date,end_date,task_responsible,projectID) VALUES (?,?,?,?,?)");
         ps.setString(1,taskName);
-        ps.setDate(2, currentDay);
+        ps.setString(2, currentDay);
         ps.setString(3, endDate);
         ps.setInt(4,taskResponsible);
         ps.setInt(5, projectID);
@@ -46,9 +46,9 @@ public class TaskRepository {
                     rs.getInt(5),
                     rs.getBoolean(6),
                     rs.getInt(7));
-            listOfTasks.add(tmp);
+            taskList.add(tmp);
         }
-        return listOfTasks;
+        return taskList;
     }
 
     public void editTask(String taskName, String startDate, String endDate, int taskResponsible, boolean completionStatus, int taskID) throws SQLException {

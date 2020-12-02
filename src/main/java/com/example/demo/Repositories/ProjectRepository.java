@@ -66,4 +66,13 @@ public class ProjectRepository {
         PreparedStatement ps = connection.establishConnection().prepareStatement("SELECT * FROM projects WHERE projectID = ?");
         return returnProjectList(ps, id, singleProjectList);
     }
+
+    //share projects
+    public void shareProject(int userID, int projectID) throws SQLException {
+        PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO project_ownership (userID, projectID) values (?,?)");
+        ps.setInt(1,userID);
+        ps.setInt(2,projectID);
+
+        ps.executeUpdate();
+    }
 }

@@ -24,6 +24,7 @@
     /*grid-row-end: 3;*/
     /*grid-column-end: 2;*/
     grid-area: 2 / 1 / 3 / 2;
+    width: 183px;
 }
 /* log in */
 #item-3{
