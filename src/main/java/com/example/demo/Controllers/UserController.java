@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(HttpSession session, WebRequest wr) throws SQLException {
+    public String login(HttpSession session, WebRequest wr, HttpServletRequest request) throws SQLException {
         String username = wr.getParameter("inputUsername");
         String password = wr.getParameter("inputPassword");
 

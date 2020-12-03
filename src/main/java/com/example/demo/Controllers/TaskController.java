@@ -25,6 +25,8 @@ public class TaskController {
         String tempUserID = wr.getParameter("responsible");
         int userID = Integer.parseInt(tempUserID);
 
+        String projectEndDate = wr.getParameter("");
+
         objectManager.tRep.createTask(taskName, startDate, endDate, userID, projectID);
         return "redirect:/project";
     }
@@ -36,9 +38,7 @@ public class TaskController {
         String endDate = wr.getParameter("newEndDate");
         String tempUserID = wr.getParameter("newResponsible");
         int responsibleUserID = Integer.parseInt(tempUserID);
-
         boolean tempStatus = Boolean.parseBoolean(wr.getParameter("newCompletionStatus"));
-        System.out.println(tempStatus);
 
         String tempID = wr.getParameter("getTaskID");
         int taskID = Integer.parseInt(tempID);

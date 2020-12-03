@@ -80,7 +80,7 @@
                 <form id="editTask" action="/task/edit" method="post" enctype="multipart/form-data">
                     <table>
                         <tr>
-                            <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th><th>edit</th>
+                            <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th>
                         </tr>
                         <tr th:each="Task : ${taskList}">
                             <td th:text="${Task.getTaskID()}" style="width:30px"></td>
@@ -93,7 +93,7 @@
                                     <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
                                 </select>
                             </td>
-                            <td> <input type="checkbox" id="newCompletionStatus" name="newCompletionStatus" value="true" checked="" th:text="${Task.isCompletionStatus()}" th:default="${Task.isCompletionStatus()}" style="width: 10px"></td>
+                            <td> <input type="checkbox" id="newCompletionStatus" name="newCompletionStatus" th:value="${Task.isCompletionStatus()}" th:text="${Task.isCompletionStatusString()}" th:default="${Task.isCompletionStatus()}" style="width: 60px"></td>
                             <td> <button type="submit" name="getTaskID" th:value="${Task.getTaskID()}">Edit!</button></td>
                         </tr>
                     </table>
