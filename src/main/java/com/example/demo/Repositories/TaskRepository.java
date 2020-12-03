@@ -27,13 +27,13 @@ public class TaskRepository {
     }
 
     public void deleteTask(int id) throws SQLException {
-        PreparedStatement ps = connection.establishConnection().prepareStatement("DELETE FROM tasks WHERE projectID = ?");
+        PreparedStatement ps = connection.establishConnection().prepareStatement("DELETE FROM tasks WHERE taskID = ?");
         ps.setInt(1,id);
         ps.executeUpdate();
     }
 
     public List<Task> getTaskList(int projectID) throws SQLException {
-        PreparedStatement ps = connection.establishConnection().prepareStatement("SELECT * from tasks where projectID = ? ORDER BY start_date ASC");
+        PreparedStatement ps = connection.establishConnection().prepareStatement("SELECT * from tasks where projectID = ? ORDER BY end_date ASC");
         ps.setInt(1,projectID);
 
         ResultSet rs = ps.executeQuery();

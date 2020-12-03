@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
@@ -30,18 +29,20 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(HttpSession session, WebRequest wr, HttpServletRequest request) throws SQLException {
+    public String login(Model m, HttpSession session, WebRequest wr) throws SQLException {
         String username = wr.getParameter("inputUsername");
         String password = wr.getParameter("inputPassword");
 
-        int id = objectManager.uRep.loginValidation(username, password);
-        System.out.println("logged in as id:" + id + ", " + username);
+        int userID = objectManager.uRep.loginValidation(username, password);
+        System.out.println("logged in as id:" + userID + ", " + username);
 
-        if(id>0){
-            session.setAttribute("userID", id);
+        if(userID>0){
+            session.setAttribute("userID", userID);
+            System.out.println(session.getAttribute("userID"));
             return "redirect:/main";
         } else {
-            //error msg i html: "username or password not correct. try again"
+            session.setAttribute("userID",0);
+            session.getAttribute("userID");
             return "redirect:/";
         }
     }

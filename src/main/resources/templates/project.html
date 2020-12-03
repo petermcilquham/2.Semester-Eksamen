@@ -19,23 +19,36 @@
 
         <!-- del projekt, se team og generer gantt diagram knapper -->
         <div class="grid-item" id="item-2">
+
+            <!--share project with teamList-->
             <ul>
-                <li>Your team:</li>
-                <!--share project with teamList-->
+
+                <li>
+                    <div>
+                        <select>
+                            <option selected disabled hidden>Your team</option>
+                            <option th:each="User : ${teamList}" th:text="${User.getUsername()}"></option>
+                        </select>
+                    </div>
+                </li>
+
+                <!-- gantt diagram -->
+                <li>Generate GANTT diagram</li>
+
+                <!-- Share project -->
                 <li>
                     <div th:each="Project : ${singleProject}">
                         <form id="shareProject" action="/project/share" method="post">
-                            <select name="teamList" id="teamList">
-                                <option selected disabled hidden>Your team</option>
-                                <option th:each="User : ${teamList}" name="shareUserID" id="shareUserID"  th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
-                            </select>
+                            <input type="text" name="shareUsername" placeholder="Username..."><br>
                             <button type="submit" name="shareProjectID" th:value="${Project.getProjectID()}">Share Project!</button>
                         </form>
                     </div>
                 </li>
-                <!-- gantt diagram -->
-                <li>Generate GANTT diagram</li>
+
             </ul>
+
+
+
         </div>
 
         <!-- vis projekt -->
@@ -48,6 +61,7 @@
                     <ul>
                         <li><p th:text="${Project.getCreatedByString()}"></p></li>
                         <li><p th:text="${Project.getProjectCreatedDate()}"></p></li>
+                        <li><p th:text="${Project.getEndDate()}"></p></li>
                     </ul>
                 </div>
             </div>
@@ -58,19 +72,25 @@
             <div class="grid-container-tasks">
 
                 <!-- opret opgave -->
-                <h1>Tasks</h1>
                 <div th:each="Project : ${singleProject}">
                     <form id="createTask" action="/task/create" method="post" enctype="multipart/form-data">
                         <h3>Create a task</h3>
-                        <label><input type="text" name="taskName" id="taskName" placeholder="Task Name"></label>
-                        <label for="startDate">start Date: </label>
-                        <input type="date" id="startDate" name="startDate" >
-                        <label for="endDate">end Date: </label>
-                        <input type="date" id="endDate" name="endDate" >
-                        <select name="responsible" id="responsible">
-                            <option selected disabled hidden>Choose responsible user</option>
-                            <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
-                        </select>
+                        <table>
+                            <tr>
+                                <th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th>
+                            </tr>
+                            <tr>
+                                <td> <label><input type="text" name="taskName" id="taskName" placeholder="Task Name"></label> </td>
+                                <td> <label><input type="date" id="startDate" name="startDate"></label> </td>
+                                <td> <label><input type="date" id="endDate" name="endDate"></label> </td>
+                                <td>
+                                    <label><select name="responsible" id="responsible">
+                                        <option selected disabled hidden>Choose responsible user</option>
+                                        <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
+                                    </select></label>
+                                </td>
+                            </tr>
+                        </table>
                         <button type="submit" name="createTask" th:value="${Project.getProjectID()}">Create task!</button>
                     </form>
                 </div>
@@ -104,6 +124,17 @@
 
         <!-- slet knap -->
         <div class="grid-item" id="item-5">
+
+            <div>
+                <form action="/task/delete" method="post">
+                    <select name="deleteTask" >
+                        <option selected disabled hidden>Choose Task</option>
+                        <option th:each="Task : ${taskList}" th:value="${Task.getTaskID()}" th:text="${Task.getTaskID()} + ': ' + ${Task.getTaskName()}"></option>
+                        <input type="submit" value="Delete Task">
+                    </select>
+                </form>
+            </div>
+
             <form action="/project/delete" method="post" th:each="Project : ${singleProject}">
                 <button type="submit" name="deleteProject" th:value="${Project.getProjectID()}">Delete project</button>
             </form>
