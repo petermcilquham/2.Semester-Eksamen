@@ -13,13 +13,23 @@
         <!-- banner/logo -->
         <div class="grid-item" id="item-1">
             <a href="/"><h1>logooo</h1></a>
+
+            <div>
+                <form action="/logout" method="post">
+                    <button type="submit">Log Out</button>
+                </form>
+            </div>
+
         </div>
+
+
 
         <!-- opret projekt knap -->
         <div class="grid-item" id="item-2">
             <h3>Create project</h3>
             <form id="createProject" action="/project/create" method="post" enctype="multipart/form-data">
-                <label><input type="text" name="projectName" placeholder="Project name"></label><br>
+                <input type="text" name="projectName" placeholder="Project name">
+                <input type="date" id="endDate" name="endDate">
                 <button type="submit">Create project!</button>
             </form>
         </div>
@@ -30,6 +40,7 @@
             <div th:each="Project : ${myProjectList}">
                 <p th:text="${Project.getProjectName()}"></p>
                 <p th:text="${Project.getProjectCreatedDate()}"></p>
+                <p th:text="${Project.getEndDate()}"></p>
                 <form action="/project/get" method="post">
                     <button type="submit" name="projectID" th:value="${Project.getProjectID()}">View project</button> <br>
                 </form>
@@ -42,6 +53,7 @@
             <div th:each="Project : ${sharedProjectList}">
                 <p th:text="${Project.getProjectName()}"></p>
                 <p th:text="${Project.getProjectCreatedDate()}"></p>
+                <p th:text="${Project.getEndDate()}"></p>
                 <p th:text="${Project.getCreatedByString()}"></p>
                 <form action="/project/get" method="post">
                     <button type="submit" name="projectID" th:value="${Project.getProjectID()}">View project</button> <br>

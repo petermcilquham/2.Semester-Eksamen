@@ -11,13 +11,31 @@ public class Project {
     private int projectID;
     private String projectName;
     private Date currentDay;
+    private String endDate;
     private int createdBy;
 
-    public Project(int projectID, String projectName, Date currentDay, int createdBy) {
+    public Project(int projectID, String projectName, Date currentDay, String endDate, int createdBy) {
         this.projectID = projectID;
         this.projectName = projectName;
         this.currentDay = currentDay;
+        this.endDate = endDate;
         this.createdBy = createdBy;
+    }
+
+    public Date getCurrentDay() {
+        return currentDay;
+    }
+
+    public void setCurrentDay(Date currentDay) {
+        this.currentDay = currentDay;
+    }
+
+    public String getEndDate() {
+        return "End date: " + endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public int getProjectID() {
@@ -36,8 +54,8 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public Date getProjectCreatedDate() {
-        return currentDay;
+    public String getProjectCreatedDate() {
+        return "Start date: " + currentDay;
     }
 
     public void setProjectCreatedDate(Date projectCreatedDate) {
@@ -47,6 +65,7 @@ public class Project {
     public int getCreatedBy() {
         return createdBy;
     }
+
     public String getCreatedByString() throws SQLException {
         return "Created by: " + userRepository.getUserByID(getCreatedBy());
     }
