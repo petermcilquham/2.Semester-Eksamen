@@ -46,4 +46,32 @@ public class TaskController {
         objectManager.tRep.editTask(newTaskName, startDate, endDate, responsibleUserID, tempStatus, taskID);
         return "redirect:/project";
     }
+
+    @PostMapping("/task/delete")
+    public String deleteTask(WebRequest wr) throws SQLException {
+        String tempTaskID = wr.getParameter("deleteTask");
+        int taskID = Integer.parseInt(tempTaskID);
+
+        objectManager.tRep.deleteTask(taskID);
+        return "redirect:/project";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

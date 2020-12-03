@@ -1,6 +1,7 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Services.*;
+import com.mysql.cj.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +17,23 @@ public class MainController {
 
     @GetMapping("/main")
     public String main(Model m, HttpSession session) throws SQLException {
-        objectManager.clearLists();
-        objectManager.myProjectList = objectManager.pRep.getMyProjects((Integer)session.getAttribute("userID"));
-        objectManager.sharedProjectList = objectManager.pRep.getSharedProjects((Integer)session.getAttribute("userID"));
-        m.addAttribute("myProjectList",objectManager.myProjectList);
-        m.addAttribute("sharedProjectList",objectManager.sharedProjectList);
-        return "main";
+        try {
+            objectManager.clearLists();
+            objectManager.myProjectList = objectManager.pRep.getMyProjects((Integer) session.getAttribute("userID"));
+            objectManager.sharedProjectList = objectManager.pRep.getSharedProjects((Integer) session.getAttribute("userID"));
+            m.addAttribute("myProjectList", objectManager.myProjectList);
+            m.addAttribute("sharedProjectList", objectManager.sharedProjectList);
+            return "main";
+
+        } catch(NullPointerException e) {
+            return "redirect:/";
+            }
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
     }
 
     @PostMapping("/backtomain")
@@ -31,7 +43,7 @@ public class MainController {
     }
   
     @PostMapping("/project/create")
-    public String createProject(WebRequest wr) throws SQLException {
+    public String createProject(WebRequest wr, HttpSession session) throws SQLException {
         objectManager.clearLists();
         String projectName = wr.getParameter("projectName");
 
@@ -40,9 +52,10 @@ public class MainController {
         java.sql.Date currentDay = new java.sql.Date(millis);
 
         //ændre til currentlogins id, når den er klar :)
-        int createdBy = 1;
+        int userID = (Integer) session.getAttribute("userID");
+        String endDate = wr.getParameter("endDate");
 
-        objectManager.pRep.createProject(projectName, currentDay, createdBy);
+        objectManager.pRep.createProject(projectName, currentDay, endDate, userID);
         return "redirect:/main";
     }
 }
