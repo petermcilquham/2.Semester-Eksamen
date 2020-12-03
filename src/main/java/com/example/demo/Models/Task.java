@@ -61,6 +61,7 @@ public class Task {
     public int getTaskResponsible() {
         return taskResponsible;
     }
+
     public String getTaskResponsibleString() throws SQLException {
         return taskRepository.getTaskResponsibleRepoMethod(getTaskResponsible());
     }

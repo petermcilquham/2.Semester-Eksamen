@@ -13,11 +13,10 @@ import java.sql.SQLException;
 @Controller
 public class MainController {
     ObjectManager objectManager = new ObjectManager();
-    ClearLists clearLists = new ClearLists();
 
     @GetMapping("/main")
     public String main(Model m, HttpSession session) throws SQLException {
-        clearLists.clearLists();
+        objectManager.clearLists();
         objectManager.myProjectList = objectManager.pRep.getMyProjects((Integer)session.getAttribute("userID"));
         objectManager.sharedProjectList = objectManager.pRep.getSharedProjects((Integer)session.getAttribute("userID"));
         m.addAttribute("myProjectList",objectManager.myProjectList);
@@ -27,13 +26,13 @@ public class MainController {
 
     @PostMapping("/backtomain")
     public String backToMain() {
-        clearLists.clearLists();
+        objectManager.clearLists();
         return "redirect:/main";
     }
   
     @PostMapping("/project/create")
     public String createProject(WebRequest wr) throws SQLException {
-        clearLists.clearLists();
+        objectManager.clearLists();
         String projectName = wr.getParameter("projectName");
 
         //dette giver dagens dato i yyyy/mm/dd

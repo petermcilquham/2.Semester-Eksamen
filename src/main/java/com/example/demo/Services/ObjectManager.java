@@ -29,5 +29,12 @@ public class ObjectManager {
     public List<User> teamList = new ArrayList<>();
     public List<User> teamListIncludeCreatedBy = new ArrayList<>();
 
-
+    public void clearLists(){
+        myProjectList.clear();
+        sharedProjectList.clear();
+        singleProjectList.clear();
+        taskList.clear();
+        teamList.clear();
+        teamListIncludeCreatedBy.clear();
+    }
 }
