@@ -63,7 +63,7 @@ public class TaskRepository {
         ps.executeUpdate();
     }
 
-    public String getTaskResponsible(int task_responsible) throws SQLException {
+    public String getTaskResponsibleRepoMethod(int task_responsible) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct username from users" +
                 "inner join project_ownership on users.userID = project_ownership.userID" +
                 "inner join tasks on project_ownership.projectID = tasks.projectID" +
@@ -73,7 +73,7 @@ public class TaskRepository {
 
         String username = "";
         if(rs.next()){
-            username = rs.getString(1);
+            username = rs.getString(2);
         }
         return username;
     }
