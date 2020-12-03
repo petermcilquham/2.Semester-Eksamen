@@ -1,6 +1,5 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Services.ClearLists;
 import com.example.demo.Services.ObjectManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +13,6 @@ import java.sql.SQLException;
 @Controller
 public class UserController {
     ObjectManager objectManager = new ObjectManager();
-    ClearLists clearLists = new ClearLists();
 
     @GetMapping("/")
     public String index(Model m){

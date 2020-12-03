@@ -1,6 +1,5 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Services.ClearLists;
 import com.example.demo.Services.ObjectManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +11,6 @@ import java.text.ParseException;
 @Controller
 public class TaskController {
     ObjectManager objectManager = new ObjectManager();
-    ClearLists clearLists = new ClearLists();
 
     @PostMapping("/task/create")
     public String createTask(WebRequest wr) throws SQLException, ParseException {

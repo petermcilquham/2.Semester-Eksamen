@@ -1,6 +1,5 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Services.ClearLists;
 import com.example.demo.Services.ObjectManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +12,6 @@ import java.sql.SQLException;
 @Controller
 public class ProjectController {
     ObjectManager objectManager = new ObjectManager();
-    ClearLists clearLists = new ClearLists();
 
     @GetMapping("/project")
     public String projectPage(Model m) {
@@ -27,7 +25,7 @@ public class ProjectController {
 
     @PostMapping("/project/get")
     public String getProject(WebRequest wr) throws SQLException {
-        clearLists.clearLists();
+        objectManager.clearLists();
         String tempID = wr.getParameter("projectID");
         int projectID = Integer.parseInt(tempID);
         objectManager.teamList = objectManager.uRep.getTeamList(projectID);
