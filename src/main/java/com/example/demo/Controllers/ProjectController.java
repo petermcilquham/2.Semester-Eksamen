@@ -19,7 +19,6 @@ public class ProjectController {
         m.addAttribute("taskList",objectManager.taskList);
         m.addAttribute("teamList",objectManager.teamList);
         m.addAttribute("TeamListIncludeCreatedBy",objectManager.teamListIncludeCreatedBy);
-        System.out.println(objectManager.teamList.size());
         return "project";
     }
 
@@ -39,7 +38,6 @@ public class ProjectController {
     public String deleteProject(WebRequest wr) throws SQLException {
         String tempID = wr.getParameter("deleteProject");
         int projectID = Integer.parseInt(tempID);
-
         objectManager.pRep.deleteProject(projectID);
         return "redirect:/main";
     }

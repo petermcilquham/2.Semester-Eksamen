@@ -1,7 +1,6 @@
 package com.example.demo.Repositories;
 
 import com.example.demo.Models.Project;
-import com.example.demo.Models.User;
 import com.example.demo.Services.DBConnect;
 import org.springframework.stereotype.Repository;
 
@@ -72,11 +71,11 @@ public class ProjectRepository {
         return returnProjectList(ps, id, singleProjectList);
     }
 
+    //share project
     public void shareProject(int userID, int projectID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO project_ownership (userID, projectID) values (?,?)");
         ps.setInt(1,userID);
         ps.setInt(2,projectID);
-
         ps.executeUpdate();
     }
 }

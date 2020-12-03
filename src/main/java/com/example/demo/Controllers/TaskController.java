@@ -6,14 +6,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 
 @Controller
 public class TaskController {
     ObjectManager objectManager = new ObjectManager();
 
     @PostMapping("/task/create")
-    public String createTask(WebRequest wr) throws SQLException, ParseException {
+    public String createTask(WebRequest wr) throws SQLException{
         String tempProjectID = wr.getParameter("createTask");
         int projectID = Integer.parseInt(tempProjectID);
 
@@ -40,7 +39,6 @@ public class TaskController {
 
         boolean tempStatus = Boolean.parseBoolean(wr.getParameter("newCompletionStatus"));
         System.out.println(tempStatus);
-
 
         String tempID = wr.getParameter("getTaskID");
         int taskID = Integer.parseInt(tempID);

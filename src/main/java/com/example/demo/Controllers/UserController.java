@@ -24,9 +24,7 @@ public class UserController {
     public String createUser(WebRequest wr) throws SQLException {
         String username = wr.getParameter("createUsername");
         String password = wr.getParameter("createPassword");
-
         objectManager.uRep.createUser(username,password);
-
         return "redirect:/";
     }
 

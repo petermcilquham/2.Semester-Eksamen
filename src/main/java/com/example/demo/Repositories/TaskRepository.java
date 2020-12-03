@@ -64,13 +64,12 @@ public class TaskRepository {
     }
 
     public String getTaskResponsibleRepoMethod(int task_responsible) throws SQLException {
-        PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct username from users" +
-                "inner join project_ownership on users.userID = project_ownership.userID" +
-                "inner join tasks on project_ownership.projectID = tasks.projectID" +
+        PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct users.userID, username, password from users \n" +
+                "inner join project_ownership on users.userID = project_ownership.userID \n" +
+                "inner join tasks on project_ownership.projectID = tasks.projectID \n" +
                 "where task_responsible = users.userID and task_responsible = ?");
         ps.setInt(1,task_responsible);
         ResultSet rs = ps.executeQuery();
-
         String username = "";
         if(rs.next()){
             username = rs.getString(2);
