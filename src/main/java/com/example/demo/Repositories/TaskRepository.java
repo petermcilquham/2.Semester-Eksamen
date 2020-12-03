@@ -72,7 +72,7 @@ public class TaskRepository {
         ResultSet rs = ps.executeQuery();
         String username = "";
         if(rs.next()){
-            username = rs.getString(1);
+            username = rs.getString(2);
         }
         return username;
     }
