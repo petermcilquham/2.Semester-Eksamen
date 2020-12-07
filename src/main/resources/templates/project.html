@@ -108,7 +108,7 @@
                                 </select>
                             </td>
                             <td><select name="newCompletionStatus">
-                                    <option th:text="${Task.isCompletionStatusString()}" th:default="${Task.isCompletionStatus()}" selected hidden></option>
+                                    <option th:text="${Task.isCompletionStatusString()}" th:value="${Task.isCompletionStatus()}" selected hidden></option>
                                     <option th:value="true">Finished</option>
                                     <option th:value="false">Unfinished</option>
                                 </select></td>
