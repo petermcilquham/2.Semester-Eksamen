@@ -37,8 +37,9 @@ public class TaskController {
         String tempUserID = wr.getParameter("newResponsible");
         int responsibleUserID = Integer.parseInt(tempUserID);
 
+        String tmptmp = wr.getParameter("newCompletionStatus");
+        System.out.println("completion: " + tmptmp);
         boolean tempStatus = Boolean.parseBoolean(wr.getParameter("newCompletionStatus"));
-        System.out.println(tempStatus);
 
         String tempID = wr.getParameter("getTaskID");
         int taskID = Integer.parseInt(tempID);
