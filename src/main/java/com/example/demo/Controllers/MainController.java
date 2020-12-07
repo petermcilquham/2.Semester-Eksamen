@@ -51,7 +51,6 @@ public class MainController {
         long millis = System.currentTimeMillis();
         java.sql.Date currentDay = new java.sql.Date(millis);
 
-        //ændre til currentlogins id, når den er klar :)
         int userID = (Integer) session.getAttribute("userID");
         String endDate = wr.getParameter("endDate");
 
