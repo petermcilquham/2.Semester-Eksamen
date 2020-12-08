@@ -1,7 +1,6 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Services.*;
-import com.mysql.cj.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
