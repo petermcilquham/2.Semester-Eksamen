@@ -1,4 +1,13 @@
-/* -------------------------------- grid ----------------------- */
+/* -------------------------------- grid banner ----------------------- */
+.grid-container-banner{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100px;
+}
+#banner-item-1{
+    grid-area: 1 / 1 / 2 / 2;
+}
+/* -------------------------------- grid main ----------------------- */
 .grid-container-main{
     display: grid;
     grid-template-columns: 50%;

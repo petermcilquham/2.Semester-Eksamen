@@ -28,11 +28,11 @@ public class TaskController {
         String taskName = wr.getParameter("taskName");
 
         //Vi modtager endDate i String format fra html og omdanner den til en sql.date, så den kan indsættes i databasen.
-//        String startDate = wr.getParameter("startDate");
-//        String taskEndDate = wr.getParameter("endDate");
+        String startDate = wr.getParameter("startDate");
+        String taskEndDate = wr.getParameter("endDate");
 //
-//        String tempUserID = wr.getParameter("responsible");
-//        int userID = Integer.parseInt(tempUserID);
+        String tempUserID = wr.getParameter("responsible");
+        int userID = Integer.parseInt(tempUserID);
 //
        //tjekker at task end date ikke er senere end projekt en date
 //        boolean bool = compareDates.compareDates(tempProjectEndDate,taskEndDate);
@@ -41,6 +41,7 @@ public class TaskController {
 //        } else {
 //            System.out.println("fejl");
 //        }
+        //objectManager.tRep.createTask(taskName, startDate, taskEndDate, userID, projectID);
         return "redirect:/project";
     }
 
