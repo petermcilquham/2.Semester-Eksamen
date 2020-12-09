@@ -81,14 +81,6 @@ public class Task {
         }
     }
 
-    public String isCompletionStatusString(){
-        if(isCompletionStatus()){
-            return "Finished";
-        }else{
-            return "Unfinished";
-        }
-    }
-
     public void setCompletionStatus(boolean completion_status) {
         this.completionStatus = completion_status;
     }

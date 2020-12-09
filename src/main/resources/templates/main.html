@@ -22,16 +22,19 @@
 
         </div>
 
-
-
         <!-- opret projekt knap -->
         <div class="grid-item" id="item-2">
             <h3>Create project</h3>
             <form id="createProject" action="/project/create" method="post" enctype="multipart/form-data">
-                <input type="text" name="projectName" placeholder="Project name">
-                <input type="date" id="endDate" name="endDate">
+                <label><input type="text" name="projectName" placeholder="Project name" required> </label>
+                <label>End Date:<input type="date" id="endDate" name="endDate" required> </label>
                 <button type="submit">Create project!</button>
             </form>
+
+            <div class="errorMessage" th:style="${errorMessage ? 'display:none' : 'display:block'}" >
+                <h2>End date is earlier than start day</h2>
+            </div>
+
         </div>
 
         <!-- mine projekter liste -->

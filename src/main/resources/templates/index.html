@@ -7,6 +7,7 @@
     <title>Index</title>
 </head>
 <body>
+
     <div  class="grid-container-main">
       
         <!-- banner/logo -->
@@ -27,32 +28,33 @@
                 <button type="submit"  class="button">Create User</button>
             </form>
 
+            <div class="errorMessage" th:style="${errorCreateUser ? 'display:block' : 'display:none'}" >
+                <h2>Username unavailable, try again</h2>
+            </div>
+
+            <div class="errorMessage" th:style="${successCreatedUser ? 'display:block' : 'display:none'}" >
+                <h2>User successfully created, please log in</h2>
+            </div>
+
         </div>
 
         <!-- login -->
         <div class="grid-item" id="item-3">
             <h1>Log in</h1>
-            <form id="login" action="/login" method="post" enctype="multipart/form-data">
+            <form id="login" action="/login" method="post" enctype="multipart/form-data" >
                 <label>
                     <input type="text" name="inputUsername" placeholder="Username..." required>
                 </label> <br>
                 <label>
                     <input type="text" name="inputPassword" placeholder="Password..." required>
                 </label> <br>
-                <button class="button" type="submit"> <!--onclick="test()"-->Log In</button>
+                <button class="button" type="submit" name="checkErrorLogin" th:value="true"> Log In</button>
             </form>
+
+            <div class="errorMessage" th:style="${errorLogin ? 'display:block' : 'display:none'}" >
+                <h1>forkert login</h1>
+            </div>
         </div>
-
-<!--        <script>-->
-<!--            function test() {-->
-<!--                var p = document.getElementById("test");-->
-<!--                p.style.display = "block";-->
-<!--            }-->
-<!--        </script>-->
-
-<!--        <div id="test" style="display: none;">-->
-<!--            hej-->
-<!--        </div>-->
 
     </div>
 

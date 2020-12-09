@@ -10,28 +10,32 @@ public class Project {
 
     private int projectID;
     private String projectName;
-    private Date currentDay;
+    private Date createdDate;
     private String endDate;
     private int createdBy;
 
     public Project(int projectID, String projectName, Date currentDay, String endDate, int createdBy) {
         this.projectID = projectID;
         this.projectName = projectName;
-        this.currentDay = currentDay;
+        this.createdDate = currentDay;
         this.endDate = endDate;
         this.createdBy = createdBy;
     }
 
     public Date getCurrentDay() {
-        return currentDay;
+        return createdDate;
     }
 
     public void setCurrentDay(Date currentDay) {
-        this.currentDay = currentDay;
+        this.createdDate = currentDay;
     }
 
     public String getEndDate() {
-        return "End date: " + endDate;
+        return endDate;
+    }
+
+    public String getEndDateString() {
+        return "End Date: " + endDate;
     }
 
     public void setEndDate(String endDate) {
@@ -54,12 +58,16 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public String getProjectCreatedDate() {
-        return "Start date: " + currentDay;
+    public String getProjectCreatedDateString() {
+        return "Start date: " + createdDate;
+    }
+
+    public Date getProjectCreatedDate() {
+        return createdDate;
     }
 
     public void setProjectCreatedDate(Date projectCreatedDate) {
-        this.currentDay = projectCreatedDate;
+        this.createdDate = projectCreatedDate;
     }
 
     public int getCreatedBy() {
