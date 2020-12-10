@@ -13,10 +13,15 @@ import java.sql.SQLException;
 @Controller
 public class UserController {
     ObjectManager objectManager = new ObjectManager();
+    boolean errorLogin;
+    boolean errorCreateUser;
+    boolean successCreatedUser;
 
     @GetMapping("/")
     public String index(Model m){
-        m.addAttribute("createUser",m);
+        m.addAttribute("errorLogin",errorLogin);
+        m.addAttribute("errorCreateUser",errorCreateUser);
+        m.addAttribute("successCreatedUser",successCreatedUser);
         return "index";
     }
 
@@ -24,7 +29,16 @@ public class UserController {
     public String createUser(WebRequest wr) throws SQLException {
         String username = wr.getParameter("createUsername");
         String password = wr.getParameter("createPassword");
-        objectManager.uRep.createUser(username,password);
+
+        int userID = objectManager.uRep.createUserValidation(username);
+        if(userID>0){
+            errorCreateUser = true;
+            successCreatedUser = false;
+        } else {
+            objectManager.uRep.createUser(username,password);
+            successCreatedUser = true;
+            errorCreateUser = false;
+        }
         return "redirect:/";
     }
 
@@ -32,6 +46,8 @@ public class UserController {
     public String login(HttpSession session, WebRequest wr) throws SQLException {
         String username = wr.getParameter("inputUsername");
         String password = wr.getParameter("inputPassword");
+        String tempErrorLogin = wr.getParameter("checkErrorLogin");
+        errorLogin = Boolean.parseBoolean(tempErrorLogin);
 
         int userID = objectManager.uRep.loginValidation(username, password);
         System.out.println("logged in as id:" + userID + ", " + username);
@@ -47,8 +63,10 @@ public class UserController {
         }
     }
 
-    @GetMapping("/gantt")
-    public String test(){
-        return "test";
+    @PostMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        errorLogin = false;
+        return "redirect:/";
     }
 }

@@ -2,7 +2,6 @@ package com.example.demo.Repositories;
 
 import com.example.demo.Models.User;
 import com.example.demo.Services.DBConnect;
-import com.mysql.cj.protocol.Resultset;
 import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,6 +47,17 @@ public class UserRepository {
             userID = rs.getInt(1);
         }
         return userID;
+    }
+
+    public int createUserValidation(String username) throws SQLException {
+        PreparedStatement ps = connection.establishConnection().prepareStatement("select userID from users where username = ?");
+        ps.setString(1,username);
+        ResultSet rs = ps.executeQuery();
+        int id = 0;
+        if(rs.next()){
+            id = rs.getInt(1);
+        }
+        return id;
     }
 
     //validate user login method

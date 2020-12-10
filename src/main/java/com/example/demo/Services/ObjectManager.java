@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObjectManager {
+
     //repositories
     public ProjectRepository pRep = new ProjectRepository();
     public TaskRepository tRep = new TaskRepository();
@@ -29,6 +30,7 @@ public class ObjectManager {
     public List<User> teamList = new ArrayList<>();
     public List<User> teamListIncludeCreatedBy = new ArrayList<>();
 
+    //Clears all the list
     public void clearLists(){
         myProjectList.clear();
         sharedProjectList.clear();
@@ -37,4 +39,8 @@ public class ObjectManager {
         teamList.clear();
         teamListIncludeCreatedBy.clear();
     }
+
+    //Used for showing error messages
+    public static boolean errorMessage = true;
+
 }

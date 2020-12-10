@@ -30,8 +30,8 @@ public class ProjectRepository {
     }
   
     //returner projectList metode
-    public List<Project> returnProjectList(PreparedStatement ps, int id, List<Project> list) throws SQLException {
-        ps.setInt(1,id);
+    public List<Project> returnProjectList(PreparedStatement ps, int userID, List<Project> list) throws SQLException {
+        ps.setInt(1,userID);
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
             Project temp = new Project(
@@ -46,31 +46,31 @@ public class ProjectRepository {
     }
 
     //get my projects only
-    public List<Project> getMyProjects(int id) throws SQLException {
+    public List<Project> getMyProjects(int userID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct projects.projectID, project_name, project_created_date, project_end_date, created_by from projects" +
                 " inner join project_ownership on projects.projectID = project_ownership.projectID inner join users on users.userID = project_ownership.userID where created_by = ?");
-        return returnProjectList(ps, id, myProjectList);
+        return returnProjectList(ps, userID, myProjectList);
     }
 
     //get projects shared with me and NOT my own projects
-    public List<Project> getSharedProjects(int id) throws SQLException{
+    public List<Project> getSharedProjects(int userID) throws SQLException{
             PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct projects.projectID, project_name, project_created_date, project_end_date, created_by " +
                     "from projects inner join project_ownership on projects.projectID = project_ownership.projectID inner join users " +
                     "on users.userID = project_ownership.userID where users.userID = ? and created_by != users.userID");
-        return returnProjectList(ps, id, sharedProjectList);
+        return returnProjectList(ps, userID, sharedProjectList);
     }
 
     //delete project
-   public void deleteProject(int id) throws SQLException {
+   public void deleteProject(int projectID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("DELETE FROM projects WHERE projectID = ?");
-        ps.setInt(1,id);
+        ps.setInt(1,projectID);
         ps.executeUpdate();
     }
 
     //get single project
-    public List<Project> getSingleProject(int id) throws SQLException {
+    public List<Project> getSingleProject(int projectID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("SELECT * FROM projects WHERE projectID = ?");
-        return returnProjectList(ps, id, singleProjectList);
+        return returnProjectList(ps, projectID, singleProjectList);
     }
 
     //share project

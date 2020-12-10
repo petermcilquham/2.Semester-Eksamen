@@ -1,13 +1,14 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Models.Project;
 import com.example.demo.Services.CompareDates;
 import com.example.demo.Services.ObjectManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.swing.*;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 @Controller
 public class TaskController {
@@ -15,33 +16,33 @@ public class TaskController {
     CompareDates compareDates = new CompareDates();
 
     @PostMapping("/task/create")
-    public String createTask(WebRequest wr) throws SQLException{
-        //henter projekt id + end date som string og splitter den ad
+    public String createTask(WebRequest wr) throws SQLException, ParseException {
+        //henter projekt id, start date og end date som string og splitter den ad
         String tempString = wr.getParameter("createTask");
         String[] tempStringArray = tempString.split("¤");
         String tempProjectID = tempStringArray[0];
-        String tempProjectEndDate = tempStringArray[1];
-        System.out.println("array længde: "+tempStringArray.length);
+        String compareProjectEndDate = tempStringArray[1];
+        String compareProjectStartDate = tempStringArray[2];
 
         int projectID = Integer.parseInt(tempProjectID);
 
         String taskName = wr.getParameter("taskName");
 
-        //Vi modtager endDate i String format fra html og omdanner den til en sql.date, så den kan indsættes i databasen.
+        // Vi modtager endDate i String format fra html og omdanner den til en sql.date, så den kan indsættes i databasen.
         String startDate = wr.getParameter("startDate");
-        String taskEndDate = wr.getParameter("endDate");
-//
+        String endDate = wr.getParameter("endDate");
+
         String tempUserID = wr.getParameter("responsible");
         int userID = Integer.parseInt(tempUserID);
-//
-       //tjekker at task end date ikke er senere end projekt en date
-//        boolean bool = compareDates.compareDates(tempProjectEndDate,taskEndDate);
-//        if(bool){
-//            objectManager.tRep.createTask(taskName, startDate, taskEndDate, userID, projectID);
-//        } else {
-//            System.out.println("fejl");
-//        }
-        //objectManager.tRep.createTask(taskName, startDate, taskEndDate, userID, projectID);
+
+        if (!compareDates.compareDates(endDate, compareProjectEndDate) || !compareDates.compareDates(compareProjectStartDate, startDate)) {
+            objectManager.errorMessage = false;
+            System.out.println("hej");
+        } else {
+            objectManager.errorMessage = true;
+            objectManager.tRep.createTask(taskName, startDate, endDate, userID, projectID);
+        }
+
         return "redirect:/project";
     }
 
@@ -72,23 +73,4 @@ public class TaskController {
         objectManager.tRep.deleteTask(taskID);
         return "redirect:/project";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
