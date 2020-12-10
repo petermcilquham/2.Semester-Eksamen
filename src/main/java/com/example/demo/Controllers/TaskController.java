@@ -42,6 +42,7 @@ public class TaskController {
             objectManager.errorMessage = true;
             objectManager.tRep.createTask(taskName, startDate, endDate, userID, projectID);
         }
+
         return "redirect:/project";
     }
 

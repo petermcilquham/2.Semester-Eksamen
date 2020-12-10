@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(Model m, HttpSession session, WebRequest wr) throws SQLException {
+    public String login(HttpSession session, WebRequest wr) throws SQLException {
         String username = wr.getParameter("inputUsername");
         String password = wr.getParameter("inputPassword");
         String tempErrorLogin = wr.getParameter("checkErrorLogin");
