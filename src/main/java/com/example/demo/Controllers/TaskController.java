@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.swing.*;
 import java.sql.SQLException;
 import java.text.ParseException;
 
@@ -34,7 +35,7 @@ public class TaskController {
         String tempUserID = wr.getParameter("responsible");
         int userID = Integer.parseInt(tempUserID);
 
-        if (!compareDates.compareDates(endDate, compareProjectEndDate) || !compareDates.compareDates(compareProjectStartDate, startDate) ) {
+        if (!compareDates.compareDates(endDate, compareProjectEndDate) || !compareDates.compareDates(compareProjectStartDate, startDate)) {
             objectManager.errorMessage = false;
             System.out.println("hej");
         } else {
@@ -71,23 +72,4 @@ public class TaskController {
         objectManager.tRep.deleteTask(taskID);
         return "redirect:/project";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

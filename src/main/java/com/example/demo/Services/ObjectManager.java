@@ -42,4 +42,5 @@ public class ObjectManager {
 
     //Used for showing error messages
     public static boolean errorMessage = true;
+
 }
