@@ -17,7 +17,7 @@
       
         <!-- banner/logo -->
         <div class="grid-item" id="item-1">
-            <a href="/"><h1>logo bitch</h1></a>
+            <a href="/logout"><h1>logo bitch</h1></a>
         </div>
 
         <!-- opret bruger -->
@@ -37,6 +37,7 @@
 
         <!-- login -->
         <div class="grid-item" id="item-3">
+            <p th:value="${e}">hkghj</p>
             <h1>Log in</h1>
             <form id="login" action="/login" method="post" enctype="multipart/form-data">
                 <label>
@@ -45,7 +46,7 @@
                 <label>
                     <input type="text" name="inputPassword" placeholder="Password..." required>
                 </label> <br>
-                <button class="button" type="submit"> <!--onclick="test()"-->Log In</button>
+                <button class="button" type="submit" onclick="myFunction()">Log In</button>
             </form>
         </div>
 

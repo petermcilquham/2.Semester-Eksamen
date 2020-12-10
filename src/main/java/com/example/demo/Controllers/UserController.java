@@ -46,4 +46,9 @@ public class UserController {
             return "redirect:/";
         }
     }
+
+    @GetMapping("/gantt")
+    public String test(){
+        return "test";
+    }
 }

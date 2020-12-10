@@ -38,7 +38,7 @@ public class ProjectRepository {
                     rs.getInt(1),
                     rs.getString(2),
                     rs.getDate(3),
-                    rs.getString(4),
+                    rs.getDate(4),
                     rs.getInt(5));
             list.add(temp);
         }

@@ -17,7 +17,7 @@ public class ObjectManager {
     public UserRepository uRep = new UserRepository();
 
     //models
-    public Project project = new Project(0,"",null,"",0);
+    public Project project = new Project(0,"",null,null,0);
     public Task task = new Task(0,"",null,null,0, false, 0);
     public User user = new User(0,"","");
 
