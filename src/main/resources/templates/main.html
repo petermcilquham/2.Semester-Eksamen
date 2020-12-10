@@ -9,36 +9,33 @@
 <body>
 
     <div  class="grid-container-main">
+        <!-- log ud knap -->
+        <div class="grid-item" id="item-1">
+            <form action="/logout" method="post">
+                <button type="submit">Log Out</button>
+            </form>
+        </div>
 
         <!-- banner/logo -->
-        <div class="grid-item" id="item-1">
-            <a href="/"><h1>logooo</h1></a>
-
-            <div>
-                <form action="/logout" method="post">
-                    <button type="submit">Log Out</button>
-                </form>
-            </div>
-
+        <div class="grid-item" id="item-2">
+            <img th:src="@{/img/logo.png}" alt="logo bitch">
         </div>
 
         <!-- opret projekt knap -->
-        <div class="grid-item" id="item-2">
-            <h3>Create project</h3>
+        <div class="grid-item" id="item-3">
             <form id="createProject" action="/project/create" method="post" enctype="multipart/form-data">
-                <label><input type="text" name="projectName" placeholder="Project name" required> </label>
-                <label>End Date:<input type="date" id="endDate" name="endDate" required> </label>
+                <label>Project Name:<br><input type="text" name="projectName" placeholder="Project name" required> </label><br><br>
+                <label>End Date:<br><input type="date" id="endDate" name="endDate" required> </label><br><br>
                 <button type="submit">Create project!</button>
             </form>
 
             <div class="errorMessage" th:style="${errorMessage ? 'display:none' : 'display:block'}" >
                 <h2>End date is earlier than start day</h2>
             </div>
-
         </div>
 
         <!-- mine projekter liste -->
-        <div class="grid-item" id="item-3">
+        <div class="grid-item" id="item-4">
             <h3>Your projects</h3>
             <div th:each="Project : ${myProjectList}">
                 <p th:text="${Project.getProjectName()}"></p>
@@ -51,7 +48,7 @@
          </div>
 
         <!-- projekter delt med mig liste -->
-        <div class="grid-item" id="item-4">
+        <div class="grid-item" id="item-5">
             <h3>Shared projects</h3>
             <div th:each="Project : ${sharedProjectList}">
                 <p th:text="${Project.getProjectName()}"></p>
