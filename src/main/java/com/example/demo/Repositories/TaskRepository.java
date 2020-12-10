@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +14,10 @@ public class TaskRepository {
     DBConnect connection = new DBConnect();
     List<Task> taskList = new ArrayList<>();
 
-    public void createTask(String taskName, String currentDay, String endDate, int taskResponsible, int projectID) throws SQLException {
+    public void createTask(String taskName, String startDate, String endDate, int taskResponsible, int projectID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO tasks (task_name,start_date,end_date,task_responsible,projectID) VALUES (?,?,?,?,?)");
         ps.setString(1,taskName);
-        ps.setString(2, currentDay);
+        ps.setString(2, startDate);
         ps.setString(3, endDate);
         ps.setInt(4,taskResponsible);
         ps.setInt(5, projectID);

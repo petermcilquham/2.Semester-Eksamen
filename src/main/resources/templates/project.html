@@ -54,8 +54,8 @@
                 <div id="show-project-item-2">
                     <ul>
                         <li><p th:text="${Project.getCreatedByString()}"></p></li>
-                        <li><p th:text="${Project.getProjectCreatedDate()}"></p></li>
-                        <li><p th:text="${Project.getEndDate()}"></p></li>
+                        <li><p th:text="${Project.getProjectCreatedDateString()}"></p></li>
+                        <li><p th:text="${Project.getEndDateString()}"></p></li>
                     </ul>
                 </div>
             </div>
@@ -74,19 +74,24 @@
                                 <th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th>
                             </tr>
                             <tr>
-                                <td> <label><input type="text" name="taskName" id="taskName" placeholder="Task Name"></label> </td>
-                                <td> <label><input type="date" id="startDate" name="startDate"></label> </td>
-                                <td> <label><input type="date" id="endDate" name="endDate"></label> </td>
+                                <td> <label><input type="text" name="taskName" id="taskName" placeholder="Task Name" required></label> </td>
+                                <td> <label><input type="date" id="startDate" name="startDate" required></label> </td>
+                                <td> <label><input type="date" id="endDate" name="endDate" required></label> </td>
                                 <td>
-                                    <label><select name="responsible" id="responsible">
-                                        <option selected disabled hidden>Choose responsible user</option>
+                                    <label><select name="responsible" id="responsible" >
+                                        <option value=0 selected hidden>Choose responsible user</option>
                                         <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
                                     </select></label>
                                 </td>
                             </tr>
                         </table>
-                        <button type="submit" name="createTask" th:value="${Project.getProjectID()} + '¤' + ${Project.getEndDate()}">Create task!</button>
+                        <button type="submit" name="createTask" th:value="${Project.getProjectID()} + '¤' + ${Project.getEndDate()} + '¤' + ${Project.getProjectCreatedDate()} ">Create task!</button>
                     </form>
+
+                    <div class="errorMessage" th:style="${errorMessage ? 'display:none' : 'display:block'}" >
+                        <h2>End or start date is bruh</h2>
+                    </div>
+
                 </div>
 
                 <!-- vis opgaver -->
