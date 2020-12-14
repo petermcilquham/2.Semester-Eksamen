@@ -24,7 +24,6 @@ public class ProjectController {
     public String projectPage(Model m, HttpSession session, WebRequest wr) {
         try {
             if (!session.getAttribute("userID").equals("")) {
-
                 objectManager.clearLists();
                 objectManager.pRep.getSingleProject(projectID);
                 objectManager.tRep.getTaskList(projectID);
@@ -59,8 +58,9 @@ public class ProjectController {
         String endDate = wr.getParameter("endDate");
 
         objectManager.errorMessage = compareDates.compareDates(compareCurrentDay, endDate);
-
-        objectManager.pRep.createProject(projectName, currentDay, endDate, userID);
+        if(objectManager.errorMessage){
+            objectManager.pRep.createProject(projectName, currentDay, endDate, userID);
+        }
         return "redirect:/main";
     }
 

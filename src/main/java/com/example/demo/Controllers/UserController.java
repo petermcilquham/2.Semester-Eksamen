@@ -69,4 +69,10 @@ public class UserController {
         errorLogin = false;
         return "redirect:/";
     }
+
+    @GetMapping("/gantt")
+    public String gantt(Model m) throws SQLException {
+        m.addAttribute("taskList",objectManager.tRep.getTaskList(1));
+        return "test";
+    }
 }
