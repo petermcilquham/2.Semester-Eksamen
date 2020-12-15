@@ -71,7 +71,7 @@
                         <h3>Create a task</h3>
                         <table>
                             <tr>
-                                <th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th>
+                                <th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Duration</th>
                             </tr>
                             <tr>
                                 <td> <label><input type="text" name="taskName" id="taskName" placeholder="Task Name" required></label> </td>
@@ -83,6 +83,7 @@
                                         <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
                                     </select></label>
                                 </td>
+                                <td> <label><input type="text" id="duration" name="duration" placeholder="Task duration in hours"></label></td>
                             </tr>
                         </table>
                         <button type="submit" name="createTask" th:value="${Project.getProjectID()} + '¤' + ${Project.getEndDate()} + '¤' + ${Project.getProjectCreatedDate()} ">Create task!</button>
@@ -98,7 +99,7 @@
                 <h3>Current tasks</h3>
                 <table>
                     <tr>
-                        <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th>
+                        <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th><th>Duration</th><th>Workhours per day</th>
                     </tr>
                     <tr th:each="Task : ${taskList}">
                         <form id="editTask" action="/task/edit" method="post" enctype="multipart/form-data">
@@ -119,6 +120,8 @@
                                     <option th:value="false">Unfinished</option>
                                 </select>
                             </td>
+                            <td style="width:75px"><label><input type="text" id="newDuration" name="newDuration" th:placeholder="${Task.getTaskDurationInHours()} + ' hours'" th:value="${Task.getTaskDurationInHours()}" style="width:20px"> hours</label></td>
+                            <td style="width:30px" th:text="${Task.getWorkload()} + ' hours'"></td>
                             <td style="width:40px"><button type="submit" name="getTaskID" th:value="${Task.getTaskID()}">Edit!</button></td>
                         </form>
                     </tr>

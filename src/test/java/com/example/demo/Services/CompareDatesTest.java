@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CompareDatesTest {
+class DatesServiceTest {
 
     @Test
     void compareDates() {
         //tester om date1 er før date2
-        CompareDates compareDates = new CompareDates();
+        DatesService compareDates = new DatesService();
         String date1 = "2020-12-10";
         String date2 = "2020-12-31";
 

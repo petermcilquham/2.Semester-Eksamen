@@ -18,7 +18,6 @@ public class ProjectRepository {
     List<Project> myProjectList = new ArrayList<>();
     List<Project> sharedProjectList = new ArrayList<>();
 
-
     public void createProject(String projectName, Date currentDay, String endDate, int createdBy) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO projects (project_name, project_created_date, project_end_date, created_by) VALUES (?,?,?,?)");
         ps.setString(1,projectName);

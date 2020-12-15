@@ -1,8 +1,6 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Models.Task;
-import com.example.demo.Models.User;
-import com.example.demo.Services.CompareDates;
+import com.example.demo.Services.DatesService;
 import com.example.demo.Services.ObjectManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +15,11 @@ import java.text.SimpleDateFormat;
 @Controller
 public class ProjectController {
     ObjectManager objectManager = new ObjectManager();
-    CompareDates compareDates = new CompareDates();
+    DatesService datesService = new DatesService();
     int projectID = 0;
 
     @GetMapping("/project")
-    public String projectPage(Model m, HttpSession session, WebRequest wr) {
+    public String projectPage(Model m, HttpSession session) {
         try {
             if (!session.getAttribute("userID").equals("")) {
                 objectManager.clearLists();
@@ -44,20 +42,25 @@ public class ProjectController {
 
     @PostMapping("/project/create")
     public String createProject(WebRequest wr, HttpSession session) throws SQLException {
+        //nulstiller alle array lister
         objectManager.clearLists();
-        String projectName = wr.getParameter("projectName");
 
-        //dette giver dagens dato i yyyy/mm/dd
+        //henter projekt navn og slut dato fra project html siden
+        String projectName = wr.getParameter("projectName");
+        String endDate = wr.getParameter("endDate");
+
+        //henter user id fra http session
+        int userID = (Integer) session.getAttribute("userID");
+
+        //dette giver dagens dato i yyyy/mm/dd format
         long millis = System.currentTimeMillis();
         java.sql.Date currentDay = new java.sql.Date(millis);
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String compareCurrentDay = simpleDateFormat.format(currentDay);
 
-        int userID = (Integer) session.getAttribute("userID");
-        String endDate = wr.getParameter("endDate");
-
-        objectManager.errorMessage = compareDates.compareDates(compareCurrentDay, endDate);
+        //kalder compareDates metoden til at tjekke at slut datoen for projektet er efter den nuværende dato
+        objectManager.errorMessage = datesService.compareDates(compareCurrentDay, endDate);
         if(objectManager.errorMessage){
             objectManager.pRep.createProject(projectName, currentDay, endDate, userID);
         }
