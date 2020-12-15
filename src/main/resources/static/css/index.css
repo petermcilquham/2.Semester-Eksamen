@@ -1,8 +1,8 @@
-/* -------------------------------- grid ----------------------- */
+/* -------------------------------- grid main ----------------------- */
 .grid-container-main{
     display: grid;
     grid-template-columns: 50%;
-    grid-template-rows: 100px 150px 150px;
+    grid-template-rows: auto 150px 150px;
     grid-row-gap: 50px;
     justify-content: center;
 }
