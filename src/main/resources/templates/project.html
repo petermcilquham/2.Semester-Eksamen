@@ -104,8 +104,10 @@
                         <form id="editTask" action="/task/edit" method="post" enctype="multipart/form-data">
                             <td th:text="${Task.getTaskID()}"></td>
                             <td><input type="text" name="newTaskName" th:contenteditable="true" th:placeholder="${Task.getTaskName()}" th:value="${Task.getTaskName()}"></td>
-                            <td> <input type="text" name="newStartDate" th:contenteditable="true" th:placeholder="${Task.getStartDate()}" th:value="${Task.getStartDate()}" onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 70px" ></td>
-                            <td> <input type="text" name="newEndDate" th:contenteditable="true" th:placeholder="${Task.getEndDate()}" th:value="${Task.getEndDate()}" onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 70px"></td>
+                            <td> <input type="text" name="newStartDate" th:contenteditable="true" th:placeholder="${Task.getStartDate()}" th:value="${Task.getStartDate()}"
+                                        onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 70px" ></td>
+                            <td> <input type="text" name="newEndDate" th:contenteditable="true" th:placeholder="${Task.getEndDate()}" th:value="${Task.getEndDate()}"
+                                        onfocus="(this.type='date')" onblur="(this.type='text')" style="width: 70px"></td>
                             <td>
                                 <select name="newResponsible">
                                     <option th:text="${Task.getTaskResponsibleString()}" th:value="${Task.getTaskResponsible()}" selected hidden> </option>
