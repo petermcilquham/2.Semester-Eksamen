@@ -14,13 +14,14 @@ public class TaskRepository {
     DBConnect connection = new DBConnect();
     List<Task> taskList = new ArrayList<>();
 
-    public void createTask(String taskName, String startDate, String endDate, int taskResponsible, int projectID) throws SQLException {
-        PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO tasks (task_name,start_date,end_date,task_responsible,projectID) VALUES (?,?,?,?,?)");
+    public void createTask(String taskName, String startDate, String endDate, int taskResponsible, int taskDurationInHours, int projectID) throws SQLException {
+        PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO tasks (task_name,start_date,end_date,task_responsible, task_duration_in_hours, projectID) VALUES (?,?,?,?,?,?)");
         ps.setString(1,taskName);
         ps.setString(2, startDate);
         ps.setString(3, endDate);
         ps.setInt(4,taskResponsible);
-        ps.setInt(5, projectID);
+        ps.setInt(5,taskDurationInHours);
+        ps.setInt(6, projectID);
 
         ps.executeUpdate();
     }
@@ -44,20 +45,23 @@ public class TaskRepository {
                     rs.getDate(4),
                     rs.getInt(5),
                     rs.getBoolean(6),
-                    rs.getInt(7));
+                    rs.getInt(7),
+                    0,
+                    rs.getInt(8));
             taskList.add(tmp);
         }
         return taskList;
     }
 
-    public void editTask(String taskName, String startDate, String endDate, int taskResponsible, boolean completionStatus, int taskID) throws SQLException {
-        PreparedStatement ps = connection.establishConnection().prepareStatement("UPDATE tasks set task_name = ?, start_date = ?, end_date = ?, task_responsible = ?, completion_status = ? where taskID = ?");
+    public void editTask(String taskName, String startDate, String endDate, int taskResponsible, boolean completionStatus, int taskDurationInHours, int taskID) throws SQLException {
+        PreparedStatement ps = connection.establishConnection().prepareStatement("UPDATE tasks set task_name = ?, start_date = ?, end_date = ?, task_responsible = ?, completion_status = ?, task_duration_in_hours = ? where taskID = ?");
         ps.setString(1,taskName);
         ps.setString(2,startDate);
         ps.setString(3,endDate);
         ps.setInt(4,taskResponsible);
         ps.setBoolean(5,completionStatus);
-        ps.setInt(6,taskID);
+        ps.setInt(6,taskDurationInHours);
+        ps.setInt(7,taskID);
 
         ps.executeUpdate();
     }

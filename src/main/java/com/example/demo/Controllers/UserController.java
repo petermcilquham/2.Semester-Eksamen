@@ -50,7 +50,6 @@ public class UserController {
         errorLogin = Boolean.parseBoolean(tempErrorLogin);
 
         int userID = objectManager.uRep.loginValidation(username, password);
-        System.out.println("logged in as id:" + userID + ", " + username);
 
         if(userID>0){
             session.setAttribute("userID", userID);
