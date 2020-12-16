@@ -29,6 +29,7 @@
                 <button type="submit">Create project!</button>
             </form>
 
+            <!-- fejlbesked -->
             <div class="errorMessage" th:style="${errorMessage ? 'display:none' : 'display:block'}" >
                 <h2>End date is earlier than start day</h2>
             </div>
@@ -47,7 +48,7 @@
             </div>
          </div>
 
-        <!-- projekter delt med mig liste -->
+        <!-- liste over projekter der er delt med mig -->
         <div class="grid-item" id="item-5">
             <h3>Shared projects</h3>
             <div th:each="Project : ${sharedProjectList}">
