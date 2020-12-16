@@ -25,7 +25,7 @@ public class MainController {
             return "main";
         } catch(NullPointerException e) {
             return "redirect:/";
-            }
+        }
     }
 
     @PostMapping("/backtomain")
