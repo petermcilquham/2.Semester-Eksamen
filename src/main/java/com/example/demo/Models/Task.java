@@ -19,7 +19,6 @@ public class Task {
     private int taskResponsible;
     private boolean completionStatus;
     private int taskDurationInHours;
-    //private long workload;
     private int projectID;
 
     public Task(int taskID, String taskName, Date startDate, Date endDate, int taskResponsible, boolean completionStatus, int taskDurationInHours, int projectID) {
@@ -30,7 +29,6 @@ public class Task {
         this.taskResponsible = taskResponsible;
         this.completionStatus = completionStatus;
         this.taskDurationInHours = taskDurationInHours;
-        //this.workload = workload;
         this.projectID = projectID;
     }
 
@@ -119,8 +117,4 @@ public class Task {
         //caster tallene til double inden udregning for at få et korrekt afrundet tal
         return formatter.format((double)getTaskDurationInHours() / (double)datesService.computeDaysBetweenDates(String.valueOf(getStartDate()), String.valueOf(getEndDate())));
     }
-
-//    public void setWorkload(long workload) {
-//        this.workload = workload;
-//    }
 }
