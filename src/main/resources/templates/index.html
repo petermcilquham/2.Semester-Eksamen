@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <link th:href="@{/css/style.css}" href="../static/css/style.css" rel="stylesheet">
     <link th:href="@{/css/index.css}" href="../static/css/index.css" rel="stylesheet">
-    <title>Index</title>
+    <title>Elegantt</title>
 </head>
 <body>
     <div  class="grid-container-main">
       
         <!-- banner/logo -->
         <div class="grid-item" id="item-1">
-            <img th:src="@{/img/logo.png}" alt="logo bitch">
+            <img th:src="@{/img/logo.png}" alt="logo">
         </div>
 
         <!-- opret bruger -->
@@ -27,15 +27,17 @@
                 <button type="submit"  class="button">Create User</button>
             </form>
 
+            <!-- fejlbesked -->
             <div class="errorMessage" th:style="${errorCreateUser ? 'display:block' : 'display:none'}" >
                 <h2>Username unavailable, try again</h2>
             </div>
 
+            <!-- success besked - bruger errorMessage funktionalitet -->
             <div class="errorMessage" th:style="${successCreatedUser ? 'display:block' : 'display:none'}" >
                 <h2>User successfully created, please log in</h2>
             </div>
-
         </div>
+
 
         <!-- login -->
         <div class="grid-item" id="item-3">
@@ -47,12 +49,12 @@
                 <label>
                     <input type="text" name="inputPassword" placeholder="Password..." required>
                 </label> <br>
-                <button class="button" type="submit" name="checkErrorLogin" th:value="true"> Log In</button>
+                <button class="button" type="submit">Log In</button>
             </form>
 
             <!-- fejlbesked -->
             <div class="errorMessage" th:style="${errorLogin ? 'display:block' : 'display:none'}" >
-                <h1>forkert login</h1>
+                <h2>Wrong username or password, please try again</h2>
             </div>
         </div>
 

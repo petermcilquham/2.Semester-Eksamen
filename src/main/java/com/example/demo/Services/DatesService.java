@@ -16,7 +16,7 @@ public class DatesService {
     }
 
     //metode til at udregne hvor mange dage der er imellem to datoer
-    public long computeHoursPerDay(String date1, String date2){
+    public long computeDaysBetweenDates(String date1, String date2){
         //vi får datoer ind som strings fra html siderne via webrequest så vi parser dem om til localDates
         LocalDate compareDate1 = LocalDate.parse(date1);
         LocalDate compareDate2 = LocalDate.parse(date2);

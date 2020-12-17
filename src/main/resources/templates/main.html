@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link th:href="@{/css/style.css}" href="../static/css/style.css" rel="stylesheet">
     <link th:href="@{/css/main.css}" href="../static/css/main.css" rel="stylesheet">
-    <title>Main</title>
+    <title>Elegantt</title>
 </head>
 <body>
 
@@ -18,7 +18,7 @@
 
         <!-- banner/logo -->
         <div class="grid-item" id="item-2">
-            <img th:src="@{/img/logo.png}" alt="logo bitch">
+            <img th:src="@{/img/logo.png}" alt="logo">
         </div>
 
         <!-- opret projekt knap -->
@@ -44,7 +44,7 @@
                 <p th:text="${Project.getEndDate()}"></p>
                 <form action="/project/get" method="post">
                     <button type="submit" name="projectID" th:value="${Project.getProjectID()}">View project</button> <br>
-                </form>
+                </form><br>
             </div>
          </div>
 
@@ -58,7 +58,7 @@
                 <p th:text="${Project.getCreatedByString()}"></p>
                 <form action="/project/get" method="post">
                     <button type="submit" name="projectID" th:value="${Project.getProjectID()}">View project</button> <br>
-                </form>
+                </form><br>
             </div>
         </div>
   </div>

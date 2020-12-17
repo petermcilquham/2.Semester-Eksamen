@@ -19,10 +19,10 @@ public class Task {
     private int taskResponsible;
     private boolean completionStatus;
     private int taskDurationInHours;
-    private long workload;
+    //private long workload;
     private int projectID;
 
-    public Task(int taskID, String taskName, Date startDate, Date endDate, int taskResponsible, boolean completionStatus, int taskDurationInHours, long workload, int projectID) {
+    public Task(int taskID, String taskName, Date startDate, Date endDate, int taskResponsible, boolean completionStatus, int taskDurationInHours, int projectID) {
         this.taskID = taskID;
         this.taskName = taskName;
         this.startDate = startDate;
@@ -30,7 +30,7 @@ public class Task {
         this.taskResponsible = taskResponsible;
         this.completionStatus = completionStatus;
         this.taskDurationInHours = taskDurationInHours;
-        this.workload = workload;
+        //this.workload = workload;
         this.projectID = projectID;
     }
 
@@ -70,6 +70,7 @@ public class Task {
         return taskResponsible;
     }
 
+    //returnerer den ansvarlige bruger for en opgave som string i stedet for int
     public String getTaskResponsibleString() throws SQLException {
         return taskRepository.getTaskResponsibleRepoMethod(getTaskResponsible());
     }
@@ -81,6 +82,8 @@ public class Task {
     public boolean isCompletionStatus() {
         return completionStatus;
     }
+
+    //returnerer en opgaves status som strings i stedet for boolean til visning for brugeren
     public String isCompletionStatusString(){
         if(isCompletionStatus()){
             return "Finished";
@@ -109,12 +112,15 @@ public class Task {
         this.taskDurationInHours = taskDurationInHours;
     }
 
+    //denne get metode henter antal timer en opgave tager og dividerer med antallet af dage som opgaven tager og returnerer antal timer per dag der skal arbejdes for at færdiggøre opgaven til tiden
     public String getWorkload() {
+        //formatterer resultatet til at have en enkelt decimal
         NumberFormat formatter = new DecimalFormat("#0.0");
-        return formatter.format((double)getTaskDurationInHours() / (double)datesService.computeHoursPerDay(String.valueOf(getStartDate()), String.valueOf(getEndDate())));
+        //caster tallene til double inden udregning for at få et korrekt afrundet tal
+        return formatter.format((double)getTaskDurationInHours() / (double)datesService.computeDaysBetweenDates(String.valueOf(getStartDate()), String.valueOf(getEndDate())));
     }
 
-    public void setWorkload(long workload) {
-        this.workload = workload;
-    }
+//    public void setWorkload(long workload) {
+//        this.workload = workload;
+//    }
 }
