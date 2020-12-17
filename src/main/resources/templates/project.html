@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link th:href="@{/css/style.css}" href="../static/css/style.css" rel="stylesheet">
     <link th:href="@{/css/project.css}" href="../static/css/project.css" rel="stylesheet">
-    <title>Project</title>
+    <title>Elegantt</title>
 </head>
 <body>
 
@@ -17,10 +17,10 @@
             </form>
         </div>
 
-        <!-- del projekt, se team og generer gantt diagram knapper -->
+        <!-- se team og del projekt knapper -->
         <div class="grid-item" id="item-2">
             <ul>
-                <!--share project with teamList-->
+                <!-- se mit team -->
                 <li>
                     <div>
                         <select>
@@ -30,10 +30,7 @@
                     </div>
                 </li>
 
-                <!-- gantt diagram -->
-                <li>Generate GANTT diagram</li>
-
-                <!-- Share project -->
+                <!-- del projekt -->
                 <li>
                     <div th:each="Project : ${singleProject}">
                         <form id="shareProject" action="/project/share" method="post">
@@ -61,76 +58,72 @@
             </div>
         </div>
 
-        <!-- delopgaver -->
+        <!-- opgaver -->
         <div class="grid-item" id="item-4" >
-            <div class="grid-container-tasks">
 
-                <!-- opret opgave -->
-                <div th:each="Project : ${singleProject}">
-                    <form id="createTask" action="/task/create" method="post" enctype="multipart/form-data">
-                        <h3>Create a task</h3>
-                        <table>
-                            <tr>
-                                <th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Duration</th>
-                            </tr>
-                            <tr>
-                                <td> <label><input type="text" name="taskName" id="taskName" placeholder="Task Name" required></label> </td>
-                                <td> <label><input type="date" id="startDate" name="startDate" required></label> </td>
-                                <td> <label><input type="date" id="endDate" name="endDate" required></label> </td>
-                                <td>
-                                    <label><select name="responsible" id="responsible" >
-                                        <option value=0 selected hidden>Choose responsible user</option>
-                                        <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
-                                    </select></label>
-                                </td>
-                                <td> <label><input type="text" id="duration" name="duration" placeholder="Task duration in hours"></label></td>
-                            </tr>
-                        </table>
-                        <button type="submit" name="createTask" th:value="${Project.getProjectID()} + '¤' + ${Project.getEndDate()} + '¤' + ${Project.getProjectCreatedDate()} ">Create task!</button>
-                    </form>
+            <!-- opret opgave -->
+            <div th:each="Project : ${singleProject}">
+                <form id="createTask" action="/task/create" method="post" enctype="multipart/form-data">
+                    <h3>Create a task</h3>
+                    <table>
+                        <tr>
+                            <th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Duration</th>
+                        </tr>
+                        <tr>
+                            <td> <label><input type="text" name="taskName" id="taskName" placeholder="Task Name" required></label> </td>
+                            <td> <label><input type="date" id="startDate" name="startDate" required></label> </td>
+                            <td> <label><input type="date" id="endDate" name="endDate" required></label> </td>
+                            <td>
+                                <label><select name="responsible" id="responsible" >
+                                    <option value=0 selected hidden>Choose responsible user</option>
+                                    <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
+                                </select></label>
+                            </td>
+                            <td> <label><input type="text" id="duration" name="duration" placeholder="Task duration in hours"></label></td>
+                        </tr>
+                    </table>
+                    <button type="submit" name="createTask" th:value="${Project.getProjectID()} + '¤' + ${Project.getEndDate()} + '¤' + ${Project.getProjectCreatedDate()} ">Create task!</button>
+                </form>
 
-                    <div class="errorMessage" th:style="${errorMessage ? 'display:none' : 'display:block'}" >
-                        <h2>End or start date is invalid</h2>
-                    </div>
-
+                <!-- fejlbesked -->
+                <div class="errorMessage" th:style="${errorMessage ? 'display:none' : 'display:block'}" >
+                    <h2>End or start date is invalid</h2>
                 </div>
 
-                <!-- vis opgaver -->
-                <h3>Current tasks</h3>
-                <table>
-                    <tr>
-                        <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th><th>Duration</th><th>Workhours per day</th>
-                    </tr>
-                    <tr th:each="Task : ${taskList}">
-                        <form id="editTask" action="/task/edit" method="post" enctype="multipart/form-data">
-                            <td style="width:30px" th:text="${Task.getTaskID()}"></td>
-                            <td><input type="text" name="newTaskName" th:contenteditable="true" th:placeholder="${Task.getTaskName()}" th:value="${Task.getTaskName()}"
-                                       style="width:98%;min-width:100px"></td>
-                            <td style="width:70px"><input type="text" name="newStartDate" th:contenteditable="true" th:placeholder="${Task.getStartDate()}" th:value="${Task.getStartDate()}"
-                                                          onfocus="(this.type='date')" onblur="(this.type='text')" style="width:70px"></td>
-                            <td style="width:70px"><input type="text" name="newEndDate" th:contenteditable="true" th:placeholder="${Task.getEndDate()}" th:value="${Task.getEndDate()}"
-                                                          onfocus="(this.type='date')" onblur="(this.type='text')" style="width:70px"></td>
-                            <td style="width:100px">
-                                <select name="newResponsible">
-                                    <option th:text="${Task.getTaskResponsibleString()}" th:value="${Task.getTaskResponsible()}" selected hidden> </option>
-                                    <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
-                                </select>
-                            </td>
-                            <td style="width:100px">
-                                <select name="newCompletionStatus">
-                                    <option th:text="${Task.isCompletionStatusString()}" th:value="${Task.isCompletionStatus()}" selected hidden></option>
-                                    <option th:value="true">Finished</option>
-                                    <option th:value="false">Unfinished</option>
-                                </select>
-                            </td>
-                            <td style="width:75px"><label><input type="text" id="newDuration" name="newDuration" th:placeholder="${Task.getTaskDurationInHours()} + ' hours'" th:value="${Task.getTaskDurationInHours()}" style="width:20px"> hours</label></td>
-                            <td style="width:30px" th:text="${Task.getWorkload()} + ' hours'"></td>
-                            <td style="width:40px"><button type="submit" name="getTaskID" th:value="${Task.getTaskID()}">Edit!</button></td>
-                        </form>
-                    </tr>
-                </table>
-
             </div>
+
+            <!-- vis opgaver -->
+            <h3>Current tasks</h3>
+            <table>
+                <tr>
+                    <th>ID</th><th>Name</th><th>Start Date</th><th>End Date</th><th>Responsible User</th><th>Completion Status</th><th>Duration</th><th>Workhours per day</th>
+                </tr>
+                <tr th:each="Task : ${taskList}">
+                    <form id="editTask" action="/task/edit" method="post" enctype="multipart/form-data">
+                        <td style="width:30px" th:text="${Task.getTaskID()}"></td>
+                        <td><input type="text" name="newTaskName" th:contenteditable="true" th:placeholder="${Task.getTaskName()}" th:value="${Task.getTaskName()}" style="width:98%;min-width:100px"></td>
+                        <td style="width:70px"><input type="text" name="newStartDate" th:contenteditable="true" th:placeholder="${Task.getStartDate()}" th:value="${Task.getStartDate()}" onfocus="(this.type='date')" onblur="(this.type='text')" style="width:70px"></td>
+                        <td style="width:70px"><input type="text" name="newEndDate" th:contenteditable="true" th:placeholder="${Task.getEndDate()}" th:value="${Task.getEndDate()}" onfocus="(this.type='date')" onblur="(this.type='text')" style="width:70px"></td>
+                        <td style="width:100px">
+                            <select name="newResponsible">
+                                <option th:text="${Task.getTaskResponsibleString()}" th:value="${Task.getTaskResponsible()}" selected hidden> </option>
+                                <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
+                            </select>
+                        </td>
+                        <td style="width:100px">
+                            <select name="newCompletionStatus">
+                                <option th:text="${Task.isCompletionStatusString()}" th:value="${Task.isCompletionStatus()}" selected hidden></option>
+                                <option th:value="true">Finished</option>
+                                <option th:value="false">Unfinished</option>
+                            </select>
+                        </td>
+                        <td style="width:75px"><label><input type="text" id="newDuration" name="newDuration" th:placeholder="${Task.getTaskDurationInHours()} + ' hours'" th:value="${Task.getTaskDurationInHours()}" style="width:20px"> hours</label></td>
+                        <td style="width:30px" th:text="${Task.getWorkload()} + ' hours'"></td>
+                        <td style="width:40px"><button type="submit" name="getTaskID" th:value="${Task.getTaskID()}">Edit!</button></td>
+                    </form>
+                </tr>
+            </table>
+
         </div>
 
         <!-- slet projekt knap -->
