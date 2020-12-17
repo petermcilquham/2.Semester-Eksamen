@@ -19,7 +19,7 @@ public class ObjectManager {
 
     //models
     public Project project = new Project(0,"",null,null,0);
-    public Task task = new Task(0,"",null,null,0, false, 0);
+    public Task task = new Task(0,"",null,null,0, false, 0, 0);
     public User user = new User(0,"","");
 
     //lists
@@ -30,7 +30,7 @@ public class ObjectManager {
     public List<User> teamList = new ArrayList<>();
     public List<User> teamListIncludeCreatedBy = new ArrayList<>();
 
-    //Clears all the list
+    //metode til at nulstille alle lister
     public void clearLists(){
         myProjectList.clear();
         sharedProjectList.clear();
@@ -40,7 +40,7 @@ public class ObjectManager {
         teamListIncludeCreatedBy.clear();
     }
 
-    //Used for showing error messages
+    //static attribut delt mellem flere klasser. Bruges til at bestemme om der skal vises en fejlbesked til brugeren
     public static boolean errorMessage = true;
 
 }

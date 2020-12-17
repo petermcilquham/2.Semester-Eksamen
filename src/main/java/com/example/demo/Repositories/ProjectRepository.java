@@ -18,21 +18,12 @@ public class ProjectRepository {
     List<Project> myProjectList = new ArrayList<>();
     List<Project> sharedProjectList = new ArrayList<>();
 
-
-    public void createProject(String projectName, Date currentDay, String endDate, int createdBy) throws SQLException {
-        PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO projects (project_name, project_created_date, project_end_date, created_by) VALUES (?,?,?,?)");
-        ps.setString(1,projectName);
-        ps.setDate(2,currentDay);
-        ps.setString(3,endDate);
-        ps.setInt(4,createdBy);
-
-        ps.executeUpdate();
-    }
-  
-    //returner projectList metode
+    //metode der indeholder kode der ellers ville være duplikeret - returnerer en liste af projekter
     public List<Project> returnProjectList(PreparedStatement ps, int userID, List<Project> list) throws SQLException {
         ps.setInt(1,userID);
         ResultSet rs = ps.executeQuery();
+
+        //while loop til at læse projekter ind i en liste
         while(rs.next()){
             Project temp = new Project(
                     rs.getInt(1),
@@ -42,38 +33,53 @@ public class ProjectRepository {
                     rs.getInt(5));
             list.add(temp);
         }
+        //returnerer en liste af projekter
         return list;
     }
 
-    //get my projects only
+    //opretter et projekt i databasen
+    public void createProject(String projectName, Date currentDay, String endDate, int createdBy) throws SQLException {
+        PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO projects (project_name, project_created_date, project_end_date, created_by) VALUES (?,?,?,?)");
+        ps.setString(1,projectName);
+        ps.setDate(2,currentDay);
+        ps.setString(3,endDate);
+        ps.setInt(4,createdBy);
+
+        ps.executeUpdate();
+    }
+
+    //metode til at hente de projekter som en bruger har oprettet
     public List<Project> getMyProjects(int userID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct projects.projectID, project_name, project_created_date, project_end_date, created_by from projects" +
                 " inner join project_ownership on projects.projectID = project_ownership.projectID inner join users on users.userID = project_ownership.userID where created_by = ?");
+
         return returnProjectList(ps, userID, myProjectList);
     }
 
-    //get projects shared with me and NOT my own projects
+    //metode til at hente de projekter en bruger har adgang til - men som brugeren ikke selv har oprettet
     public List<Project> getSharedProjects(int userID) throws SQLException{
             PreparedStatement ps = connection.establishConnection().prepareStatement("select distinct projects.projectID, project_name, project_created_date, project_end_date, created_by " +
                     "from projects inner join project_ownership on projects.projectID = project_ownership.projectID inner join users " +
                     "on users.userID = project_ownership.userID where users.userID = ? and created_by != users.userID");
-        return returnProjectList(ps, userID, sharedProjectList);
+
+            return returnProjectList(ps, userID, sharedProjectList);
     }
 
-    //delete project
+    //slet et projekt
    public void deleteProject(int projectID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("DELETE FROM projects WHERE projectID = ?");
         ps.setInt(1,projectID);
         ps.executeUpdate();
     }
 
-    //get single project
+    //hent et enkelt projekt
     public List<Project> getSingleProject(int projectID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("SELECT * FROM projects WHERE projectID = ?");
+
         return returnProjectList(ps, projectID, singleProjectList);
     }
 
-    //share project
+    //tilknyt et projekt til en bruger
     public void shareProject(int userID, int projectID) throws SQLException {
         PreparedStatement ps = connection.establishConnection().prepareStatement("INSERT INTO project_ownership (userID, projectID) values (?,?)");
         ps.setInt(1,userID);

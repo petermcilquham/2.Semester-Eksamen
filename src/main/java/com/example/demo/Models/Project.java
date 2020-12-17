@@ -34,6 +34,7 @@ public class Project {
         return endDate;
     }
 
+    //returnerer noget ekstra tekst til et projekts slut dato til visning for brugeren
     public String getEndDateString() {
         return "End Date: " + endDate;
     }
@@ -58,6 +59,7 @@ public class Project {
         this.projectName = projectName;
     }
 
+    //returnerer noget ekstra tekst til et projekts oprettelsesdato til visning for brugeren
     public String getProjectCreatedDateString() {
         return "Start date: " + createdDate;
     }
@@ -74,6 +76,7 @@ public class Project {
         return createdBy;
     }
 
+    //returnerer noget ekstra tekst til at vise den bruger der har oprettet et projekt
     public String getCreatedByString() throws SQLException {
         return "Created by: " + userRepository.getUserByID(getCreatedBy());
     }
