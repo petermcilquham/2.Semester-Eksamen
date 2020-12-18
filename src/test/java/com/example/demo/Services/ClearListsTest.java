@@ -13,11 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ClearListsTest {
 
+    //her tester vi om vores clearlist metode virker
     @Test
     void clearLists() throws SQLException {
         ObjectManager objectManager = new ObjectManager();
 
-        //myprojectlist, teamList og tasklist
+        //vælger tre forskellige lister myprojectlist, teamList og tasklist
         objectManager.pRep.getMyProjects(1);
         objectManager.uRep.getTeamList(1);
         objectManager.tRep.getTaskList(1);
