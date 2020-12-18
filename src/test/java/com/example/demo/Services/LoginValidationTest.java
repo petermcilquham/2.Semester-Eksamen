@@ -15,8 +15,8 @@ class LoginValidationTest {
     void loginValidation() throws SQLException {
         UserRepository userRepository = new UserRepository();
         //dette er en rigtig bruger i systemet
-        String username = "adam123";
-        String password = "ad123";
+        String username = "user1";
+        String password = "pass1";
 
         int test = userRepository.loginValidation(username,password);
         Assertions.assertTrue(test > 0);
