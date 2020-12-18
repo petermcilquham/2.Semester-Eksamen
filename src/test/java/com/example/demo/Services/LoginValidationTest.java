@@ -10,14 +10,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LoginValidationTest {
 
+    //her tester vi loginvalidation, om brugeren kan logge ind med forkert information
     @Test
     void loginValidation() throws SQLException {
         UserRepository userRepository = new UserRepository();
+        //dette er en rigtig bruger i systemet
         String username = "adam123";
         String password = "ad123";
 
         int test = userRepository.loginValidation(username,password);
-
         Assertions.assertTrue(test > 0);
 
     }
