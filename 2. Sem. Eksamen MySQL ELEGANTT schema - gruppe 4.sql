@@ -83,7 +83,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `projects_AFTER_INSERT` AFTER INSERT ON `projects` FOR EACH ROW BEGIN
+/*!50003 CREATE*/ /*!50017 DEFINER=CURRENT_USER*/ /*!50003 TRIGGER `projects_AFTER_INSERT` AFTER INSERT ON `projects` FOR EACH ROW BEGIN
 insert into project_ownership(userID, projectID) values (new.created_by, new.projectID);
 END */;;
 DELIMITER ;
