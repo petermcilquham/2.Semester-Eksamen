@@ -106,7 +106,7 @@
                         <td style="width:70px"><input type="text" name="newEndDate" th:contenteditable="true" th:placeholder="${Task.getEndDate()}" th:value="${Task.getEndDate()}" onfocus="(this.type='date')" onblur="(this.type='text')" style="width:70px"></td>
                         <td style="width:100px">
                             <select name="newResponsible">
-                                <option th:text="${Task.getTaskResponsibleString()}" th:value="${Task.getTaskResponsible()}" selected hidden> </option>
+                                <option th:placeholder="${Task.getTaskResponsibleString()}" th:value="${Task.getTaskResponsible()}" selected hidden> </option>
                                 <option th:each="User : ${TeamListIncludeCreatedBy}" th:value="${User.getUserID()}" th:text="${User.getUsername()}"></option>
                             </select>
                         </td>
